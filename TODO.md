@@ -1,15 +1,16 @@
-Ver. 0.1.0.0 - alpha
+Ver. 0.1.0.0 - alpha - Completado
 
-1. [ ] Configuración de servidores django y vuejs.
-2. [ ] Configuración de base de datos
-3. [ ] Configuración de CORS y API
-4. [ ] Dependencias de paquetes
-5. [ ] Configuración de entorno de pruebas para producción:
-    1. [ ] Este apartado incluye:
-    2. [ ] Configuración de contenedores Docker
-    3. [ ] Configuración de paquetes y dependencias extras.
-6. [ ] Reporte de configuración.
+1. [X] Configuración de servidores django y vuejs.
+2. [X] Configuración de base de datos
+3. [X] Configuración de CORS y API
+4. [X] Dependencias de paquetes
+5. [X] Configuración de entorno de pruebas para producción:
 
+     Este apartado incluye:
+
+    1. [X] Configuración de contenedores Docker
+    2. [X] Configuración de paquetes y dependencias extras.
+6. [X] Reporte de configuración.
 
 Ver. 0.2.0.0 -alpha:
 
@@ -22,7 +23,6 @@ Ver. 0.2.0.0 -alpha:
     5. [ ] [ ] Pruebas unitarias de módulo de Usuarios
     6. [ ] [ ] Reportes de pruebas y configuraciones.
     7. [ ] [ ] Mocks de prueba y manuales de desarrollo y uso
-
 
 Ver. 0.3.0.0 - alpha
 
@@ -39,8 +39,6 @@ Módulo de Personas:
 6. [ ] Reportes de pruebas y configuraciones
 7. [ ] Mocks de pruebas y manuales de desarrollo y uso
 
-
-
 Ver. 0.4.0.0 - alpha
 
 1. [ ] Módulo de Inventario
@@ -50,7 +48,6 @@ Ver. 0.4.0.0 - alpha
 2. [ ] Pruebas unitarias de módulos de inventario
 3. [ ] Reportes de pruebas y configuraciones
 4. [ ] Mocks de pruebas y manuales de desarrollo y uso
-
 
 Ver. 0.5.0.0 - alpha
 
@@ -84,12 +81,9 @@ Ver. 0.6.0.0 - beta
 5. [ ] Propuesta de selección de tecnologías para despliegue
 6. [ ] Configuraciones para despliegue en producción adicionales
 
-
 Ver. 1.0.0.0 -stable
 
 1. [ ] Despliegue en entorno de producción
-
-
 
 Ver 1.1.0.0 – alpha
 
