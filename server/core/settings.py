@@ -30,8 +30,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'djoser',
-    #'apps.CustomUser',
     'whitenoise',
+    #DevApps
+    'apps.accounts',
 ]
 
 MIDDLEWARE = [
@@ -72,12 +73,18 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER':os.getenv('DB_USER'),
-        'PASSWORD':os.getenv('DB_PASSWORD'),
-        'HOST':os.getenv('DB_HOST'),
-        'PORT':os.getenv('DB_PORT')
+       
+        ####Docker config
+        #'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': os.getenv('DB_NAME'),
+        #'USER':os.getenv('DB_USER'),
+        #'PASSWORD':os.getenv('DB_PASSWORD'),
+        #'HOST':os.getenv('DB_HOST'),
+        #'PORT':os.getenv('DB_PORT')
+        
+        ####Local config
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -179,18 +186,18 @@ DJOSER = {
     'USERNAME_RESET_CONFIRM_URL':'email/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL':'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL':True,
-    'RESEND_ACTIVATION_EMAIL':True
-    #'SERIALIZERS':{
-    #    'user_create':'apps.accounts.serializers.UserCreateSerializer',
-    #    'user':'apps.accounts.serializers.UserCreateSerializer',
-    #    'current_user':'apps.accounts.serializers.UserSerializer',
-    #    'user_update':'djoser.serializers.UserSerializer',
-    #    'user_delete':'djoser.serializers.UserDeleteSerializer'
-    #}    
+    'RESEND_ACTIVATION_EMAIL':True,
+    'SERIALIZERS':{
+        'user_create':'apps.accounts.serializers.UserCreateSerializer',
+        'user':'apps.accounts.serializers.UserCreateSerializer',
+        'current_user':'apps.accounts.serializers.UserSerializer',
+        'user_update':'djoser.serializers.UserSerializer',
+        'user_delete':'djoser.serializers.UserDeleteSerializer'
+    }    
 }
 
 #### AuthUserConfig
-#AUTH_USER_MODEL = 'accounts.UserAccount'
+AUTH_USER_MODEL = 'accounts.UserAccount'
 
 ### Email config
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
