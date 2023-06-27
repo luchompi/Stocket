@@ -1,0 +1,17 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.4, pytest-7.4.0, pluggy-1.2.0
+django: settings: core.settings (from ini)
+rootdir: C:\GitHub\Stocket\server
+configfile: pytest.ini
+plugins: django-4.5.2
+collected 4 items
+
+apps\accounts\tests.py ....                                              [100%]
+
+============================== warnings summary ===============================
+..\..\envs\Stocket\Lib\site-packages\pkg_resources\__init__.py:121
+  C:\GitHub\envs\Stocket\Lib\site-packages\pkg_resources\__init__.py:121: DeprecationWarning: pkg_resources is deprecated as an API
+    warnings.warn("pkg_resources is deprecated as an API", DeprecationWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 4 passed, 1 warning in 2.30s =========================
