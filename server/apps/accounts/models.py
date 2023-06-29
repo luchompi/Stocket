@@ -38,7 +38,7 @@ class UserAccount(AbstractBaseUser,PermissionsMixin):
     phone = models.CharField(max_length=255, null=True,blank=True)
     address = models.CharField(max_length=255, null=True,blank=True)
     city = models.CharField(max_length=255, default='Riohacha')
-    uid = models.CharField(max_length=255,unique=True)
+    uid = models.CharField(max_length=255,unique=True,null=True,blank=True)
     
     objects = UserAccountManager()
     
