@@ -9,9 +9,23 @@
                 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">FAQs</a></li>
                 <li class="nav-item"><RouterLink :to="{name:'about'}" class="nav-link link-body-emphasis px-2">About</RouterLink></li>
             </ul>
-            <ul class="nav">
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Login</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Sign up</a></li>
+            <ul class="nav"  v-if="sesion.isLogged">
+                <li class="nav-item">
+                    <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sesión iniciada como test
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" @click="sesion.clearSesion()">Salir <i class="bi bi-power"></i></a></li>
+                      </ul>
+                    </div>
+                </li>
+            </ul>
+            <ul class="nav" v-else>
+                <li class="nav-item"><RouterLink :to="{name:'login'}" class="nav-link link-body-emphasis px-2">Login</RouterLink></li>
+                <li class="nav-item"><RouterLink :to="{name:'register'}" class="nav-link link-body-emphasis px-2">Sign up</RouterLink></li>
             </ul>
         </div>
     </nav>
@@ -31,6 +45,8 @@
 </template>
 
 <script setup lang="ts">
+import { sesionStore } from '@/stores/sesion.store';
+const sesion = sesionStore()
 const props = defineProps<{
     dateTime: string
 }>()
