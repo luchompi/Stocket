@@ -1,5 +1,6 @@
 import authRoutes from '@/views/Auth/services/auth.routes'
 import principalRoutes from '@/views/principal/services/principal.routes'
+import profileRoutes from '@/views/Profile/services/profile.routes'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -7,7 +8,7 @@ const router = createRouter({
   routes: [
     ...principalRoutes,
     ...authRoutes,
-    
+    ...profileRoutes,
   ]
 })
 
