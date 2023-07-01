@@ -68,7 +68,11 @@ import {ref} from 'vue'
 import { storeUser } from '../services/auth.apis';
 import Swal from 'sweetalert2';
 import { errorValidator } from '@/hooks/errors.hooks';
-
+import { watchEffect } from 'vue';
+import { redirectToHome } from '@/hooks/sesion.hook'
+watchEffect(()=>{
+    redirectToHome()
+})
 const username = ref<string>('')
 const password = ref<string>('')
 const re_password = ref<string>('')

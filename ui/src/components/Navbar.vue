@@ -13,11 +13,11 @@
                 <li class="nav-item">
                     <div class="dropdown">
                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        Sesión iniciada como test
+                        Sesión iniciada como {{ sesion.UserData[0]?.username }}
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><RouterLink :to="{name:'profile'}" class="dropdown-item" >Perfil <i class="bi bi-person-badge"></i></RouterLink></li>
+                        <li><RouterLink :to="{name:'reset-password'}" class="dropdown-item" >Cambiar contraseña <i class="bi bi-sync"></i></RouterLink></li>
                         <li><a class="dropdown-item" @click="sesion.clearSesion()">Salir <i class="bi bi-power"></i></a></li>
                       </ul>
                     </div>

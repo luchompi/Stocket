@@ -7,6 +7,11 @@ import {activateAccount } from '../services/auth.apis'
 import { useRouter } from 'vue-router';
 import { errorValidator } from '@/hooks/errors.hooks';
 import Swal from 'sweetalert2';
+import { watchEffect } from 'vue';
+import { redirectToHome } from '@/hooks/sesion.hook'
+watchEffect(()=>{
+    redirectToHome()
+})
 
 const url = useRouter()
 const uid = url.currentRoute.value.params.uid

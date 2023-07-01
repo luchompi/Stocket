@@ -10,9 +10,5 @@
     </div>
 </template>
 <script setup lang="ts">
-import { watchEffect } from 'vue';
-import { redirectToHome } from '@/hooks/sesion.hook'
-watchEffect(()=>{
-    redirectToHome()
-})
+
 </script>
