@@ -6,7 +6,7 @@ Ver. 0.1.0.0 - alpha - Completado
 4. [X] Dependencias de paquetes
 5. [X] Configuración de entorno de pruebas para producción:
 
-     Este apartado incluye:
+    Este apartado incluye:
 
     1. [X] Configuración de contenedores Docker
     2. [X] Configuración de paquetes y dependencias extras.
@@ -14,15 +14,15 @@ Ver. 0.1.0.0 - alpha - Completado
 
 Ver. 0.2.0.0 -alpha:
 
-1. [ ] Módulo de Usuarios
-    1. [ ] [ ] Crear y registrar usuario nuevo
-    2. [ ] [ ] Gestionar Perfil de Usuario
-    3. [ ] [ ] Roles y permisos de usuario
-    4. [ ] [ ] Seguridad de API
-        1. [ ] [ ] Configuración y ciclo de vida de tokens
-    5. [ ] [ ] Pruebas unitarias de módulo de Usuarios
-    6. [ ] [ ] Reportes de pruebas y configuraciones.
-    7. [ ] [ ] Mocks de prueba y manuales de desarrollo y uso
+1. [X] Módulo de Usuarios
+    1. [X] [ ] Crear y registrar usuario nuevo
+    2. [X] [ ] Gestionar Perfil de Usuario
+    3. [X] [ ] Roles y permisos de usuario
+    4. [X] [ ] Seguridad de API
+        1. [X] [ ] Configuración y ciclo de vida de tokens
+    5. [X] [ ] Pruebas unitarias de módulo de Usuarios
+    6. [X] [ ] Reportes de pruebas y configuraciones.
+    7. [X] [ ] Mocks de prueba y manuales de desarrollo y uso
 
 Ver. 0.3.0.0 - alpha
 
