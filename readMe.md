@@ -35,3 +35,31 @@ Ver. 0.2.0.0
    * uid (representa número de documento de usuario)
 2. Se han creado las vistas en vuejs, ahora se puede administrar el perfil de usuario y se han añadido animaciones de carga.
 3. Se han añadido los estaticos de vuejs en django, ahora el backend en el puerto 8000 Puede mostrar la representacion de las vistas
+
+Ver. 0.3.0.0
+
+1. Se ha creado la representación y apis de Empresa:
+   * Se ha creado el modelo de empresa con sus respectivas dependencias débiles (Sedes, Depedencias, sede por dependencia):
+     * Tabla Empresa incluye:
+       * NIT
+       * nombre
+       * direccion
+       * telefono
+       * correo
+       * descripcion [opcional]
+       * url [opcional]
+     * Tabla Sedes incluye:
+       * nombre
+       * direccion
+       * telefono
+       * correo
+       * descripcion [opcional]
+       * empresa_id
+     * Tabla dependencias incluye
+       * nombre
+       * descripcion
+     * Tabla Sede por Dependencias
+       * sede_id
+       * dependencia_id
+
+NOTA: SE DEBE CONTINUAR CON EL DESARROLLO DE LA INTERFAZ. PROCESAR LOS CAMBIOS DE LAS MIGRACIONES Y CAMBIAR EL SQL DE LAS DEPENDENCIAS ELIMINANDO LA ID DE LA SEDE
