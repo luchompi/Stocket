@@ -2,6 +2,7 @@ import baseApi from "@/apis/base.api";
 import { sesionStore } from "@/stores/sesion.store";
 import type { userData } from "./auth.interfaces";
 import { getUserData } from '@/views/Profile/services/profile.apis'
+import Swal from "sweetalert2";
 
 export const getCredentials = async (data: any) => {
     const sesion = sesionStore()
@@ -32,6 +33,16 @@ export const refreshTokens = async() =>{
     const sesion = sesionStore()
     if (sesion.isLogged){
         const response = await baseApi.post('jwt/refresh',{refresh:`${sesion.RAT}`})
-        sesion.setTokens(response.data)
+        if(response.status == 200){
+            sesion.setTokens(response.data)
+        }
+        else{
+            Swal.fire({
+                icon:'error',
+                title:'Error de Comunicación con el servidor',
+                text:'Se ha detectado un error de comunicación con el servidor, se cerrará la sesión y se perderán todas las operaciones que no se hayan procesado'
+            })
+            sesion.clearSesion()
+        }
     }
 }
