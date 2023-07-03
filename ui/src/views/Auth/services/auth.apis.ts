@@ -27,3 +27,11 @@ export const resetPassword = (data: any) => {
 export const resetPasswordConfirm = (data: any) => {
     return baseApi.post("users/reset_password_confirm/", data);
 }
+
+export const refreshTokens = async() =>{
+    const sesion = sesionStore()
+    if (sesion.isLogged){
+        const response = await baseApi.post('jwt/refresh',{refresh:`${sesion.RAT}`})
+        sesion.setTokens(response.data)
+    }
+}

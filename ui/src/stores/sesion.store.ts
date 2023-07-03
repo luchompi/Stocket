@@ -1,11 +1,13 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import Swal from 'sweetalert2'
+import {refreshTokens} from '@/views/Auth/services/auth.apis'
 
 export const sesionStore = defineStore('sesion', () => {
   const PAT = ref<string|null>(null)
   const RAT = ref<string|null>(null)
   const UserData = ref<any|null>([])
+  const timer = ref<number>(0)
   
   const isLogged = computed(() => PAT.value !== '' && RAT.value !== ''
   && PAT.value !== null && RAT.value !== null
@@ -13,8 +15,14 @@ export const sesionStore = defineStore('sesion', () => {
   )
   
   const setTokens = (data:any) =>{
-    PAT.value = data.access
-    RAT.value = data.refresh
+    if(isLogged.value){
+      PAT.value = data.access
+      timer.value = 0
+    }
+    else{
+      PAT.value = data.access
+      RAT.value = data.refresh
+    }
   }
 
   const setUserData = (data:any) =>{
@@ -31,6 +39,19 @@ export const sesionStore = defineStore('sesion', () => {
     PAT.value = null
     RAT.value = null
     UserData.value = null
+    timer.value = 0
+  }
+
+  const incrementTimer = () =>{
+    if(isLogged.value){
+      timer.value++
+    }
+  }
+
+  const refreshAccessToken = () =>{
+    if(timer.value > 1700 && timer.value < 1800 && isLogged.value){
+      refreshTokens()
+    }
   }
 
   return {
@@ -38,8 +59,11 @@ export const sesionStore = defineStore('sesion', () => {
     RAT,
     UserData,
     isLogged,
+    timer,
     setTokens,
     setUserData,
-    clearSesion
+    clearSesion,
+    incrementTimer,
+    refreshAccessToken
   }
 })
