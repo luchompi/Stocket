@@ -55,6 +55,8 @@ services:
       DJANGO_SUPERUSER_USERNAME: ${DJANGO_SUPERUSER_USERNAME}
       DJANGO_SUPERUSER_EMAIL: ${DJANGO_SUPERUSER_EMAIL}
       DJANGO_SUPERUSER_PASSWORD: ${DJANGO_SUPERUSER_PASSWORD}
+      DJANGO_SUPERUSER_FIRST_NAME: ${DJANGO_SUPERUSER_FIRST_NAME}
+      DJANGO_SUPERUSER_LAST_NAME: ${DJANGO_SUPERUSER_LAST_NAME}
     command: >
       sh -c "python manage.py makemigrations && python manage.py migrate &&  python manage.py createsuperuser --no-input --username=${DJANGO_SUPERUSER_USERNAME} 2>&1 || true && python manage.py runserver 0.0.0.0:8000"
     
