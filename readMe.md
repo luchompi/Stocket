@@ -14,7 +14,6 @@ credenciales predeterminadas: usuario: root password: root123
 
 OBS. si desea registrar un nuevo usuario, considere hacerlo desde la ip de django: 127.0.0.1:8000 en vista de que, las validaciones solo funcionan en ese puerto, una vez validada la cuenta, puede utilizar la ip 127.0.0.1:5173
 
-
 Cambios:
 
 Ver. 0.1.0.0
@@ -22,3 +21,17 @@ Ver. 0.1.0.0
 1. Se ha configurado a django con la base de datos, soporte de api de rest_framework y soporte para variables de entorno en archivo .env dentro de la configuracion del servidor.
    Hasta el momento, no se encuentra habilitada ninguna opcion para manipulacion de registro e inicio de seisón
 2. Se ha configurado vuejs con los paquetes para el desarrollo de la interfaz. Se ha añadido axios, bootstrap y sus respectivos iconos, sweetalert2 y html2pdf para el manejo de las funciones futuras.
+
+Ver. 0.2.0.0
+
+1. Se ha creado modelo, serializador y rutas para el perfil de usuario. Ahora, el perfil de usuario se representa con estos datos:
+   * email
+   * username
+   * first_name
+   * last_name
+   * phone
+   * city
+   * address
+   * uid (representa número de documento de usuario)
+2. Se han creado las vistas en vuejs, ahora se puede administrar el perfil de usuario y se han añadido animaciones de carga.
+3. Se han añadido los estaticos de vuejs en django, ahora el backend en el puerto 8000 Puede mostrar la representacion de las vistas
