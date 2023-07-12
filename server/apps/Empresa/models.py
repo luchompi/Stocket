@@ -1,7 +1,7 @@
 from django.db import models
 
 class Empresa(models.Model):
-    NIT = models.CharField(max_length=20,primary_key=True)
+    NIT = models.CharField(max_length=20, unique=True)
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=50)
     phone = models.CharField(max_length=20)

@@ -7,8 +7,8 @@ from django.shortcuts import get_object_or_404,get_list_or_404
 from core.permissions import isAdminOrSuperuser,isEncargado
 from rest_framework.decorators import permission_classes
 
-@permission_classes([isAdminOrSuperuser | isEncargado])
 class EmpresaIndex(APIView):
+    @permission_classes([isAdminOrSuperuser | isEncargado])
     def get(self, request, format=None):
         empresas = Empresa.objects.all()
         serializer = EmpresaSerializer(empresas, many=True)
@@ -25,7 +25,7 @@ class EmpresaIndex(APIView):
 class EmpresaDetails(APIView):
     permission_classes =[isAdminOrSuperuser]
     def put(self,request, pk, format=None):
-        empresa = get_object_or_404(Empresa,NIT=pk)
+        empresa = get_object_or_404(Empresa,id=pk)
         serializer = EmpresaSerializer(empresa,data=request.data,partial=True)
         if serializer.is_valid():
             serializer.save()
