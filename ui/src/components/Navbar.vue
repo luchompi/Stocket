@@ -4,7 +4,18 @@
             <ul class="nav me-auto">
                 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2 active"
                         aria-current="page">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Features</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle link-body-emphasis px-2 active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Empresa <i class="bi bi-building"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li><RouterLink :to="{name:'empresa'}" class="dropdown-item">Datos de empresa</RouterLink></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+
+                </li>
                 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Pricing</a></li>
                 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">FAQs</a></li>
                 <li class="nav-item"><RouterLink :to="{name:'about'}" class="nav-link link-body-emphasis px-2">About</RouterLink></li>
