@@ -1,6 +1,6 @@
 1. [X] Formulario de consertación (hasta el 20 de junio)
 2. [X] Bitácora 1 (hasta el  20 de junio)
-3. [ ] Bitacora 2 (hasta el 5 de julio)
+3. [X] Bitacora 2 (hasta el 5 de julio)
 4. [ ] Bitacora 3 (hasta 20 de julio)
 5. [ ] Bitacora 4 (hasta 4 de agosto)
 6. [ ] Bitacora 5 (hasta 19 de agosto)
