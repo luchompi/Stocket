@@ -62,4 +62,4 @@ Ver. 0.3.0.0
        * sede_id
        * dependencia_id
 
-NOTA: SE DEBE CONTINUAR CON EL DESARROLLO DE LA INTERFAZ. PROCESAR LOS CAMBIOS DE LAS MIGRACIONES Y CAMBIAR EL SQL DE LAS DEPENDENCIAS ELIMINANDO LA ID DE LA SEDE
+OBS: Se está construyendo las dependencias y se deben asociar sedes a dependencias.
