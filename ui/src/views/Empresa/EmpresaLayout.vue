@@ -7,9 +7,9 @@
             <div class="text-center flex-grow-1 mb-0">Empresas - Stocket <i class="bi bi-archive-fill"></i></div>
           </div>
           <div class="card-body">
-            <p class="card-text">
-              <router-view/>
-            </p>
+
+            <router-view/>
+
           </div>
         </div>
       </div>
