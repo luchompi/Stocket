@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Empresa, Sede
+from .models import Dependencia, Empresa, Sede
 
 
 class EmpresaSerializer(serializers.ModelSerializer):
@@ -12,4 +12,9 @@ class EmpresaSerializer(serializers.ModelSerializer):
 class SedeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sede
+        fields = '__all__'
+
+class DependenciaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Dependencia
         fields = '__all__'

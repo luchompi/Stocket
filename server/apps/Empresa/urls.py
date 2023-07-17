@@ -10,6 +10,10 @@ urlpatterns = [
     # URLS para sedes
     path('<int:NIT>/sedes/', v.SedeIndex.as_view()),
     path('<int:NIT>/sedes/<int:pk>/', v.SedeDetails.as_view()),
+
+    # URLS para dependencias
+    path('dependencias/', v.DependenciaIndex.as_view()),
+    path('dependencias/<int:pk>/', v.DependenciaDetails.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
