@@ -3,8 +3,16 @@
     <div class="container d-flex flex-wrap">
       <ul class="nav me-auto">
         <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2 active" aria-current="page">Home</a></li>
-        <li class="nav-item">
-          <RouterLink :to="{ name: 'empresa' }" class="nav-link ink-body-emphasis px-2 link-dark ">Empresa <i class="bi bi-building"></i></RouterLink>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Empresa <i class="bi bi-building"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li><RouterLink :to="{ name: 'empresa' }" class="dropdown-item">Ver datos <i class="bi bi-search"></i></RouterLink></li>
+            <li><RouterLink :to="{name:'dependencias'}" class="dropdown-item">Dependencias <i class="bi bi-plus-circle"></i></RouterLink></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
         </li>
         <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Pricing</a></li>
         <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">FAQs</a></li>
