@@ -20,6 +20,10 @@ class DependenciaSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class SedeDependenciaSerializer(serializers.ModelSerializer):
+    dependencias = serializers.SerializerMethodField('get_dependencias')
     class Meta:
         model = SedeDependencia
         fields = '__all__'
+
+    def get_dependencias(self, obj):
+        return [{"id": obj.dependencia.id, "nombre": obj.dependencia.name}]
