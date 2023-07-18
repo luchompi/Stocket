@@ -4,6 +4,7 @@ import Create from '../main/Create.vue'
 import Update from '../main/Update.vue'
 import sedeRoutes from "@/views/Empresa/sede/services/sede.routes";
 import dependenciasRoutes from '../dependencias/services/dependencias.routes';
+import operationsRoutes from "@/views/Empresa/operations/services/operations.routes";
 
 const empresaRoutes = [
     {
@@ -27,6 +28,7 @@ const empresaRoutes = [
             },
             ...sedeRoutes,
             ...dependenciasRoutes,
+            ...operationsRoutes,
         ]
     }
 ]
