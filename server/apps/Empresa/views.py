@@ -19,6 +19,8 @@ class EmpresaIndex(APIView):
     @permission_classes([isAdminOrSuperuser])
     def post(self, request, format=None):
         serializer = EmpresaSerializer(data=request.data)
+        if Empresa.objects.count() == 1:
+            return Response ({"error": "Ya existe un registro en la tabla Empresa. No puedes crear más registros."}, status=status.HTTP_400_BAD_REQUEST)
         if serializer.is_valid():
             serializer.save()
             return Response(status=status.HTTP_201_CREATED)
