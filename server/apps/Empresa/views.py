@@ -5,8 +5,8 @@ from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Dependencia, Empresa, Sede
-from .serializers import DependenciaSerializer, EmpresaSerializer, SedeSerializer
-
+from .serializers import DependenciaSerializer, EmpresaSerializer, SedeDependenciaSerializer, SedeSerializer
+from django.db import transaction
 
 # Empresa Controllers
 class EmpresaIndex(APIView):
@@ -120,3 +120,30 @@ class DependenciaDetails(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         except (dependencia.DoesNotExist):
             return Response(status=status.HTTP_404_NOT_FOUND)
+        
+
+#Sedes por dependencias
+class SedeByDependencia(APIView):
+    @permission_classes([isAdminOrSuperuser | isEncargado])
+    def get(self, request, pk, format=None):
+        sedes = get_list_or_404(Sede, dependencia=pk)
+        serializer = SedeSerializer(sedes, many=True)
+        return Response(serializer.data)
+    
+    @permission_classes([isAdminOrSuperuser])
+    def post(self, request, pk, format=None):
+        data_list = request.data['_value']
+        try:
+            with transaction.atomic():
+                for data in data_list:
+                    myData = {
+                        'sede': data['sede_id'],
+                        'dependencia': data['dependencia_id']
+                    }    
+                    serializer = SedeDependenciaSerializer(data=myData)
+                    if(serializer.is_valid()):
+                        serializer.save()                
+                return Response(status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
