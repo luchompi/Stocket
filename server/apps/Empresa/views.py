@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from .models import Dependencia, Empresa, Sede, SedeDependencia
 from .serializers import DependenciaSerializer, EmpresaSerializer, SedeDependenciaSerializer, SedeSerializer
 from django.db import transaction
+from django.db.models import Q
 
 # Empresa Controllers
 class EmpresaIndex(APIView):
@@ -82,6 +83,13 @@ class SedeDetails(APIView):
         except (sede.DoesNotExist):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+class SedeSearch(APIView):
+    @permission_classes([isAdminOrSuperuser | isEncargado])
+    def get(self, request, NIT, search, format=None):
+        sedes = Sede.objects.filter(Q(name__icontains=search) | Q(id__icontains=search),empresa__NIT=NIT, )
+        serializer = SedeSerializer(sedes, many=True)
+        return Response(serializer.data)
+
 #Dependencia controllers
 class DependenciaIndex(APIView):
     @permission_classes([isAdminOrSuperuser | isEncargado])
@@ -121,7 +129,12 @@ class DependenciaDetails(APIView):
         except (dependencia.DoesNotExist):
             return Response(status=status.HTTP_404_NOT_FOUND)
         
-
+class SearchDependencia(APIView):
+    @permission_classes([isAdminOrSuperuser | isEncargado])
+    def get(self, request, search, format=None):
+        dependencias = Dependencia.objects.filter(Q(name__icontains=search) | Q(id__icontains=search))
+        serializer = DependenciaSerializer(dependencias, many=True)
+        return Response(serializer.data)
 #Sedes por dependencias
 class SedeByDependencia(APIView):
     @permission_classes([isAdminOrSuperuser | isEncargado])
