@@ -51,6 +51,7 @@ import {onMounted, ref} from "vue";
 import {deleteSede, getSedes} from "@/views/Empresa/services/empresa.services";
 import {useRouter} from 'vue-router';
 import Swal from "sweetalert2";
+import { errorValidator } from "@/hooks/errors.hooks";
 
 const url = useRouter()
 const loading = ref<boolean>(false)
@@ -58,9 +59,21 @@ const queryset = ref<any>([])
 onMounted(async () => {
   loading.value = true
   const NIT = url.currentRoute.value.params.nit
-  const response = await getSedes(NIT.toString())
-  queryset.value = response.data
-  loading.value = false
+  await getSedes(NIT.toString())
+  .then((Response)=>{
+    queryset.value = Response.data
+  })
+  .catch((error)=>{
+    const resiever = errorValidator(error.response.data)
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: resiever,
+    })
+  })
+  .finally(()=>{
+    loading.value = false
+  })
 })
 
 const eliminarSede = async(id:any) => {
