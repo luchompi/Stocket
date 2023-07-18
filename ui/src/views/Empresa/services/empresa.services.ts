@@ -57,3 +57,9 @@ export const deleteSede = async (NIT: any, id: any) => {
     baseApi.defaults.headers.common["Authorization"] = `JWT ${sesion.PAT}`;
     return await baseApi.delete(`empresa/${NIT}/sedes/${id}/`)
 }
+
+export const getSedeById = async (id: any) => {
+    const sesion = sesionStore()
+    baseApi.defaults.headers.common["Authorization"] = `JWT ${sesion.PAT}`;
+    return await baseApi.get(`empresa/${sesion.NIT}/sedes/${id}/`)
+}
