@@ -8,6 +8,12 @@ export const getDependencias = async () => {
     return await baseApi.get('empresa/dependencias/')
 }
 
+export const searchDependencias = async (data: any) => {
+    const sesion = sesionStore()
+    baseApi.defaults.headers.common['Authorization'] = `JWT ${sesion.PAT}`
+    return await baseApi.get(`empresa/dependencias/search/${data}/`)
+}
+
 export const saveDependencias = async (data: dependenciaInterface) => {
     const sesion = sesionStore()
     baseApi.defaults.headers.common['Authorization'] = `JWT ${sesion.PAT}`

@@ -63,3 +63,9 @@ export const getSedeById = async (id: any) => {
     baseApi.defaults.headers.common["Authorization"] = `JWT ${sesion.PAT}`;
     return await baseApi.get(`empresa/${sesion.NIT}/sedes/${id}/`)
 }
+
+export const searchSede = async (data: any) => {
+    const sesion = sesionStore()
+    baseApi.defaults.headers.common["Authorization"] = `JWT ${sesion.PAT}`;
+    return await baseApi.get(`empresa/${sesion.NIT}/sedes/${data}/`)
+}

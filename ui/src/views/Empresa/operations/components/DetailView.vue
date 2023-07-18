@@ -13,6 +13,7 @@
                 placeholder="Ingrese id o nombre de dependencia para buscar"
                 aria-label="Username"
                 aria-describedby="inputSearch"
+                v-model="search"
               />
             </div>
             <StoreView :sede-id="sedeData.id" :dependencias="dependenciasData"/>
@@ -24,25 +25,48 @@
   </div>
 </template>
 <script setup lang="ts">
-import {onMounted, ref} from 'vue'
+import {onMounted, ref, watchEffect} from 'vue'
 import type {Dependencia} from "@/views/Empresa/dependencias/services/dependencias.interfaces";
 import {useRouter} from "vue-router";
 import {getSedeById} from "@/views/Empresa/services/empresa.services";
-import {getDependencias} from '../../dependencias/services/dependencias.services';
+import {getDependencias, searchDependencias} from '../../dependencias/services/dependencias.services';
 import StoreView from "@/views/Empresa/operations/components/StoreView.vue";
 
+const search = ref<string>('')
 const url = useRouter()
 const loading = ref<boolean>(false)
 const sedeData = ref<any>([]);
 const dependenciasData = ref([] as Dependencia[])
 
-onMounted(async () => {
+const searchData = async () => {
+  loading.value = true
+  await searchDependencias(search.value)
+    .then((Response) => {
+      dependenciasData.value = Response.data
+    })
+    .catch((error) => {
+      dependenciasData.value = []
+    })
+    .finally(() => {
+      loading.value = false
+    })
+}
+
+const getData =async () => {
   loading.value = true
   const sedeResponse = await getSedeById(url.currentRoute.value.params.id)
   sedeData.value = sedeResponse.data
   const dependenciasResponse = await getDependencias()
   dependenciasData.value = dependenciasResponse.data
   loading.value = false
+}
+
+watchEffect(()=>{
+  if(search.value.length > 0){
+    searchData()
+  }else{
+    getData()
+  }
 })
 
 </script>

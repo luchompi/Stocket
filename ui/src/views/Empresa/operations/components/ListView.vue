@@ -3,6 +3,17 @@
     <div class="card-body">
       <h6 class="card-title">Seleccione una Sede para empezar</h6>
       <div class="card-text">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="inputSearch"><i class="bi bi-search"></i></span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Ingrese id o nombre de sede a buscar"
+            aria-label="Username"
+            aria-describedby="inputSearch"
+            v-model="search"
+          />
+        </div>
         <div v-if="loading">
           <div class="d-flex justify-content-center">
             Espere ...
@@ -51,15 +62,18 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { getCompany, getSedes } from '../../services/empresa.services';
+import { watchEffect, ref } from 'vue'
+import { getCompany, getSedes,searchSede } from '../../services/empresa.services';
 import type { sedes } from '../../sede/services/sedes.interfaces';
 import { sesionStore } from '@/stores/sesion.store';
+import Swal from 'sweetalert2';
+import { errorValidator } from '@/hooks/errors.hooks';
 
 const sedesList = ref([] as sedes[])
+const search = ref<string>('')
 const loading = ref<boolean>(false)
 
-onMounted(async () => {
+const getData = async () => {
   loading.value = true
   const empresa = await getCompany()
   await getSedes(empresa.data[0].NIT)
@@ -72,5 +86,36 @@ onMounted(async () => {
     .finally(() => {
       loading.value = false
     })
+}
+
+
+const searchData = async () => {
+  loading.value = true
+  await searchSede(search.value)
+    .then((Response) => {
+      sedesList.value = Response.data
+    })
+    .catch((error) => {
+      sedesList.value = []
+      const resiever = errorValidator(error.response.data)
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: resiever,
+      })
+    })
+    .finally(() => {
+      loading.value = false
+    })
+}
+
+watchEffect(()=>{
+  if(!search.value){
+    getData()
+  }
+  else{
+    searchData()
+  }
 })
+
 </script>
