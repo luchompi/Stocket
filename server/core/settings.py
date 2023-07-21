@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     #DevApps
     'apps.accounts',
     'apps.Empresa',
+    'apps.Personas',
 ]
 
 MIDDLEWARE = [
@@ -76,17 +77,17 @@ DATABASES = {
     'default': {
        
         ####Docker config
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER':os.getenv('DB_USER'),
-        'PASSWORD':os.getenv('DB_PASSWORD'),
+        #'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': os.getenv('DB_NAME'),
+        #'USER':os.getenv('DB_USER'),
+        #'PASSWORD':os.getenv('DB_PASSWORD'),
         #'HOST':os.getenv('DB_HOST'),
-        'HOST':'localhost',
-        'PORT':os.getenv('DB_PORT')
+        #'HOST':'localhost',
+        #'PORT':os.getenv('DB_PORT')
         
         ####Local config
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

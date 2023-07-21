@@ -27,6 +27,29 @@
             </li>
           </ul>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown"
+             aria-expanded="false">
+            Personas <i class="bi bi-person"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <RouterLink :to="{ name: 'funcionarios' }" class="dropdown-item">Funcionarios <i class="bi bi-person-fill"></i>
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink :to="{name:'dependencias'}" class="dropdown-item">Dependencias <i
+                  class="bi bi-plus-circle"></i></RouterLink>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <RouterLink :to="{name:'operations-index'}" class="dropdown-item">Incluir dependencias en sedes <i class="bi bi-box-arrow-in-right"></i>
+              </RouterLink>
+            </li>
+          </ul>
+        </li>
         <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Pricing</a></li>
         <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">FAQs</a></li>
         <li class="nav-item">
