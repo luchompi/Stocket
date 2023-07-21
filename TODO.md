@@ -30,11 +30,11 @@ Módulo de Personas:
 
 1. [ ] Gestiónde funcionarios
 2. [ ] Gestión de Proveedores
-3. [ ] Gestión de Empresa
+3. [X] Gestión de Empresa
 4. [X] Gestión de datos de empresa
 
     1. [X] gestión de datos de sedes
-    2. [ ] gestión de datos de dependencias
+    2. [X] gestión de datos de dependencias
 5. [ ] Pruebas unitarias de módulos de usuarios
 6. [ ] Reportes de pruebas y configuraciones
 7. [ ] Mocks de pruebas y manuales de desarrollo y uso
