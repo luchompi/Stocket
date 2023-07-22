@@ -12,7 +12,6 @@ onMounted(()=>{
     sesion.incrementTimer()
     watchEffect(()=>{
       company.value = !!sesion.NIT
-      console.log(company.value)
     })
   },1000)
 })
