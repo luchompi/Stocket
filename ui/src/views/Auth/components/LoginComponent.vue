@@ -49,6 +49,7 @@ import Swal from 'sweetalert2'
 import {errorValidator} from "@/hooks/errors.hooks";
 import { watchEffect } from 'vue';
 import { redirectToHome } from '@/hooks/sesion.hook'
+import {getUserData} from "@/views/Profile/services/profile.apis";
 watchEffect(()=>{
     redirectToHome()
 })
@@ -63,27 +64,25 @@ const login = async() => {
         username: username.value,
         password: password.value
     }
-    await getCredentials(data)
-    .then((Response)=>{
-        Swal.fire({
-            icon: 'success',
-            title: 'Bienvenido',
-            text: 'Sesión iniciada satisfactoriamente',
-            showConfirmButton: false,
-            timer: 1500
-        })
-    })
-    .catch((error)=>{
-      const reciever = errorValidator(error.response.data);
+    const response = await getCredentials(data)
+    if(response.status == 200){
       Swal.fire({
-        icon:'error',
-        title:'error',
-        text:reciever,
+        icon: 'success',
+        title: '¡Bienvenido!',
+        text: 'Sesión iniciada',
         showConfirmButton: false,
         timer: 1500
       })
-    })
-        .finally(()=>loading.value = false)
-
+    }
+    else{
+      const reciever = errorValidator(response.data)
+      Swal.fire({
+        icon: 'error',
+        title: '¡Error!',
+        text: reciever,
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
 }
 </script>

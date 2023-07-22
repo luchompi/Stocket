@@ -9,10 +9,10 @@ export const getCredentials = async (data: any) => {
     const sesion = sesionStore()
     const response = await baseApi.post('jwt/create', data)
     sesion.setTokens(response.data)
-    const company = await getCompany()
-    sesion.setNIT(company.data[0].NIT)
-    getUserData()
-    return response.status
+    console.log(response.data)
+    await storeCompanyNIT()
+    await getUserData()
+    return response
 }
 
 export const storeUser = async (data: userData) => {
@@ -46,5 +46,13 @@ export const refreshTokens = async () => {
             })
             sesion.clearSesion()
         }
+    }
+}
+
+export const storeCompanyNIT = async () => {
+    const company = await getCompany()
+    const sesion = sesionStore()
+    if(company.data.length){
+        sesion.setNIT(company.data[0].NIT)
     }
 }
