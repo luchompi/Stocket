@@ -9,7 +9,6 @@ export const getCredentials = async (data: any) => {
     const sesion = sesionStore()
     const response = await baseApi.post('jwt/create', data)
     sesion.setTokens(response.data)
-    console.log(response.data)
     await storeCompanyNIT()
     await getUserData()
     return response

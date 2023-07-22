@@ -6,7 +6,6 @@ export const getUserData = async() =>{
     baseApi.defaults.headers.common['Authorization'] = `JWT ${sesion.PAT}`;
     const response = await baseApi.get('users/me/');
     sesion.setUserData(response.data)
-    console.log(response.data)
 }
 
 export const updateUserData = async(data:any) =>{
