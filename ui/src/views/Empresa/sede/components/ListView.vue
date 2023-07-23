@@ -59,7 +59,6 @@ import { ref, watchEffect } from "vue";
 import { deleteSede, getSedes, searchSede } from "@/views/Empresa/services/empresa.services";
 import { useRouter } from 'vue-router';
 import Swal from "sweetalert2";
-import { errorValidator } from "@/hooks/errors.hooks";
 
 const search = ref<string>('')
 const url = useRouter()
@@ -72,15 +71,6 @@ const searchData = async () => {
     .then((Response) => {
       queryset.value = Response.data
     })
-    .catch((error) => {
-      queryset.value = []
-      const resiever = errorValidator(error.response.data)
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: resiever,
-      })
-    })
     .finally(() => {
       loading.value = false
     })
@@ -92,14 +82,6 @@ const getData = async () => {
   await getSedes(NIT.toString())
     .then((Response) => {
       queryset.value = Response.data
-    })
-    .catch((error) => {
-      const resiever = errorValidator(error.response.data)
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: resiever,
-      })
     })
     .finally(() => {
       loading.value = false
