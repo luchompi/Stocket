@@ -10,6 +10,7 @@ const search = ref<string>('')
 const queryset = ref([] as Employee[])
 const loading = ref<boolean>(false)
 
+
 const fetchData = async () => {
   loading.value = true
   await getAllEmployees()
@@ -39,6 +40,11 @@ watchEffect(() => {
 })
 
 
+const onDeleteData = (id:any)=>{
+  queryset.value = queryset.value.filter((element)=>element.iden !== id)
+}
+
+
 </script>
 
 <template>
@@ -60,8 +66,9 @@ watchEffect(() => {
     </div>
   </div>
   <div v-else-if="!!queryset">
-    <DataView :data="queryset"/>
-    test
+    <div v-for="element in queryset">
+      <DataView :data="element" @onDeleteData="onDeleteData"/>
+    </div>
   </div>
   <div v-else>
     <div class="alert alert-warning alert-dismissible fade show" role="alert">

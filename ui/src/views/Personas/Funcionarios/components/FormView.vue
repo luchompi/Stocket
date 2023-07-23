@@ -93,7 +93,7 @@
           placeholder="Ingrese nombre de sede a buscar"
           aria-label="Username"
           aria-describedby="inputSearch"
-          v-model="sede"
+          v-model="searchSede"
       />
     </div>
     <div class="list-group" v-if="!!sedes.length">
@@ -105,7 +105,7 @@
           - {{ elements.name }}</a>
       </div>
     </div>
-    <div v-if="selectedSede.length">
+    <div v-if="selectedSede.value">
       <div class="alert alert-info" role="alert">
         <strong>{{ selectedSede.id }} - {{ selectedSede.name }}</strong> seleccionada
       </div>
@@ -127,7 +127,7 @@ const lastName = ref<string>("")
 const address = ref<string>("")
 const phone = ref<number>(0)
 const job = ref<string>("")
-const sede = ref<string>("")
+const searchSede = ref<string>("")
 const mail = ref<string>("")
 const sedes = ref([] as sedes[])
 const selectedSede = ref<any>([])
@@ -137,8 +137,8 @@ computed(() => {
 })
 
 watchEffect(async () => {
-  if (sede.value) {
-    const response = await getSedeById(sede.value)
+  if (searchSede.value) {
+    const response = await getSedeById(searchSede.value)
     sedes.value = response.data
   } else {
     sedes.value = []
@@ -147,25 +147,25 @@ watchEffect(async () => {
 
 const chooseThisSede = (element: any) => {
   selectedSede.value = element
-  console.log('selected')
-  console.log(selectedSede.value)
 }
 
 const emits = defineEmits(['onSaveData', 'onUpdateData'])
+
 const props = defineProps<{
-  data?: Array<Employee>,
+  data?: Employee | null,
 }>()
+
 
 const sender = () => {
   const data = {
-    iden: iden.value,
-    firstName: firstName.value,
-    lastName: lastName.value,
-    address: address.value,
-    phone: phone.value,
-    job: job.value,
-    sede_id: sede.value,
-    mail: mail.value,
+    ...(props.data ? (iden.value ? {iden: iden.value} : {iden:props.data?.iden}) : {iden: iden.value}),
+    ...(props.data ? (firstName.value ? {first_name: firstName.value} : {first_name:props.data?.first_name}) : {first_name: firstName.value}),
+    ...(props.data ? (lastName.value ? {last_name: lastName.value} : {last_name:props.data.last_name}) : {last_name: lastName.value}),
+    ...(props.data ? (address.value ? {address: address.value} : {address:props.data?.address}) : {address: address.value}),
+    ...(props.data ? (phone.value ? {phone: phone.value} : {phone:props.data?.phone}) : {phone: phone.value}),
+    ...(props.data ? (job.value ? {job: job.value} : {job:props.data?.job}) : {job: job.value}),
+    ...(props.data ? (mail.value ? {email: mail.value} : {email:props.data?.email}) : {email: mail.value}),
+    ...(props.data ? (selectedSede.value.name ? {sede: selectedSede.value.id} : {sede:props.data?.sede}) : {sede: selectedSede.value.id})
   }
   props.data ? emits('onUpdateData', data) : emits('onSaveData', data)
 }
