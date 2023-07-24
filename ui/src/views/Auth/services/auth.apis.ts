@@ -49,9 +49,9 @@ export const refreshTokens = async () => {
 }
 
 export const storeCompanyNIT = async () => {
-    const company = await getCompany()
     const sesion = sesionStore()
-    if(company.data.length){
-        sesion.setNIT(company.data[0].NIT)
-    }
+    await getCompany()
+    .then((Response)=>{
+        sesion.setNIT(Response.data[0].NIT)
+    })
 }
