@@ -9,6 +9,7 @@ class Empresa(models.Model):
     email = models.EmailField(max_length=254)
     description = models.TextField(null=True, blank=True)
     web = models.CharField(max_length=50, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.NIT} {self.name}'
@@ -22,6 +23,7 @@ class Sede(models.Model):
     description = models.TextField(null=True, blank=True)
     web = models.CharField(max_length=50, null=True, blank=True)
     empresa = models.ForeignKey(Empresa, to_field='NIT', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
@@ -30,6 +32,7 @@ class Sede(models.Model):
 class Dependencia(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
@@ -38,6 +41,7 @@ class Dependencia(models.Model):
 class SedeDependencia(models.Model):
     sede = models.ForeignKey(Sede, on_delete=models.CASCADE)
     dependencia = models.ForeignKey(Dependencia, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.sede} {self.dependencia}'
