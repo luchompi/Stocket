@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref, watchEffect} from 'vue'
-import {getAllEmployees} from '../services/funcionarios.services';
+import {findEmployeeByIdOrName, getAllEmployees} from '../services/funcionarios.services';
 import type {Employee} from '../services/funcionarios.interfaces';
 import {errorValidator} from '@/hooks/errors.hooks';
 import DataView from './DataView.vue';
@@ -17,23 +17,19 @@ const fetchData = async () => {
       .then((Response) => {
         queryset.value = Response.data
       })
-      .catch((error) => {
-        const resiever = errorValidator(error.response.data)
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: resiever,
-        })
-      })
       .finally(() => {
         loading.value = false
       })
 }
 
+const searchData = async () =>{
+  const response = await findEmployeeByIdOrName(search.value)
+  queryset.value = response.data
+}
 
 watchEffect(() => {
   if (!!search.value) {
-
+    searchData()
   } else {
     fetchData()
   }
