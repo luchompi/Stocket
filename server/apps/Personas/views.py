@@ -52,3 +52,10 @@ class FuncionarioDetail(APIView):
         queryset = get_object_or_404(Funcionario,iden=pk)
         queryset.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class FuncionarioSearch(APIView):
+    @permission_classes([isAdminOrSuperuser|isEncargado])
+    def get(self,request,pk,format=None):
+        queryset = Funcionario.objects.filter(Q(iden__icontains=pk)|Q(first_name__icontains=pk)|Q(last_name__icontains=pk))
+        serializer = FuncionarioPreviewSerializer(queryset,many=True)
+        return Response(serializer.data)

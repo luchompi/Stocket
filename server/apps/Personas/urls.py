@@ -6,6 +6,7 @@ urlpatterns = [
     #APIS de funcionarios
     p('funcionarios/', v.FuncionarioIndex.as_view()),
     p('funcionarios/<str:pk>/', v.FuncionarioDetail.as_view()),
+    p('funcionarios/search/<str:pk>/', v.FuncionarioSearch.as_view()),
 ]
 
 urlpatterns = fsp(urlpatterns)
