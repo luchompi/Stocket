@@ -4,17 +4,18 @@ import type {userData} from "./auth.interfaces";
 import {getUserData} from '@/views/Profile/services/profile.apis'
 import Swal from "sweetalert2";
 import {getCompany} from "@/views/Empresa/services/empresa.services";
+import type {AxiosResponse} from "axios";
 
-export const getCredentials = async (data: any) => {
+export const getCredentials = async (data: any): Promise <AxiosResponse<any>> => {
     const sesion = sesionStore()
     const response = await baseApi.post('jwt/create', data)
     sesion.setTokens(response.data)
-    await storeCompanyNIT()
     await getUserData()
+    await storeCompanyNIT()
     return response
 }
 
-export const storeUser = async (data: userData) => {
+export const storeUser = async (data: userData): Promise <AxiosResponse<any>> => {
     return await baseApi.post('users/', data)
 }
 
@@ -48,10 +49,10 @@ export const refreshTokens = async () => {
     }
 }
 
-export const storeCompanyNIT = async () => {
+export const storeCompanyNIT = async ():Promise<void> => {
     const sesion = sesionStore()
-    await getCompany()
-    .then((Response)=>{
-        sesion.setNIT(Response.data[0].NIT)
-    })
+    const response = await getCompany()
+    if(response.status == 200) {
+        sesion.setNIT(response.data[0].NIT)
+    }
 }
