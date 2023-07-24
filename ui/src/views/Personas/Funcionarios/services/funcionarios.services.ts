@@ -2,7 +2,6 @@ import baseApi from "@/apis/base.api";
 import { sesionStore } from "@/stores/sesion.store";
 import type { Employee } from "./funcionarios.interfaces";
 import type { AxiosResponse } from "axios";
-import {Axios} from "axios";
 
 export const getAllEmployees = async () => {
     const sesion = sesionStore()
@@ -43,6 +42,15 @@ export const updateEmployee = async (id:any, data:Employee): Promise<AxiosRespon
 export const deleteEmployee = async (id:any): Promise<AxiosResponse<any>> => {
     const sesion = sesionStore()
     return await baseApi.delete(`/personas/funcionarios/${id}/`, {
+        headers: {
+            Authorization: `JWT ${sesion.PAT}`
+        }
+    })
+}
+
+export const findEmployeeByIdOrName = (id: string) =>{
+    const sesion = sesionStore()
+    return baseApi.get(`/personas/funcionarios/search/${id}/`, {
         headers: {
             Authorization: `JWT ${sesion.PAT}`
         }
