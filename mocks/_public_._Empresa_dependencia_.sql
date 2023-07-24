@@ -38,3 +38,46 @@ INSERT INTO "public"."Empresa_dependencia" ("name") VALUES ('Comunicación Inter
 INSERT INTO "public"."Empresa_dependencia" ("name") VALUES ('Ventas Internacionales');
 INSERT INTO "public"."Empresa_dependencia" ("name") VALUES ('Servicio Técnico');
 INSERT INTO "public"."Empresa_dependencia" ("name") VALUES ('Recursos Humanos');
+
+Para sqlite3
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Sistemas');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Marketing');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Recursos Humanos');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Finanzas');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Ventas');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Operaciones');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Producción');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Calidad');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Logística');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Innovación');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Desarrollo');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Administración');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Compras');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Investigación');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Mantenimiento');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Servicio al Cliente');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Legal');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Comunicación');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Planificación');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Gestión de Proyectos');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Investigación y Desarrollo');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Contabilidad');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Auditoría');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Recursos Materiales');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Planificación Estratégica');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Desarrollo de Negocios');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Capacitación');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Servicios Generales');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Relaciones Públicas');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Publicidad');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Desarrollo de Producto');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Diseño');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Recursos Tecnológicos');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Servicios Financieros');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Relaciones Laborales');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Gestión de Calidad');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Comunicación Interna');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Ventas Internacionales');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Servicio Técnico');
+INSERT INTO "Empresa_dependencia" ("name") VALUES ('Recursos Humanos');
+
