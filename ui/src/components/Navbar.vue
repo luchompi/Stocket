@@ -4,7 +4,7 @@
       <ul class="nav me-auto">
         <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2 active" aria-current="page">Home</a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" v-if="sesion.isLogged">
           <a class="nav-link dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown"
              aria-expanded="false">
             Empresa <i class="bi bi-building"></i>
@@ -27,7 +27,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" v-if="sesion.isLogged">
           <a class="nav-link dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown"
              aria-expanded="false">
             Personas <i class="bi bi-person"></i>
