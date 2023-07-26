@@ -21,3 +21,13 @@ class FuncionarioStoreSerializer(serializers.ModelSerializer):
         model = Funcionario
         fields = '__all__'
 
+
+class ProveedorSerializerPreview(serializers.ModelSerializer):
+    class Meta:
+        model = Proveedores
+        fields = ('NIT','razonSocial','created_at')
+
+class ProveedorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Proveedores
+        fields = '__all__'
