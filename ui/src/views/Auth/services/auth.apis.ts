@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import {getCompany} from "@/views/Empresa/services/empresa.services";
 import type {AxiosResponse} from "axios";
 
-export const getCredentials = async (data: any): Promise <AxiosResponse<any>> => {
+export const getCredentials = async (data: any): Promise<AxiosResponse<any>> => {
     const sesion = sesionStore()
     const response = await baseApi.post('jwt/create', data)
     sesion.setTokens(response.data)
@@ -15,7 +15,7 @@ export const getCredentials = async (data: any): Promise <AxiosResponse<any>> =>
     return response
 }
 
-export const storeUser = async (data: userData): Promise <AxiosResponse<any>> => {
+export const storeUser = async (data: userData): Promise<AxiosResponse<any>> => {
     return await baseApi.post('users/', data)
 }
 
@@ -34,25 +34,23 @@ export const resetPasswordConfirm = (data: any) => {
 
 export const refreshTokens = async () => {
     const sesion = sesionStore()
-    if (sesion.isLogged) {
-        const response = await baseApi.post('jwt/refresh', {refresh: `${sesion.RAT}`})
-        if (response.status == 200) {
-            sesion.setTokens(response.data)
-        } else {
+    await baseApi.post('jwt/refresh', {refresh: `${sesion.RAT}`})
+        .then((Response) => {
+            sesion.setTokens(Response.data)
+        }).catch((error) => {
             Swal.fire({
                 icon: 'error',
                 title: 'Error de Comunicación con el servidor',
                 text: 'Se ha detectado un error de comunicación con el servidor, se cerrará la sesión y se perderán todas las operaciones que no se hayan procesado'
             })
             sesion.clearSesion()
-        }
-    }
+        })
 }
 
-export const storeCompanyNIT = async ():Promise<void> => {
+export const storeCompanyNIT = async (): Promise<void> => {
     const sesion = sesionStore()
     const response = await getCompany()
-    if(response.status == 200) {
+    if (response.status == 200) {
         sesion.setNIT(response.data[0].NIT)
     }
 }
