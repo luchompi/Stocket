@@ -51,7 +51,7 @@ onMounted(async () => {
               <p><strong>Estado: </strong>{{ employee?.status }}</p>
             </div>
             <div class="col">
-              <p><strong>Sede: </strong>{{ employee?.sede }}</p>
+              <p><strong>Sede: </strong>{{ employee?.sede ? employee?.sede : 'No hay datos'}}</p>
               <p><strong>Cargo: </strong>{{ employee?.job }}</p>
             </div>
           </div>
