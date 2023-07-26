@@ -13,7 +13,7 @@ class FuncionarioSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_sede_name(self,obj):
-        return obj.sede.name
+        return obj.sede.name if obj.sede else None
 
 
 class FuncionarioStoreSerializer(serializers.ModelSerializer):
