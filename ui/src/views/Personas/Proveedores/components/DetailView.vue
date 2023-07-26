@@ -23,7 +23,6 @@ onMounted(async () => {
       })
       .finally(() => {
         loading.value = false
-        console.log(queryset.value)
       })
 })
 </script>
