@@ -38,15 +38,8 @@
               </RouterLink>
             </li>
             <li>
-              <RouterLink :to="{name:'dependencias'}" class="dropdown-item">Dependencias <i
-                  class="bi bi-plus-circle"></i></RouterLink>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li>
-              <RouterLink :to="{name:'operations-index'}" class="dropdown-item">Incluir dependencias en sedes <i class="bi bi-box-arrow-in-right"></i>
-              </RouterLink>
+              <RouterLink :to="{name:'proveedores'}" class="dropdown-item">Proveedores <i
+                  class="bi bi-plus-square"></i></RouterLink>
             </li>
           </ul>
         </li>
@@ -83,6 +76,9 @@
         </li>
         <li class="nav-item">
           <RouterLink :to="{ name: 'register' }" class="nav-link link-body-emphasis px-2">Sign up</RouterLink>
+        </li>
+        <li class="nav-item">
+          <a href="" class="nav-link link-body-emphasis px-2">Panel de administrador</a>
         </li>
       </ul>
     </div>
