@@ -39,6 +39,7 @@ Ver. 0.2.0.0
 Ver. 0.3.0.0
 
 1. Se ha creado la representación y apis de Empresa:
+
    * Se ha creado el modelo de empresa con sus respectivas dependencias débiles (Sedes, Depedencias, sede por dependencia):
      * Tabla Empresa incluye:
        * NIT
@@ -61,5 +62,27 @@ Ver. 0.3.0.0
      * Tabla Sede por Dependencias
        * sede_id
        * dependencia_id
+2. Se han creado las operaciones CRUD sobre las tablas sede, dependencia y sededependencia
+3. Se ha creado representacion de la tabla de Funcionarios y Proveedores siguiendo los siguientes esquemas:
 
-OBS: Se está construyendo las dependencias y se deben asociar sedes a dependencias.
+   * Tabla de Funcionarios
+     * iden
+     * first_name
+     * last_name
+     * email
+     * phone
+     * address
+     * job
+     * status
+     * sede
+     * created_at
+   * Tabla Proveedores
+     * NIT
+     * razonSocial
+     * phone
+     * address
+     * email
+     * city
+     * created_at
+   * Se han escrito operaciones CRUD, APIS, Controladores, servicios, rutas y demás configuracion requerida para el uso de dichas tablas
+4. Se han incluido mocks con registros de prueba para el uso de estas tablas
