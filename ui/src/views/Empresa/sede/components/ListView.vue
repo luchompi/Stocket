@@ -97,7 +97,23 @@ watchEffect(() => {
   }
 })
 
-const eliminarSede = async (id: any) => {
+const eliminarSede = (id:any) => {
+  Swal.fire({
+    icon:'question',
+    title:'¿Está seguro?',
+    text:'Este proceso no se puede deshacer',
+    showCancelButton:true,
+    showConfirmButton:true,
+    confirmButtonText:'Sí, continuar',
+    cancelButtonText:'No, cancelar'
+  }).then((results)=>{
+    if(results.isConfirmed){
+      proceed(id)
+    }
+  })
+}
+
+const proceed = async (id: any) => {
   const response = await deleteSede(url.currentRoute.value.params.nit, id)
   if (response.status == 204) {
     Swal.fire({
