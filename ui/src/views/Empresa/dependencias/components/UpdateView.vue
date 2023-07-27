@@ -5,10 +5,11 @@ import { getDependenciaById, updateDependencia } from '../services/dependencias.
 import FormViewComponent from "@/views/Empresa/dependencias/components/FormViewComponent.vue";
 import Swal from 'sweetalert2';
 import { errorValidator } from '@/hooks/errors.hooks';
+import type { Dependencia } from '../services/dependencias.interfaces';
 
 const url = useRouter()
 const loading = ref<boolean>(false)
-const queryset = ref<any>([])
+const queryset = ref({} as Dependencia)
 
 
 onMounted(() => {

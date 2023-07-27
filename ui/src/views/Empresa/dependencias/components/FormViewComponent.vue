@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {ref} from 'vue'
+import type { DependenciaPreview } from '../services/dependencias.interfaces';
 
 const props = defineProps<{
-  data?: any
+  data?: DependenciaPreview | null
 }>()
 
 const emits = defineEmits(['onSave', 'onUpdateData'])
@@ -14,9 +15,9 @@ const description = ref<string>('')
 const storeData = () => {
 
   const data = {
-    ...(props.data ? {name: name.value ?? props.data[0].name} : {name: name.value}),
-    ...(props.data ? {description: description.value ?? props.data[0].description} : {description: description.value})
-  } 
+    ...(props.data ? (name.value ? ({name: name.value}) : ({name: props.data.name})) : ({name: name.value})),
+    ...(props.data ? (description.value ? ({description: description.value}) : ({description: props.data.description})) : ({description: description.value}))
+  }
   props.data ? (emits('onUpdateData', data)) : (emits('onSave', data))
 }
 
@@ -30,7 +31,7 @@ const storeData = () => {
           type="text"
           class="form-control"
           placeholder="Nombre de la dependencia"
-          required
+          :required="!props.data"
           v-model="name"
       />
     </div>
