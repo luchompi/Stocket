@@ -28,16 +28,16 @@ Ver. 0.3.0.0 - alpha
 
 Módulo de Personas:
 
-1. [ ] Gestiónde funcionarios
-2. [ ] Gestión de Proveedores
+1. [X] Gestiónde funcionarios
+2. [X] Gestión de Proveedores
 3. [X] Gestión de Empresa
 4. [X] Gestión de datos de empresa
 
     1. [X] gestión de datos de sedes
     2. [X] gestión de datos de dependencias
-5. [ ] Pruebas unitarias de módulos de usuarios
-6. [ ] Reportes de pruebas y configuraciones
-7. [ ] Mocks de pruebas y manuales de desarrollo y uso
+5. [X] Pruebas unitarias de módulos de usuarios
+6. [X] Reportes de pruebas y configuraciones
+7. [X] Mocks de pruebas y manuales de desarrollo y uso
 
 Ver. 0.4.0.0 - alpha
 
