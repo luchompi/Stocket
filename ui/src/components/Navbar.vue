@@ -43,6 +43,22 @@
             </li>
           </ul>
         </li>
+        <li class="nav-item dropdown" v-if="sesion.isLogged">
+          <a class="nav-link dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown"
+             aria-expanded="false">
+            Inventario <i class="bi bi-bookshelf"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <RouterLink :to="{ name: 'marcas' }" class="dropdown-item">Marcas <i class="bi bi-bookmark"></i>
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink :to="{name:'proveedores'}" class="dropdown-item">Categorías <i
+                  class="bi bi-plus-square"></i></RouterLink>
+            </li>
+          </ul>
+        </li>
         <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Pricing</a></li>
         <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">FAQs</a></li>
         <li class="nav-item">
