@@ -7,6 +7,7 @@ import Forbidden from '@/components/ErrorComponents/Forbidden.vue'
 import ServerError from '@/components/ErrorComponents/ServerError.vue'
 import {createRouter, createWebHistory} from 'vue-router'
 import personasRouter from "@/views/Personas/services/personas.routes";
+import inventarioRoutes from '@/views/Inventario/services/inventario.routes'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,6 +17,7 @@ const router = createRouter({
         ...profileRoutes,
         ...empresaRoutes,
         ...personasRouter,
+        ...inventarioRoutes,
         {
             path: '/:pathMatch(.*)*',
             name: 'NotFound',
