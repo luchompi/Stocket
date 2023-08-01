@@ -45,8 +45,8 @@ Ver. 0.4.0.0 - alpha
     1. [ ] Gestión de referencias
     2. [ ] Gestión de tipos
     3. [ ] Gestión de Elementos
-2. [ ] Pruebas unitarias de módulos de inventario
-3. [ ] Reportes de pruebas y configuraciones
+2. [X] Pruebas unitarias de módulos de inventario
+3. [X] Reportes de pruebas y configuraciones
 4. [ ] Mocks de pruebas y manuales de desarrollo y uso
 
 Ver. 0.5.0.0 - alpha
