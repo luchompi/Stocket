@@ -54,7 +54,7 @@
               </RouterLink>
             </li>
             <li>
-              <RouterLink :to="{name:'proveedores'}" class="dropdown-item">Categorías <i
+              <RouterLink :to="{name:'categorias'}" class="dropdown-item">Categorías <i
                   class="bi bi-plus-square"></i></RouterLink>
             </li>
           </ul>
