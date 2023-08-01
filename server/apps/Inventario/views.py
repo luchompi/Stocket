@@ -5,10 +5,11 @@ from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Marca, Categoria, Referencia, Elemento
-from .serializers import MarcaSerializer
+from .serializers import CategoriaSerializer, MarcaSerializer
 from django.db import transaction
 from django.db.models import Q
 
+#Controladores de marcas
 class MarcaSearch(APIView):
     @permission_classes([isAdminOrSuperuser | isEncargado])
     def get(self,request,pk,format=None):
@@ -51,4 +52,34 @@ class MarcaDetail(APIView):
     def delete(self,request,id,format=None):
         marca = get_object_or_404(Marca,pk=id)
         marca.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+#controladores de Categorias
+class CategoriaIndex(APIView):
+    @permission_classes([isAdminOrSuperuser | isEncargado])
+    def get(self,request,format=None):
+        queryset = Categoria.objects.order_by('-created_at')[:5]
+        serializer = CategoriaSerializer(queryset,many=True)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+    
+    @permission_classes([isAdminOrSuperuser | isEncargado])
+    def post(self,request,format=None):
+        serializer = CategoriaSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(status=status.HTTP_200_OK)
+        return Response (serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+class CategoriaSearch(APIView):
+    @permission_classes([isAdminOrSuperuser | isEncargado])
+    def get(self,request,pk,format=None):
+        queryset = Categoria.objects.filter(name__icontains=pk)
+        serializer = CategoriaSerializer(queryset,many=True)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+
+class CategoriaDetail(APIView):
+    @permission_classes([isAdminOrSuperuser|isEncargado])
+    def delete(self,request,pk,format=None):
+        queryset = get_object_or_404(Categoria,pk=pk)
+        queryset.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

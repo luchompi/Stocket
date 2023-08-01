@@ -5,3 +5,8 @@ class MarcaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Marca
         fields = '__all__'
+
+class CategoriaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Categoria
+        fields = '__all__'
