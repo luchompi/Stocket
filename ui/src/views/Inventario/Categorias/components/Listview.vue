@@ -70,7 +70,7 @@ const getDataByName = async() =>{
     loading.value = false
 }
 
-const deleteCategoria = async(id:string) =>{
+const deleteCategoria = async(id:any) =>{
     const response = await deleteCategory(id)
   if(response == 204){
     categorias.value = categorias.value.filter((element) => element.id != parseInt(id))
