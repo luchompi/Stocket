@@ -83,3 +83,18 @@ class CategoriaDetail(APIView):
         queryset = get_object_or_404(Categoria,pk=pk)
         queryset.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+    @permission_classes([isAdminOrSuperuser | isEncargado])
+    def put(self,request,pk,format=None):
+        queryset = get_object_or_404(Categoria,pk=pk)
+        serializer = CategoriaSerializer(queryset,data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(status=status.HTTP_200_OK)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+    @permission_classes([isAdminOrSuperuser | isEncargado])
+    def get(self,request,pk,format=None):
+        queryset = get_object_or_404(Categoria,pk=pk)
+        serializer = CategoriaSerializer(queryset)
+        return Response(serializer.data,status=status.HTTP_200_OK)
