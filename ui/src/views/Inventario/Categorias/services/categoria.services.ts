@@ -74,3 +74,38 @@ export const deleteCategory = async(id:string) =>{
     }
     return response.status
 }
+
+export const getCategoryById = async (id: any) =>{
+    const response = await baseApi.get(`/inventario/categorias/${id}/`,{
+        headers: {
+            Authorization: `JWT ${sesionStore().PAT}`
+        }
+    })
+    return response.data
+}
+
+export const updateCategory = async (id: any, data: any) =>{
+    const response = await baseApi.put(`/inventario/categorias/${id}/`,data,{
+        headers: {
+            Authorization: `JWT ${sesionStore().PAT}`
+        }
+    })
+    if (response.status == 200) {
+        Swal.fire({
+            icon:'success',
+            title: 'Actualizado',
+            text: 'Se ha actualizado la categoría con éxito',
+            timer: 2000,
+            timerProgressBar: true
+        })
+    }
+    else {
+        const reciever = errorValidator(response.data)
+        Swal.fire({
+            icon:'error',
+            title:'Error',
+            text:reciever
+        })
+    }
+    return response.status
+}
