@@ -34,7 +34,7 @@
                                     <td>{{ element.name }}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="button" class="btn btn-warning">Editar</button>
+                                            <RouterLink :to="{name:'categorias-editar',params:{id:element.id}}" type="button" class="btn btn-warning">Editar</RouterLink>
                                             <button type="button" class="btn btn-danger" @click="deleteCategoria(element.id)">Eliminar</button>
                                         </div>
                                     </td>
