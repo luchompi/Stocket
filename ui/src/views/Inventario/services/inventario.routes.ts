@@ -1,6 +1,7 @@
 import categoriasRoutes from "../Categorias/services/categoria.routes";
 import InventarioLayout from "../InventarioLayout.vue";
 import marcaRoutes from "../Marcas/services/marca.routes";
+import referenciasRoutes from "../Referencias/services/services/referencias.routes";
 
 const inventarioRoutes = [
     {
@@ -9,6 +10,7 @@ const inventarioRoutes = [
         children:[
             ...marcaRoutes,
             ...categoriasRoutes,
+            ...referenciasRoutes,
         ]
     }
 ]
