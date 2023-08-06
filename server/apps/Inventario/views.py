@@ -5,7 +5,7 @@ from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Marca, Categoria, Referencia, Elemento
-from .serializers import CategoriaSerializer, MarcaSerializer
+from .serializers import CategoriaSerializer, MarcaSerializer,ReferenciaStoreSerializer, ReferenciaSerializer
 from django.db import transaction
 from django.db.models import Q
 
@@ -98,3 +98,36 @@ class CategoriaDetail(APIView):
         queryset = get_object_or_404(Categoria,pk=pk)
         serializer = CategoriaSerializer(queryset)
         return Response(serializer.data,status=status.HTTP_200_OK)
+
+#Referencias Controller
+class ReferenciaIndex(APIView):
+    @permission_classes([isAdminOrSuperuser | isEncargado])
+    def get(self,request,pk,format=None):
+        queryset = Referencia.objects.filter(categoria__id=pk).order_by('-timestamps')[:5]
+        serializer = ReferenciaSerializer(queryset,many=True)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+
+    @permission_classes([isAdminOrSuperuser | isEncargado])
+    def post(self,request,pk,format=None):
+        data_list = request.data
+        try:
+            with transaction.atomic():
+                for data in data_list:
+                    myData = {
+                        'categoria': pk,
+                        'marca': data['id']
+                    }
+                    serializer = ReferenciaStoreSerializer(data=myData)
+                    if serializer.is_valid():
+                        serializer.save()
+                return Response(status=status.HTTP_201_CREATED)
+        except Exception as e:
+            transaction.rollback()
+            return Response({"error":e},status=status.HTTP_400_BAD_REQUEST)
+
+class ReferenciaDetail(APIView):
+    @permission_classes([isAdminOrSuperuser | isEncargado])
+    def delete(self,request,pk,format=None):
+        queryset = get_object_or_404(Referencia,pk=pk)
+        queryset.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

@@ -11,6 +11,9 @@ urlpatterns = [
     path('categorias/',v.CategoriaIndex.as_view()),
     path('categorias/search/<str:pk>/',v.CategoriaSearch.as_view()),
     path('categorias/<int:pk>/',v.CategoriaDetail.as_view()),
+    #URLS de referencias
+    path('referencias/<int:pk>/',v.ReferenciaIndex.as_view()),
+    path('referencias/details/<int:pk>/',v.ReferenciaDetail.as_view())
 ]
 
 urlpatterns = fsp(urlpatterns)
