@@ -13,7 +13,7 @@ export const getAllCategories = async () => {
 }
 
 export const getCategoriesByName = async (name: string) => {
-    return await baseApi.get(`/inventario/categorias/search/${name}`, {
+    return await baseApi.get(`/inventario/categorias/search/${name}/`, {
         headers: {
             Authorization: `JWT ${sesionStore().PAT}`
         }

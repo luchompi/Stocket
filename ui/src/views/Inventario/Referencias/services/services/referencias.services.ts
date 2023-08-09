@@ -24,3 +24,11 @@ export const deleteReference = async(id:any) =>{
         }
     })
 }
+
+export const filterReferences = async(category:any,brand:any)=>{
+    return await baseApi.get(`/inventario/referencias/filter/${category}/${brand}/`,{
+        headers:{
+            Authorization:`JWT ${sesionStore().PAT}`
+        }
+    })
+}
