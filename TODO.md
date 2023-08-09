@@ -41,10 +41,10 @@ Módulo de Personas:
 
 Ver. 0.4.0.0 - alpha
 
-1. [ ] Módulo de Inventario
+1. [X] Módulo de Inventario
     1. [X] Gestión de referencias
     2. [X] Gestión de tipos
-    3. [ ] Gestión de Elementos
+    3. [X] Gestión de Elementos
 2. [X] Pruebas unitarias de módulos de inventario
 3. [X] Reportes de pruebas y configuraciones
 4. [ ] Mocks de pruebas y manuales de desarrollo y uso
