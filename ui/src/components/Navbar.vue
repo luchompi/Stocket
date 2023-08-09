@@ -66,6 +66,12 @@
               <RouterLink :to="{ name: 'refer-list' }" class="dropdown-item">Referencias <i
                   class="bi bi-folder-plus"></i></RouterLink>
             </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <RouterLink :to="{name:'elementos-list'}" class="dropdown-item">Elementos <i class="bi bi-laptop"></i> <i class="bi bi-pc-display"></i></RouterLink>
+            </li>
           </ul>
         </li>
         <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Pricing</a></li>
@@ -126,6 +132,7 @@
 
 <script setup lang="ts">
 import { sesionStore } from '@/stores/sesion.store';
+import { RouterLink } from 'vue-router';
 
 const sesion = sesionStore()
 const props = defineProps<{
