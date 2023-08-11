@@ -86,3 +86,33 @@ Ver. 0.3.0.0
      * created_at
    * Se han escrito operaciones CRUD, APIS, Controladores, servicios, rutas y demás configuracion requerida para el uso de dichas tablas
 4. Se han incluido mocks con registros de prueba para el uso de estas tablas
+
+Ver. 0.4.0.0 
+
+1. Se ha creado representacion de Inventario:
+   * Tabla de marcas
+     * nombre
+     * descripcion
+     * timestamps
+   * Tabla de categorias
+     * nombre
+     * descripcion
+     * timestamps
+   * tabla de referencias
+     * marca_id
+     * categoria_id
+     * timestamps
+   * tabla elementos
+     * placa
+     * referencia
+     * modelo
+     * serial
+     * estado
+     * ip
+     * mac
+     * proveedor
+     * created_at
+     * delete_on
+     * created_by
+2. Se han habilidato Procesos crud sobre las tablas marcas, categorias y elementos
+3. se ha habilidato creacion de referencias, ahora puede enlazarse una marca sobre una categoria
