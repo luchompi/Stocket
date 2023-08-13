@@ -20,7 +20,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div @mousemove="sesion.refreshAccessToken()">
+  <div @mousemove="sesion.refreshAccessToken">
     <Navbar :dateTime="dateTime"/>
     <div class="alert alert-warning alert-dismissible fade show" role="alert"
          v-if="sesion.isLogged && (sesion.UserData[0]?.groups?.includes('Administradores') || sesion.UserData[0]?.is_superuser)">

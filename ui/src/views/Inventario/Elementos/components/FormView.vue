@@ -8,7 +8,7 @@ import { filterReferences } from '../../Referencias/services/services/referencia
 import type { Suppliers } from '@/views/Personas/Proveedores/services/proveedor.interfaces';
 import { getProveedoresByNameOrNIT } from '@/views/Personas/Proveedores/services/proveedor.services';
 const props = defineProps<{
-    element?: Element | null
+    element?: Element
 }>()
 
 const emits = defineEmits(['onSaveData', 'onUpdateData'])
@@ -123,12 +123,12 @@ watchEffect(() => {
         <!--modelo-->
         <div class="input-group mb-3">
             <span class="input-group-text" id="inputmodelo"><i class="bi bi-cpu"></i></span>
-            <input type="text" class="form-control" placeholder="Especifique el modelo de elemento" v-model="modelo" />
+            <input type="text" class="form-control" placeholder="Especifique el modelo de elemento" v-model="modelo" :required="!!(!props.element)"/>
         </div>
         <!--serial-->
         <div class="input-group mb-3">
             <span class="input-group-text" id="inputserial"><i class="bi bi-upc"></i></span>
-            <input type="text" class="form-control" placeholder="Especifique el serial de elemento" v-model="serial" />
+            <input type="text" class="form-control" placeholder="Especifique el serial de elemento" v-model="serial" :required="!!(!props.element)"/>
         </div>
         <!--IP-->
         <div class="input-group mb-3">
@@ -138,7 +138,7 @@ watchEffect(() => {
         <!--MAC-->
         <div class="input-group mb-3">
             <span class="input-group-text" id="inputMAC"><i class="bi bi-laptop"></i></span>
-            <input type="text" class="form-control" placeholder="Especifique la MAC de elemento" v-model="MAC" />
+            <input type="text" class="form-control" placeholder="Especifique la MAC de elemento" v-model="MAC" :required="!!(!props.element)"/>
         </div>
         <!--Proveedor-->
         <div class="row">
@@ -147,7 +147,7 @@ watchEffect(() => {
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="inputBrand"><i class="bi bi-bookmark"></i></span>
                     <input type="text" class="form-control" placeholder="Indique proveedor del elemento"
-                        v-model="searchProvider" />
+                        v-model="searchProvider" :required="!!(!props.element)"/>
                 </div>
                 <!--Respuesta de búsqueda-->
                 <ul class="list-group">
