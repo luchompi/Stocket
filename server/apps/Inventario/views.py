@@ -172,7 +172,7 @@ class ElementoSearch(APIView):
 	permission_classes = [isAdminOrSuperuser | isEncargado]
 
 	def get(self, request, pk, format=None):
-		queryset = Elemento.objects.filter(serial__icontains=pk)
+		queryset = Elemento.objects.filter(placa__icontains=pk)
 		serializer = ElementoSerializerPreview(queryset, many=True)
 		return Response(serializer.data, status=status.HTTP_200_OK)
 
