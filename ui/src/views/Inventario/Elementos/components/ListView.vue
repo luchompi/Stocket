@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {getAllElements} from '../services/elementos.services';
+import {getAllElements,findElementByPlaca} from '../services/elementos.services';
 import {ref, watchEffect} from 'vue'
 import type {ElementPreview} from '../services/elementos.interfaces'
 
@@ -14,24 +14,27 @@ const getAllData = async () => {
 }
 
 const findData = async () => {
-  console.log(search.value)
+  loading.value = true
+  await findElementByPlaca(search.value)
+  .then((Response)=>{
+    elementos.value = Response.data
+  })
+  .catch((error)=>{
+    elementos.value = []
+  })
+  .finally(()=>{
+    loading.value = false
+  })
 }
 
 watchEffect(() => {
-  search.value.length ? findData() : getAllData()
+  search.value ? findData() : getAllData()
 })
 
 </script>
 
 <template>
-  <div v-if="loading">
-    Espere ...
-    <div class="spinner-border text-primary" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-  </div>
-  <div v-else-if="elementos.length">
-    <div class="input-group mb-3">
+  <div class="input-group mb-3">
       <span class="input-group-text" id="inputSearch"><i class="bi bi-search"></i></span>
       <input
           type="text"
@@ -40,6 +43,13 @@ watchEffect(() => {
           v-model="search"
       />
     </div>
+  <div v-if="loading">
+    Espere ...
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  <div v-else-if="elementos.length">
     <table class="table table-hover table-striped">
       <thead>
       <tr>

@@ -20,6 +20,14 @@ export const getElementById = async (id: any) => {
     })
 }
 
+export const findElementByPlaca = async (placa: any) => {
+    return await baseApi.get(`/inventario/elementos/search/${placa}/`, {
+        headers: {
+            Authorization: `JWT ${sesionStore().PAT}`
+        }
+    })
+}
+
 export const saveElement = async (data: Element) => {
     await baseApi.post('/inventario/elementos/', data, {
         headers: {

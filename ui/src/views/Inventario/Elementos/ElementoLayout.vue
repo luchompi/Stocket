@@ -10,8 +10,12 @@ import {RouterLink} from 'vue-router';
             <div class="text-center flex-grow-1 mb-0">
               <h6 class="card-title">Elementos <i class="bi bi-laptop"></i> <i class="bi bi-pc-display"></i></h6>
             </div>
-            <RouterLink :to="{name:'elementos-create'}" type="button" class="btn btn-success ml-auto"><i
+            <div class="btn-group ml-auto" role="group" aria-label="Basic example">
+              <RouterLink :to="{name:'elementos-list'}" type="button" class="btn btn-primary ml-auto">Listado <i class="bi bi-list-task"></i></RouterLink>
+              <RouterLink :to="{name:'elementos-create'}" type="button" class="btn btn-success ml-auto">Nuevo <i
                 class="bi bi-plus-square"></i></RouterLink>
+              
+            </div>
           </div>
         </div>
         <div class="card-body">
