@@ -3,7 +3,7 @@
 3. [X] Bitacora 2 (hasta el 5 de julio)
 4. [X] Bitacora 3 (hasta 20 de julio)
 5. [X] Bitacora 4 (hasta 4 de agosto)
-6. [ ] Bitacora 5 (hasta 19 de agosto)
+6. [X] Bitacora 5 (hasta 19 de agosto)
 7. [ ] Bitacora 6 (hasta 3 de septiembre)
 8. [ ] Formulario Parcial (4 de septiembre)
 9. [ ] Bitacora 7 (hasta 18 de septiembre)

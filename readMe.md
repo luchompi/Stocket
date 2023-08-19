@@ -87,7 +87,7 @@ Ver. 0.3.0.0
    * Se han escrito operaciones CRUD, APIS, Controladores, servicios, rutas y demás configuracion requerida para el uso de dichas tablas
 4. Se han incluido mocks con registros de prueba para el uso de estas tablas
 
-Ver. 0.4.0.0 
+Ver. 0.4.0.0
 
 1. Se ha creado representacion de Inventario:
    * Tabla de marcas
@@ -116,3 +116,37 @@ Ver. 0.4.0.0
      * created_by
 2. Se han habilidato Procesos crud sobre las tablas marcas, categorias y elementos
 3. se ha habilidato creacion de referencias, ahora puede enlazarse una marca sobre una categoria
+4. Ahora, se pueden enlazar elementos con referencias
+
+Ver. 0.5.0.0
+
+1. Se ha creado representación de las operaciones
+   * Tabla de asignaciones
+     * funcionario_id
+     * user_id
+     * timestamps
+   * Tabla detalles de asignacion
+     * asignacion_id
+     * elemento_id
+     * timestamps
+   * Tabla mantenimientos
+     * PID
+     * elemento_id
+     * user
+     * FechaFin
+     * descripcion
+     * observaciones
+     * timestamps
+     * estado
+   * Tabla Baja
+     * PID
+     * user
+     * timestamps
+   * Tabla Detalle Baja
+     * baja_id
+     * elemento_id
+     * autorizado
+     * timestamps
+     * fechaBorrado
+2. Se han escrito los casos de prueba de los modelos
+3. Se ha creado scaffolding en vuejs para las vistas, no están disponibles procedimientos django ni tampoco apis

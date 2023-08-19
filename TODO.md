@@ -53,20 +53,20 @@ Ver. 0.5.0.0 - alpha
 
 1. [ ] Módulo de Mantenimiento
 
-    1. [ ] gestión de mantenimientos
+    1. [X] gestión de mantenimientos
 2. [ ] Módulo de Bajas
 
-    1. [ ] gestión de baja.
+    1. [X] gestión de baja.
     2. [ ] Rutinas de borrado automático de registros
 3. [ ] Módulo de Asignaciones
 
-    1. [ ] Gestión de asignaciones
+    1. [X] Gestión de asignaciones
     2. [ ] Gestión de traspasos
 4. [ ] Módulo de certificaciones
 
     1. [ ] Reporte de certificación de Paz y salvo de sistemas
-5. [ ] Pruebas unitarias de módulos de Mantenimiento, Bajas y Asignaciones
-6. [ ] Reportes de Pruebas y configuraciones
+5. [X] Pruebas unitarias de módulos de Mantenimiento, Bajas y Asignaciones
+6. [X] Reportes de Pruebas y configuraciones
 7. [ ] Mocks de Pruebas y manuales de desarrollo
 
 Ver. 0.6.0.0 - beta
