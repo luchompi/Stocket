@@ -6,6 +6,7 @@
         <div>Estado: {{ props.data?.status }}</div>
         <div class="col col-lg-4">
           <div class="btn-group" role="group" aria-label="Basic example">
+            <RouterLink :to="{name:'asig-create'}" class="btn btn-success" type="button" @click="store.setEmployee(props.data)" v-if="props.data">Asignar <i class="bi bi-plus"></i></RouterLink>
             <RouterLink :to="{ name: 'funcionarios-detail', params: { id: props.data?.iden } }" type="button"
               class="btn btn-info">Detalles <i class="bi bi-search"></i></RouterLink>
             <RouterLink :to="{ name: 'funcionarios-edit', params: { id: props.data?.iden } }" type="button"
@@ -23,7 +24,8 @@
 import type { Employee } from '../services/funcionarios.interfaces';
 import { deleteEmployee } from "@/views/Personas/Funcionarios/services/funcionarios.services";
 import Swal from "sweetalert2";
-
+import {asignacionStore} from '@/views/Gestion/Asignaciones/services/asignacion.store'
+const store = asignacionStore()
 const props = defineProps<{
   data?: Employee | null
 }>()
