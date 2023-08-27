@@ -72,6 +72,7 @@ const findData = async () => {
   data.value = response.data
   loading.value = false
 }
+
 watchEffect(() => {
   search.value ? findData() : getData()
 })
