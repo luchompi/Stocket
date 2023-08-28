@@ -35,7 +35,7 @@
             <div class="btn-group" role="group" aria-label="Basic example">
               <RouterLink :to="{name:'asig-detail',params:{id:element.id}}" type="button" class="btn btn-primary">Ver <i
                   class="bi bi-search"></i></RouterLink>
-              <button type="button" class="btn btn-danger">Anular <i class="bi bi-trash"></i></button>
+              <button type="button" class="btn btn-danger" @click="anular(element.id)">Anular <i class="bi bi-trash"></i></button>
             </div>
           </td>
         </tr>
@@ -52,8 +52,9 @@
 
 <script setup lang="ts">
 import {ref, watchEffect} from "vue";
-import {findAsignaciones, getAsignaciones} from "../services/asignacion.services";
+import {deleteAsignment, findAsignaciones, getAsignaciones} from "../services/asignacion.services";
 import type {Asignation} from "../services/asignacion.interfaces"
+import Swal from "sweetalert2";
 
 const loading = ref<boolean>(false)
 const data = ref([] as Asignation[])
@@ -71,6 +72,31 @@ const findData = async () => {
   const response = await findAsignaciones(search.value)
   data.value = response.data
   loading.value = false
+}
+
+const anular = (id:any) => {
+  Swal.fire({
+    title: '¿Está seguro?',
+    text: "¡No podrá revertir esta acción!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Si, anular',
+    cancelButtonText: 'Cancelar'
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      const response = await deleteAsignment(id)
+      if(response.status == 204){
+        Swal.fire(
+          'Anulado!',
+          'La asignación ha sido anulada.',
+          'success'
+        )
+        data.value = data.value.filter((element:Asignation) => element.id != id)
+      }
+    }
+  })
 }
 
 watchEffect(() => {
