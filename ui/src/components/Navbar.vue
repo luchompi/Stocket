@@ -90,6 +90,11 @@
               </RouterLink>
             </li>
             <li>
+              <RouterLink :to="{ name: 'traspasos-list' }" class="dropdown-item">Traspasos <i
+                  class="bi bi-bezier2"></i>
+              </RouterLink>
+            </li>
+            <li>
               <RouterLink :to="{ name: 'refer-list' }" class="dropdown-item">Mantenimientos <i
                   class="bi bi-wrench-adjustable-circle"></i></RouterLink>
             </li>
@@ -129,7 +134,7 @@
           <RouterLink :to="{ name: 'register' }" class="nav-link link-body-emphasis px-2">Sign up</RouterLink>
         </li>
         <li class="nav-item">
-          <a href="" target="blank" class="nav-link link-body-emphasis px-2">Panel de administrador</a>
+          <a href="http://localhost:8000/admin/" target="blank" class="nav-link link-body-emphasis px-2">Panel de administrador</a>
         </li>
       </ul>
     </div>
