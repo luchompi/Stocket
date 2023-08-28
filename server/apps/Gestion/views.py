@@ -44,6 +44,18 @@ class AsignacionDetail(APIView):
         asignacion = Asignacion.objects.get(pk=pk)
         serializer = AsignacionSerializer(asignacion)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def delete(self,request,pk,format=None):
+        asignacion = Asignacion.objects.get(pk=pk)
+        queryset = DetallesAsignacion.objects.filter(asignacion_id=pk)
+        with transaction.atomic():
+            for element in queryset:
+                element.elemento.estado = 'Por asignar'
+                element.elemento.save()
+            queryset.delete()
+            asignacion.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
 
 class AsignacionSearch(APIView):
     permission_classes = [isAdminOrSuperuser | isEncargado]
