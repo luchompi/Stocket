@@ -1,5 +1,6 @@
 import GestionLayout from "@/views/Gestion/GestionLayout.vue";
 import asignacionRoutes from "@/views/Gestion/Asignaciones/services/asignacion.routes";
+import traspasosRoutes from "@/views/Gestion/Traspasos/services/traspasos.routes";
 
 const gestionRoutes = [
     {
@@ -7,6 +8,7 @@ const gestionRoutes = [
         component: GestionLayout,
         children: [
             ...asignacionRoutes,
+            ...traspasosRoutes,
         ]
     }
 ]
