@@ -6,9 +6,6 @@
         <div class="btn-group ml-auto" role="group" aria-label="Basic example">
           <RouterLink :to="{ name: 'asig-list' }" class="btn btn-primary">Listado <i
               class="bi bi-list-check"></i></RouterLink>
-          <RouterLink :to="{ name: 'categorias-nuevo' }" class="btn btn-success">Nuevo <i
-              class="bi bi-person-plus"></i>
-          </RouterLink>
         </div>
       </div>
     </div>

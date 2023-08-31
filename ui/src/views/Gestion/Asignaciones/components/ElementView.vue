@@ -3,7 +3,6 @@
     <h6>Referencia {{ element.referencia }} {{ element.modelo }}</h6>
     <p>Estado: {{ element.estado }}</p>
     <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-warning">Traspasar</button>
         <button type="button" class="btn btn-danger">Declarar baja</button>
     </div>
 </template>
