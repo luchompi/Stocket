@@ -10,6 +10,7 @@ from .serializers import AsignacionSerializer, DetallesAsignacionSerializer
 from django.db.models import Q
 from django.db import transaction
 
+from ..Personas.models import Funcionario
 
 """
     Esta clase se encarga de listar y guardar asignaciones
@@ -44,7 +45,15 @@ class AsignacionDetail(APIView):
         asignacion = Asignacion.objects.get(pk=pk)
         serializer = AsignacionSerializer(asignacion)
         return Response(serializer.data, status=status.HTTP_200_OK)
-    
+
+    def put(self, request, pk, format=None):
+        funcionario = request.data['_value']['funcionario']
+        asignacion = Asignacion.objects.get(id=pk)
+        func=Funcionario.objects.get(iden=funcionario)
+        asignacion.funcionario = func
+        asignacion.save()
+        return Response(status=status.HTTP_200_OK)
+
     def delete(self,request,pk,format=None):
         asignacion = Asignacion.objects.get(pk=pk)
         queryset = DetallesAsignacion.objects.filter(asignacion_id=pk)

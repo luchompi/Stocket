@@ -9,7 +9,7 @@ urlpatterns = [
     path('asignaciones/', views.AsignacionIndex.as_view()),
     #Filtrado de asignaciones por funcionario o id
     path('asignaciones/filter/<int:pk>/', views.AsignacionSearch.as_view()),
-    #obtener una asignacion por id o anularla.
+    #obtener una asignacion por id, traspasarla o anularla.
     path('asignaciones/details/<int:pk>/', views.AsignacionDetail.as_view()),
     #obtener elementos de una asignacion
     path('asignaciones/detalles/<int:pk>/', views.DetallesAsignacionDetail.as_view()),
