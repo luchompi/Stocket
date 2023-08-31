@@ -35,6 +35,7 @@
             <div class="btn-group" role="group" aria-label="Basic example">
               <RouterLink :to="{name:'asig-detail',params:{id:element.id}}" type="button" class="btn btn-primary">Ver <i
                   class="bi bi-search"></i></RouterLink>
+                  <RouterLink :to="{name:'traspasos-create',params:{id:element.id}}" type="button" class="btn btn-warning">Traspasar <i class="bi bi-arrow-right"></i></RouterLink>
               <button type="button" class="btn btn-danger" @click="anular(element.id)">Anular <i class="bi bi-trash"></i></button>
             </div>
           </td>
