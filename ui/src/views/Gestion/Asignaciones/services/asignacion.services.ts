@@ -58,3 +58,14 @@ export const createNewAsignment = async (data: any) => {
         }
     })
 }
+
+/**
+ * Este metodo elimina la asignacion y actualiza el estado de los elementos asignados
+ */
+export const deleteAsignment = async (id: any) => {
+    return await baseApi.delete(`/gestion/asignaciones/details/${id}/`, {
+        headers: {
+            Authorization: `JWT ${sesionStore().PAT}`
+        }
+    })
+}
