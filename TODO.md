@@ -51,17 +51,17 @@ Ver. 0.4.0.0 - alpha
 
 Ver. 0.5.0.0 - alpha
 
-1. [ ] Módulo de Mantenimiento
+1. [X] Módulo de Mantenimiento
 
     1. [X] gestión de mantenimientos
 2. [ ] Módulo de Bajas
 
     1. [X] gestión de baja.
     2. [ ] Rutinas de borrado automático de registros
-3. [ ] Módulo de Asignaciones
+3. [X] Módulo de Asignaciones
 
     1. [X] Gestión de asignaciones
-    2. [ ] Gestión de traspasos
+    2. [X] Gestión de traspasos
 4. [ ] Módulo de certificaciones
 
     1. [ ] Reporte de certificación de Paz y salvo de sistemas
