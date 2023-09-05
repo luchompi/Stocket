@@ -17,6 +17,14 @@ urlpatterns = [
     path('asignaciones/detalles/disponibles/', views.DetalleAsignacionSearch.as_view()),
     #obetenr elementos disponibles para asignar por argumentos
     path('asignaciones/detalles/disponibles/args/', views.SearchElementByArgs.as_view()),
+
+    ###APIS de mantenimiento
+    #Lista de mantenimientos 
+    path('mantenimientos/', views.MantenimientoIndex.as_view()),
+    #Crea un nuevo mantenimiento
+    path('mantenimientos/create/<int:pk>/', views.MantenimientoCreate.as_view()),
+    #Obtener detalles de un mantenimiento
+    path('mantenimientos/details/<int:pk>/', views.MantenimientoDetails.as_view()),
 ]
 
 urlpatterns = fsp(urlpatterns)

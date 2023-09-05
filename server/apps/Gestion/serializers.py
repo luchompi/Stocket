@@ -34,10 +34,19 @@ class DetallesAsignacionSerializer(serializers.ModelSerializer):
 
 
 class MantenimientoSerializer(serializers.ModelSerializer):
+    elemento = serializers.SerializerMethodField('get_element')
     class Meta:
         model = Mantenimiento
         fields = '__all__'
 
+    def get_element(self, obj):
+        return [
+            {
+                'placa': obj.elemento.placa,
+                'referencia': f'{obj.elemento.referencia.categoria.name} - {obj.elemento.referencia.marca.name}',
+                'modelo': obj.elemento.modelo,
+            }
+        ] if obj.elemento else None
 
 class BajaSerializer(serializers.ModelSerializer):
     class Meta:

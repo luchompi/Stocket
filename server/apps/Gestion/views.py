@@ -1,3 +1,4 @@
+from datetime import datetime as dt
 from core.permissions import isAdminOrSuperuser, isEncargado
 from django.db.models import Q
 from rest_framework import status
@@ -5,8 +6,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from apps.Inventario.models import Elemento
 from apps.Inventario.serializers import ElementoViewSerializer
-from .models import Asignacion, DetallesAsignacion
-from .serializers import AsignacionSerializer, DetallesAsignacionSerializer
+from .models import Asignacion, DetallesAsignacion,Mantenimiento
+from .serializers import AsignacionSerializer, DetallesAsignacionSerializer,MantenimientoSerializer
 from django.db.models import Q
 from django.db import transaction
 
@@ -106,3 +107,46 @@ class SearchElementByArgs(APIView):
         queryset = Elemento.objects.filter(query)[:5]
         serializer = ElementoViewSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+####CONTROLADORES DE MANTENIMIENTO
+class MantenimientoIndex(APIView):
+    permission_classes = [isAdminOrSuperuser | isEncargado]
+    def get(self, request):
+        mantenimiento = Mantenimiento.objects.order_by('-timestamps')[:5]
+        serializer = MantenimientoSerializer(mantenimiento, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class MantenimientoCreate(APIView):
+    permission_classes = [isAdminOrSuperuser | isEncargado]
+    def post(self, request, pk, format=None):
+        queryset = Elemento.objects.get(placa=pk)
+        q = Mantenimiento(elemento=queryset, user=request.user.username, estado='En mantenimiento',descripcion=request.data['details'])
+        q.save()
+        return Response(status=status.HTTP_201_CREATED)
+
+class MantenimientoDetails(APIView):
+    permission_classes = [isAdminOrSuperuser | isEncargado]
+    def get(self, request, pk, format=None):
+        queryset = Mantenimiento.objects.get(PID=pk)
+        serializer = MantenimientoSerializer(queryset)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    def put(self,request,pk,format=None):
+        queryset = Mantenimiento.objects.get(PID=pk)
+        elemento = Elemento.objects.get(placa=queryset.elemento.placa)
+        if(request.data['estado']=='1'):
+            q = DetallesAsignacion.objects.filter(elemento__placa=queryset.elemento.placa)
+            if q:
+                elemento.estado = 'Asignado'
+            else:
+                elemento.estado = 'Por asignar'
+        elif(request.data['estado']=='2'):
+            elemento.estado = 'Para cambio'
+        elif(request.data['estado']=='3'):
+            elemento.estado = 'Dañado'
+        queryset.estado = 'Finalizado'
+        queryset.observaciones = request.data['observacion']
+        queryset.fechaFin = f'{dt.now().date()} {dt.now().time()}'
+        queryset.save()
+        elemento.save()
+        return Response(status=status.HTTP_200_OK)
+
