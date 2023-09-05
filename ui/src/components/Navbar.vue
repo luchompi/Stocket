@@ -90,7 +90,7 @@
               </RouterLink>
             </li>
             <li>
-              <RouterLink :to="{ name: 'refer-list' }" class="dropdown-item">Mantenimientos <i
+              <RouterLink :to="{ name: 'fix-list' }" class="dropdown-item">Mantenimientos <i
                   class="bi bi-wrench-adjustable-circle"></i></RouterLink>
             </li>
             <li>
