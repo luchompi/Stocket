@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import {getAllElements,findElementByPlaca} from '../services/elementos.services';
+import {getAllElements,findElementByPlaca, elementoABaja} from '../services/elementos.services';
 import {ref, watchEffect} from 'vue'
 import type {ElementPreview} from '../services/elementos.interfaces'
+import Swal from 'sweetalert2';
 
 const elementos = ref([] as ElementPreview[])
 const search = ref<string>('')
@@ -11,6 +12,22 @@ const getAllData = async () => {
   loading.value = true
   elementos.value = (await getAllElements()).data
   loading.value = false
+}
+
+const declararBaja = (item:ElementPreview) => {
+  Swal.fire({
+    icon: 'question',
+    title: '¿Está seguro?',
+    text: `¿Desea declarar a baja el elemento ${item.placa}?`,
+    showCancelButton: true,
+    confirmButtonText: 'Si, declarar a baja',
+    cancelButtonText: 'No, cancelar',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      elementoABaja(item.placa)
+      getAllData()
+    }
+  })
 }
 
 const findData = async () => {
@@ -70,7 +87,7 @@ watchEffect(() => {
           <div class="btn-group" role="group" aria-label="Basic example">
             <RouterLink :to="{name:'elementos-details',params:{placa:item.placa}}" type="button" class="btn btn-primary">Ver</RouterLink>
             <RouterLink :to="{name:'elementos-edit',params:{placa:item.placa}}" type="button" class="btn btn-warning">Editar</RouterLink>
-            <button type="button" class="btn btn-danger">Declarar baja</button>
+            <button @click="declararBaja(item)" type="button" class="btn btn-danger">A baja</button>
           </div>
         </td>
       </tr>

@@ -81,3 +81,31 @@ export const updateElement = async (placa: any, data: any): Promise<any> => {
             return false
         })
 }
+
+export const elementoABaja = async (placa: any): Promise<any> => {
+    await baseApi.put(`/inventario/elementos/${placa}/baja/`, {
+        headers: {
+            Authorization: `JWT ${sesionStore().PAT}`
+        }
+    })
+    .then((Response) => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Elemento actualizado correctamente',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true            
+        })
+    })
+    .catch((error) => {
+        const resiever = errorValidator(error.response.data)
+        Swal.fire({
+            icon: 'error',
+            title: 'Error al actualizar el elemento',
+            text: resiever,
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true
+        })
+    })
+}
