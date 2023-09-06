@@ -191,3 +191,11 @@ class ElementoDetail(APIView):
 			serializer.save()
 			return Response(status=status.HTTP_200_OK)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ElementoABaja(APIView):
+	permission_classes = [isAdminOrSuperuser | isEncargado]
+	def put(self,request,pk,format=None):
+		q = Elemento.objects.get(placa=pk)
+		q.estado = 'Para baja'
+		q.save()
+		return Response(status=status.HTTP_200_OK)

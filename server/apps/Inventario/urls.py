@@ -19,7 +19,9 @@ urlpatterns = [
 	# Urls de Elementos
 	path('elementos/', v.ElementoIndex.as_view()),
 	path('elementos/search/<str:pk>/', v.ElementoSearch.as_view()),
-	path('elementos/<int:pk>/', v.ElementoDetail.as_view())
+	path('elementos/<int:pk>/', v.ElementoDetail.as_view()),
+    #Declarar Elemento a baja
+	path('elementos/<int:pk>/baja/', v.ElementoABaja.as_view()),
 ]
 
 urlpatterns = fsp(urlpatterns)
