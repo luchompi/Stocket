@@ -6,7 +6,7 @@ Ver. 0.1.0.0 - alpha - Completado
 4. [X] Dependencias de paquetes
 5. [X] Configuración de entorno de pruebas para producción:
 
-    Este apartado incluye:
+   Este apartado incluye:
 
     1. [X] Configuración de contenedores Docker
     2. [X] Configuración de paquetes y dependencias extras.
@@ -54,7 +54,7 @@ Ver. 0.5.0.0 - alpha
 1. [X] Módulo de Mantenimiento
 
     1. [X] gestión de mantenimientos
-2. [ ] Módulo de Bajas
+2. [X] Módulo de Bajas
 
     1. [X] gestión de baja.
     2. [ ] Rutinas de borrado automático de registros
