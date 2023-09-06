@@ -94,7 +94,7 @@
                   class="bi bi-wrench-adjustable-circle"></i></RouterLink>
             </li>
             <li>
-              <RouterLink :to="{name:'elementos-list'}" class="dropdown-item">Bajas <i class="bi bi-laptop"></i> <i
+              <RouterLink :to="{name:'bajas-list'}" class="dropdown-item">Bajas <i class="bi bi-laptop"></i> <i
                   class="bi bi-download"></i></RouterLink>
             </li>
           </ul>
