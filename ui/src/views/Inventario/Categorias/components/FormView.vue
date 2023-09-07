@@ -15,7 +15,8 @@
           :required="!props.categoria"
       />
     </div>
-    <button type="submit" class="btn btn-success">Guardar <i class="bi bi-check"></i></button>
+    <button type="submit" class="btn btn-success" :disabled="(props.categoria && !name) || (!name) ">Guardar <i
+        class="bi bi-check"></i></button>
   </form>
 </template>
 <script setup lang="ts">
