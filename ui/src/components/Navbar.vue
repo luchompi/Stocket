@@ -14,6 +14,11 @@
               <RouterLink :to="{ name: 'empresa' }" class="dropdown-item">Ver datos <i class="bi bi-search"></i>
               </RouterLink>
             </li>
+            <li v-if="!!sesion.NIT">
+              <RouterLink :to="{ name: 'sedes',params:{nit:sesion.NIT} }" class="dropdown-item">Sedes <i
+                  class="bi bi-building"></i>
+              </RouterLink>
+            </li>
             <li>
               <RouterLink :to="{ name: 'dependencias' }" class="dropdown-item">Dependencias <i
                   class="bi bi-plus-circle"></i>
