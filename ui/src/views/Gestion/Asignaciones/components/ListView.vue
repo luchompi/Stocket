@@ -35,8 +35,10 @@
             <div class="btn-group" role="group" aria-label="Basic example">
               <RouterLink :to="{name:'asig-detail',params:{id:element.id}}" type="button" class="btn btn-primary">Ver <i
                   class="bi bi-search"></i></RouterLink>
-                  <RouterLink :to="{name:'traspasos-create',params:{id:element.id}}" type="button" class="btn btn-warning">Traspasar <i class="bi bi-arrow-right"></i></RouterLink>
-              <button type="button" class="btn btn-danger" @click="anular(element.id)">Anular <i class="bi bi-trash"></i></button>
+              <RouterLink :to="{name:'traspasos-create',params:{id:element.id}}" type="button" class="btn btn-warning">
+                Traspasar <i class="bi bi-arrow-right"></i></RouterLink>
+              <button type="button" class="btn btn-danger" @click="anular(element.id)">Anular <i
+                  class="bi bi-trash"></i></button>
             </div>
           </td>
         </tr>
@@ -75,7 +77,7 @@ const findData = async () => {
   loading.value = false
 }
 
-const anular = (id:any) => {
+const anular = (id: any) => {
   Swal.fire({
     title: '¿Está seguro?',
     text: "¡No podrá revertir esta acción!",
@@ -88,19 +90,19 @@ const anular = (id:any) => {
   }).then(async (result) => {
     if (result.isConfirmed) {
       const response = await deleteAsignment(id)
-      if(response.status == 204){
+      if (response.status == 204) {
         Swal.fire(
-          'Anulado!',
-          'La asignación ha sido anulada.',
-          'success'
+            'Anulado!',
+            'La asignación ha sido anulada.',
+            'success'
         )
-        data.value = data.value.filter((element:Asignation) => element.id != id)
+        data.value = data.value.filter((element: Asignation) => element.id != id)
       }
     }
   })
 }
 
 watchEffect(() => {
-  search.value ? findData() : getData()
+  search.value.length > 3 ? findData() : getData()
 })
 </script>
