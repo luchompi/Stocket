@@ -5,7 +5,8 @@
 * [X] Personas - Debe indicarse la sede seleccionada al crear un funcionario
 * [X] Personas - No se renderizan registros por orden de agregado
 * [X] Personas - Botones actualizar y eliminar no deben verse en vista de actualizacion de funcionario
-* [ ] Referencias - Buscador de referencias
+* [X] Referencias - Buscador de referencias
+* [ ] Referencias - Mostrar datos de la referencia cuando se vaya a editar
 * [ ] elementos: IP y mac opcionales
 * [ ] Certificados: Al buscar nueva persona, no se actualizan datos
 * [ ] General - Console.log en producción
