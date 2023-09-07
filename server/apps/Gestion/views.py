@@ -78,8 +78,10 @@ class AsignacionSearch(APIView):
     permission_classes = [isAdminOrSuperuser | isEncargado]
 
     def get(self, request, pk):
-        asignacion = Asignacion.objects.filter(Q(funcionario__iden=pk) | Q(funcionario__first_name__icontains=pk))
+        asignacion = Asignacion.objects.filter(
+            funcionario__iden__icontains=pk)
         serializer = AsignacionSerializer(asignacion, many=True)
+        print(asignacion)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
