@@ -2,7 +2,7 @@ import baseApi from "@/apis/base.api";
 import type {empresaInterface} from "./empresa.interfaces";
 import {sesionStore} from "@/stores/sesion.store";
 import type {sedes} from "@/views/Empresa/sede/services/sedes.interfaces";
-import { storeCompanyNIT } from "@/views/Auth/services/auth.apis";
+import {storeCompanyNIT} from "@/views/Auth/services/auth.apis";
 
 /**
  * Estas son las funciones de api para empresa
@@ -31,7 +31,7 @@ export const updateCompany = async (data: empresaInterface) => {
  * Estas son las apis para sedes
  * */
 
-export const getSedes = async (NIT: string) => {
+export const getSedes = async (NIT: any) => {
     const sesion = sesionStore()
     baseApi.defaults.headers.common["Authorization"] = `JWT ${sesion.PAT}`;
     return await baseApi.get(`empresa/${NIT}/sedes/`)
