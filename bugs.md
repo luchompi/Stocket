@@ -7,6 +7,7 @@
 * [X] Personas - Botones actualizar y eliminar no deben verse en vista de actualizacion de funcionario
 * [X] Referencias - Buscador de referencias
 * [X] Categorías - Mostrar datos de la Categoria cuando se vaya a editar
+* [X] Marcas - Mostrar datos de la Marca cuando se vaya a editar
 * [ ] elementos: IP y mac opcionales
 * [ ] Certificados: Al buscar nueva persona, no se actualizan datos
 * [ ] General - Console.log en producción
