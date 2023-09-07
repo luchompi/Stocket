@@ -26,6 +26,9 @@ urlpatterns = [
     # Obtener detalles de un mantenimiento
     path('mantenimientos/details/<int:pk>/', views.MantenimientoDetails.as_view()),
 
+    # Obtener elementos cuyo estado sea En mantenimiento
+    path('mantenimientos/elementos/en_proceso/', views.ComprobarMantenimiento.as_view()),
+
     ###APIS de bajas
     # Lista de bajas
     path('bajas/', views.BajaIndex.as_view()),

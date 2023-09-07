@@ -258,3 +258,13 @@ class BorrarRegistros(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         else:
             return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+# Esta clase comprueba los elementos cuyo mantenimiento sigue en progreso
+class ComprobarMantenimiento(APIView):
+    permission_classes = [isAdminOrSuperuser | isEncargado]
+
+    def get(self, request, format=None):
+        queryset = Mantenimiento.objects.filter(estado='En mantenimiento')
+        serializer = MantenimientoSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
