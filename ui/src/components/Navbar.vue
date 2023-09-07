@@ -99,6 +99,19 @@
             </li>
           </ul>
         </li>
+        <li class="nav-item dropdown" v-if="sesion.isLogged">
+          <a class="nav-link dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown"
+             aria-expanded="false">
+            Certificados <i class="bi bi-file-earmark-post"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <RouterLink :to="{ name: 'cert-create' }" class="dropdown-item">Paz y salvo <i
+                  class="bi bi-clipboard-check-fill"></i>
+              </RouterLink>
+            </li>
+          </ul>
+        </li>
       </ul>
       <ul class="nav" v-if="sesion.isLogged">
         <li class="nav-item">
@@ -129,7 +142,8 @@
           <RouterLink :to="{ name: 'register' }" class="nav-link link-body-emphasis px-2">Sign up</RouterLink>
         </li>
         <li class="nav-item">
-          <a href="http://localhost:8000/admin/" target="blank" class="nav-link link-body-emphasis px-2">Panel de administrador</a>
+          <a href="http://localhost:8000/admin/" target="blank" class="nav-link link-body-emphasis px-2">Panel de
+            administrador</a>
         </li>
       </ul>
     </div>
