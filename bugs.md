@@ -1,6 +1,7 @@
 * [X] Empresa - No se pueden añadir sedes a dependencias, no se listan las sedes que se añadirán
 * [X] Empresa - No se lista menú de sedes
-* [ ] Empresa - No se pueden añadir sedes ya agregadas
+* [X] Empresa - No se pueden añadir sedes ya agregadas
+* [ ] Empresa - No se deben añadir dependencias a sedes si ya existen
 * [ ] Personas - Debe indicarse la sede seleccionada al crear un funcionario
 * [ ] Personas - No se renderizan registros por orden de agregado
 * [ ] Personas - Botones actualizar y eliminar no deben verse en vista de actualizacion

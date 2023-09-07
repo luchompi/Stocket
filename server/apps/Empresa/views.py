@@ -51,13 +51,17 @@ class SedeIndex(APIView):
     @permission_classes([isAdminOrSuperuser])
     def post(self, request, NIT, format=None):
         myData = request.data.copy()
-        empresa = Empresa.objects.get(NIT=NIT)
-        myData['empresa'] = empresa.NIT
-        serializer = SedeSerializer(data=myData)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        q = Sede.objects.get(name__icontains=myData['name'], empresa__NIT=NIT)
+        if not q:
+            empresa = Empresa.objects.get(NIT=NIT)
+            myData['empresa'] = empresa.NIT
+            serializer = SedeSerializer(data=myData)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({"error": "Ya existe una sede con ese nombre."}, status=status.HTTP_400_BAD_REQUEST)
 
 class SedeDetails(APIView):
     @permission_classes([isAdminOrSuperuser | isEncargado])
