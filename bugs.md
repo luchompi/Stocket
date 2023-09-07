@@ -1,4 +1,4 @@
-* [?] Empresa - No se pueden añadir sedes a dependencias, no se listan las sedes que se añadirán
+* [X] Empresa - No se pueden añadir sedes a dependencias, no se listan las sedes que se añadirán
 * [X] Empresa - No se lista menú de sedes
 * [ ] Empresa - No se pueden añadir sedes ya agregadas
 * [ ] Personas - Debe indicarse la sede seleccionada al crear un funcionario
@@ -8,6 +8,8 @@
 * [ ] elementos: IP y mac opcionales
 * [ ] Certificados: Al buscar nueva persona, no se actualizan datos
 * [ ] General - Console.log en producción
+* [ ] General - Mensaje de inicio de sesion debe mostrarse aunque no hayan datos de empresa
+* [ ] General - No se cierra la sesión al vencerse los tokens
 
 OBS. Verificar si dockerfile puede cohexistir con procfile en railway.
 Configuracion Procfile
