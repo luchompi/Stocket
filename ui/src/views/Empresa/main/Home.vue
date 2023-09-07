@@ -10,7 +10,7 @@
             <i class="bi bi-pencil-square"></i>
           </RouterLink>
           <RouterLink :to="{ name: 'sedes', params: { nit: queryset[0].NIT } }" type="button" class="btn btn-info"
-            v-if="queryset.length">Ver <i class="bi bi-search"></i>
+                      v-if="queryset.length">Ver sedes <i class="bi bi-search"></i>
           </RouterLink>
         </div>
       </div>
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div v-else>
-        <dataComponent :empresa="queryset" />
+        <dataComponent :empresa="queryset"/>
       </div>
 
     </div>
@@ -32,10 +32,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { getCompany } from '../services/empresa.services';
+import {onMounted, ref} from 'vue'
+import {getCompany} from '../services/empresa.services';
 import dataComponent from './components/dataComponent.vue'
-import type { empresaInterface } from '../services/empresa.interfaces';
+import type {empresaInterface} from '../services/empresa.interfaces';
 
 
 const queryset = ref([] as empresaInterface[])
