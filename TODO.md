@@ -6,7 +6,7 @@ Ver. 0.1.0.0 - alpha - Completado
 4. [X] Dependencias de paquetes
 5. [X] Configuración de entorno de pruebas para producción:
 
-   Este apartado incluye:
+    Este apartado incluye:
 
     1. [X] Configuración de contenedores Docker
     2. [X] Configuración de paquetes y dependencias extras.
@@ -62,9 +62,9 @@ Ver. 0.5.0.0 - alpha
 
     1. [X] Gestión de asignaciones
     2. [X] Gestión de traspasos
-4. [ ] Módulo de certificaciones
+4. [X] Módulo de certificaciones
 
-    1. [ ] Reporte de certificación de Paz y salvo de sistemas
+    1. [X] Reporte de certificación de Paz y salvo de sistemas
 5. [X] Pruebas unitarias de módulos de Mantenimiento, Bajas y Asignaciones
 6. [X] Reportes de Pruebas y configuraciones
 7. [ ] Mocks de Pruebas y manuales de desarrollo
