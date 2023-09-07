@@ -99,13 +99,13 @@
     <div class="list-group" v-if="!!sedes.length">
       <div v-for="elements in sedes" :key="elements.id">
         <a @click="chooseThisSede(elements)"
-           :class="isActive? 'list-group-item list-group-item-action active':'list-group-item list-group-item-action'">{{
+           class="list-group-item list-group-item-action">{{
             elements.id
           }}
           - {{ elements.name }}</a>
       </div>
     </div>
-    <div v-if="selectedSede.value">
+    <div v-if="isActive">
       <div class="alert alert-info" role="alert">
         <strong>{{ selectedSede.id }} - {{ selectedSede.name }}</strong> seleccionada
       </div>
@@ -117,7 +117,7 @@
 
 <script setup lang="ts">
 import type {Employee} from "@/views/Personas/Funcionarios/services/funcionarios.interfaces";
-import {computed, ref, watchEffect} from "vue";
+import {ref, watchEffect} from "vue";
 import type {sedes} from "@/views/Empresa/sede/services/sedes.interfaces";
 import {getSedeById} from "@/views/Empresa/services/empresa.services";
 
@@ -132,9 +132,6 @@ const mail = ref<string>("")
 const sedes = ref([] as sedes[])
 const selectedSede = ref<any>([])
 const isActive = ref<boolean>(false)
-computed(() => {
-  isActive.value = !!onmouseover
-})
 
 watchEffect(async () => {
   if (searchSede.value) {
@@ -147,6 +144,7 @@ watchEffect(async () => {
 
 const chooseThisSede = (element: any) => {
   selectedSede.value = element
+  isActive.value = true
 }
 
 const emits = defineEmits(['onSaveData', 'onUpdateData'])
@@ -158,14 +156,14 @@ const props = defineProps<{
 
 const sender = () => {
   const data = {
-    ...(props.data ? (iden.value ? {iden: iden.value} : {iden:props.data?.iden}) : {iden: iden.value}),
-    ...(props.data ? (firstName.value ? {first_name: firstName.value} : {first_name:props.data?.first_name}) : {first_name: firstName.value}),
-    ...(props.data ? (lastName.value ? {last_name: lastName.value} : {last_name:props.data.last_name}) : {last_name: lastName.value}),
-    ...(props.data ? (address.value ? {address: address.value} : {address:props.data?.address}) : {address: address.value}),
-    ...(props.data ? (phone.value ? {phone: phone.value} : {phone:props.data?.phone}) : {phone: phone.value}),
-    ...(props.data ? (job.value ? {job: job.value} : {job:props.data?.job}) : {job: job.value}),
-    ...(props.data ? (mail.value ? {email: mail.value} : {email:props.data?.email}) : {email: mail.value}),
-    ...(props.data ? (selectedSede.value.name ? {sede: selectedSede.value.id} : {sede:props.data?.sede}) : {sede: selectedSede.value.id})
+    ...(props.data ? (iden.value ? {iden: iden.value} : {iden: props.data?.iden}) : {iden: iden.value}),
+    ...(props.data ? (firstName.value ? {first_name: firstName.value} : {first_name: props.data?.first_name}) : {first_name: firstName.value}),
+    ...(props.data ? (lastName.value ? {last_name: lastName.value} : {last_name: props.data.last_name}) : {last_name: lastName.value}),
+    ...(props.data ? (address.value ? {address: address.value} : {address: props.data?.address}) : {address: address.value}),
+    ...(props.data ? (phone.value ? {phone: phone.value} : {phone: props.data?.phone}) : {phone: phone.value}),
+    ...(props.data ? (job.value ? {job: job.value} : {job: props.data?.job}) : {job: job.value}),
+    ...(props.data ? (mail.value ? {email: mail.value} : {email: props.data?.email}) : {email: mail.value}),
+    ...(props.data ? (selectedSede.value.name ? {sede: selectedSede.value.id} : {sede: props.data?.sede}) : {sede: selectedSede.value.id})
   }
   props.data ? emits('onUpdateData', data) : emits('onSaveData', data)
 }
