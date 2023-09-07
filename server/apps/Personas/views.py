@@ -15,7 +15,7 @@ from .serializers import FuncionarioPreviewSerializer, FuncionarioSerializer, Fu
 class FuncionarioIndex(APIView):
 	@permission_classes([isAdminOrSuperuser | isEncargado])
 	def get(self, request, format=None):
-		funcionarios = Funcionario.objects.order_by('-iden')[:5]
+		funcionarios = Funcionario.objects.order_by('-created_at')[:5]
 		serializer = FuncionarioPreviewSerializer(funcionarios, many=True)
 		return Response(serializer.data)
 
