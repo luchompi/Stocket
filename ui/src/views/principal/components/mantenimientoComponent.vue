@@ -31,7 +31,7 @@ onMounted(() => {
           </tr>
           </thead>
           <tbody>
-          <tr v-for="mantenimiento in mantenimientos" :key="mantenimiento.id">
+          <tr v-for="mantenimiento in mantenimientos" :key="mantenimiento.PID">
             <th scope="row">{{ mantenimiento.PID }}</th>
             <td v-for="index in mantenimiento.elemento">
               <span>Placa: {{ index.placa }} - {{ index.referencia }} {{ index.modelo }}</span>
