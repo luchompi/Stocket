@@ -4,7 +4,7 @@
 * [X] Empresa - No se deben añadir dependencias a sedes si ya existen
 * [X] Personas - Debe indicarse la sede seleccionada al crear un funcionario
 * [X] Personas - No se renderizan registros por orden de agregado
-* [ ] Personas - Botones actualizar y eliminar no deben verse en vista de actualizacion
+* [X] Personas - Botones actualizar y eliminar no deben verse en vista de actualizacion de funcionario
 * [ ] Referencias - Buscador de referencias
 * [ ] elementos: IP y mac opcionales
 * [ ] Certificados: Al buscar nueva persona, no se actualizan datos

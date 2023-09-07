@@ -12,10 +12,13 @@
           <p>Correo: {{ props.data?.email }}</p>
         </div>
       </div>
-      <RouterLink :to="{name:'proveedores-update',params:{nit:props.data?.NIT}}" type="button"
-                  class="btn btn-warning">Editar <i class="bi bi-pencil-square"></i></RouterLink>
-      <button @click="deleteReg(props.data?.NIT)" type="button" class="btn btn-danger">Borrar <i
-          class="bi bi-trash"></i></button>
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <RouterLink :to="{ name: 'proveedores-update', params: { nit: props.data?.NIT } }" type="button"
+                    class="btn btn-warning">
+          Editar <i class="bi bi-pencil-square"></i></RouterLink>
+        <button @click="deleteReg(props.data?.NIT)" type="button" class="btn btn-danger">Borrar <i
+            class="bi bi-trash"></i></button>
+      </div>
     </div>
   </div>
 </template>
@@ -30,7 +33,7 @@ const props = defineProps<{
 
 const emits = defineEmits(['onDeleteData'])
 
-const deleteReg = () => {
+const deleteReg = (id: any) => {
   Swal.fire({
     icon: 'question',
     title: '¿Está seguro?',
@@ -43,7 +46,7 @@ const deleteReg = () => {
     cancelButtonColor: '#6c757d'
   }).then((result) => {
     if (result.isConfirmed) {
-      emits('onDeleteData', props.data?.NIT)
+      emits('onDeleteData', id)
     }
   })
 }
