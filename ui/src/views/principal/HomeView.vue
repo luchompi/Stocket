@@ -1,4 +1,17 @@
 <script setup lang="ts">
+import {sesionStore} from "@/stores/sesion.store";
+import {borrarBaja} from "@/views/Gestion/Bajas/services/bajas.services";
+import {onMounted, watchEffect} from "vue";
+
+onMounted(() => {
+  watchEffect(async () => {
+    if (sesionStore().isLogged) {
+      await borrarBaja()
+    }
+  })
+})
+
+
 </script>
 
 <template>

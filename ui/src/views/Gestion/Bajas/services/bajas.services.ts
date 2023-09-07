@@ -34,8 +34,16 @@ export const crearBaja = async (elementos: any) => {
     })
 }
 
-export const anularBaja = async(id: any) => {
+export const anularBaja = async (id: any) => {
     return await baseApi.delete(`/gestion/bajas/details/${id}/`, {
+        headers: {
+            Authorization: `JWT ${sesionStore().PAT}`
+        }
+    })
+}
+
+export const borrarBaja = async () => {
+    return await baseApi.delete(`/gestion/bajas/delete/`, {
         headers: {
             Authorization: `JWT ${sesionStore().PAT}`
         }
