@@ -9,6 +9,7 @@ import {createRouter, createWebHistory} from 'vue-router'
 import personasRouter from "@/views/Personas/services/personas.routes";
 import inventarioRoutes from '@/views/Inventario/services/inventario.routes'
 import gestionRoutes from "@/views/Gestion/services/gestion.routes";
+import certificacionRoutes from "@/views/Certificaciones/services/certificacion.routes";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,6 +21,7 @@ const router = createRouter({
         ...personasRouter,
         ...inventarioRoutes,
         ...gestionRoutes,
+        ...certificacionRoutes,
         {
             path: '/:pathMatch(.*)*',
             name: 'NotFound',
