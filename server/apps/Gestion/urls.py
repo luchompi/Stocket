@@ -1,6 +1,5 @@
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns as fsp
-
 from . import views
 
 urlpatterns = [
@@ -33,6 +32,10 @@ urlpatterns = [
     path('bajas/elementos/', views.BajaCreate.as_view()),
     # Obtener detalles de una baja
     path('bajas/details/<int:pk>/', views.BajaDetails.as_view()),
+
+    ###APIS de certificacion
+    # Generar certificado de asignacion
+    path('certificacion/asignacion/<int:pk>/', views.certificaciones.as_view()),
 ]
 
 urlpatterns = fsp(urlpatterns)

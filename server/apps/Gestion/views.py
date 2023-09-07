@@ -1,6 +1,8 @@
 from datetime import datetime as dt
 from datetime import timedelta as td
 
+from django.shortcuts import get_list_or_404
+
 from apps.Inventario.models import Elemento
 from apps.Inventario.serializers import ElementoViewSerializer
 from core.permissions import isAdminOrSuperuser, isEncargado
@@ -225,3 +227,13 @@ class BajaDetails(APIView):
         q = Baja.objects.get(PID=pk)
         q.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+class certificaciones(APIView):
+    permission_classes = [isAdminOrSuperuser | isEncargado]
+    def get(self,request,pk,format=None):
+        queryset = Asignacion.objects.filter(funcionario__iden=pk)
+        if queryset:
+            serializer = AsignacionSerializer(queryset,many=True)
+            return Response(serializer.data,status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_204_NO_CONTENT)
