@@ -51,7 +51,7 @@ class SedeIndex(APIView):
     @permission_classes([isAdminOrSuperuser])
     def post(self, request, NIT, format=None):
         myData = request.data.copy()
-        q = Sede.objects.get(name__icontains=myData['name'], empresa__NIT=NIT)
+        q = Sede.objects.filter(name=myData['name'], empresa__NIT=NIT)
         if not q:
             empresa = Empresa.objects.get(NIT=NIT)
             myData['empresa'] = empresa.NIT
@@ -171,3 +171,21 @@ class SedeByDependenciaDetails(APIView):
             queryset.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_404_NOT_FOUND)
+    
+
+class obtenerDependenciasParaSede(APIView):
+    permission_classes = [isAdminOrSuperuser | isEncargado]
+    def get(self, request, sede_id, format=None):
+        #Consulto las dependencias que tiene la sede
+        dependencias = SedeDependencia.objects.filter(sede__id=sede_id)
+        #si existe una sede añadida, procedo con filtro
+        if dependencias:
+            #Obtengo los id de las dependencias
+            ids = dependencias.values_list('dependencia', flat=True)
+            #Consulto las dependencias que no estan en la sede
+            dependencias = Dependencia.objects.exclude(id__in=ids)
+            print(dependencias)
+        else:
+            dependencias = Dependencia.objects.all()
+        serializer = DependenciaSerializer(dependencias, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

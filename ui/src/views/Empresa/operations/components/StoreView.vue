@@ -14,7 +14,7 @@ const props = defineProps<{
 <template>
   <div class="row">
     <div class="col">
-      <table class="table table-striped table-hover">
+      <table class="table table-striped table-hover" v-if="props.dependencias.length">
         <thead>
         <tr>
           <th>ID</th>
@@ -32,6 +32,11 @@ const props = defineProps<{
         </tr>
         </tbody>
       </table>
+      <div v-else>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>404!</strong> Esta sede posee todas las dependencias en sistema añadidas.
+        </div>
+      </div>
     </div>
     <div class="col">
       <h5>Dependencias Seleccionadas 

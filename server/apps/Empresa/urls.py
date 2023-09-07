@@ -18,6 +18,7 @@ urlpatterns = [
     # URLS para sedes por dependencias
     path('sedes/<int:pk>/dependencias/', v.SedeByDependencia.as_view()),
     path('sedes/<int:sede_id>/dependencias/<int:dep_id>/', v.SedeByDependenciaDetails.as_view()),
+    path('sedes/<sede_id>/dependencias/filtrado/',v.obtenerDependenciasParaSede.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
