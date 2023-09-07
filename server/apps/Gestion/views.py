@@ -1,8 +1,6 @@
 from datetime import datetime as dt
 from datetime import timedelta as td
 
-from django.shortcuts import get_list_or_404
-
 from apps.Inventario.models import Elemento
 from apps.Inventario.serializers import ElementoViewSerializer
 from core.permissions import isAdminOrSuperuser, isEncargado
@@ -193,7 +191,8 @@ class BajaCreate(APIView):
     permission_classes = [isAdminOrSuperuser | isEncargado]
 
     def get(self, request, format=None):
-        queryset = Elemento.objects.filter(Q(estado__contains='Para cambio') | Q(estado__contains='Dañado') |Q(estado__contains='Para baja'))
+        queryset = Elemento.objects.filter(
+            Q(estado__contains='Para cambio') | Q(estado__contains='Dañado') | Q(estado__contains='Para baja'))
         serializer = ElementoViewSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -210,13 +209,15 @@ class BajaCreate(APIView):
             q.save()
         return Response(status=status.HTTP_201_CREATED)
 
+
 class BajaDetails(APIView):
     permission_classes = [isAdminOrSuperuser | isEncargado]
+
     def get(self, request, pk, format=None):
         queryset = DetalleBaja.objects.filter(baja__PID=pk)
         serializer = DetalleBajaSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-    
+
     def delete(self, request, pk, format=None):
         queryset = DetalleBaja.objects.filter(baja__PID=pk)
         for item in queryset:
@@ -227,13 +228,33 @@ class BajaDetails(APIView):
         q = Baja.objects.get(PID=pk)
         q.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-    
+
+
 class certificaciones(APIView):
     permission_classes = [isAdminOrSuperuser | isEncargado]
-    def get(self,request,pk,format=None):
+
+    def get(self, request, pk, format=None):
         queryset = Asignacion.objects.filter(funcionario__iden=pk)
         if queryset:
-            serializer = AsignacionSerializer(queryset,many=True)
-            return Response(serializer.data,status=status.HTTP_200_OK)
+            serializer = AsignacionSerializer(queryset, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class BorrarRegistros(APIView):
+    permission_classes = [isAdminOrSuperuser | isEncargado]
+
+    def delete(self, request, format=None):
+        queryset = DetalleBaja.objects.filter(fechaBorrado__lte=dt.now().date())
+        if queryset:
+            for item in queryset:
+                elemento = Elemento.objects.get(placa=item.elemento.placa)
+                elemento.delete()
+            for x in queryset:
+                q = Baja.objects.get(PID=x.baja.PID)
+                q.delete()
+            queryset.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
         else:
             return Response(status=status.HTTP_204_NO_CONTENT)
