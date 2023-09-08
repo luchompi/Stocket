@@ -10,8 +10,8 @@ export const getCredentials = async (data: any): Promise<AxiosResponse<any>> => 
     const sesion = sesionStore()
     const response = await baseApi.post('jwt/create', data)
     sesion.setTokens(response.data)
-    await getUserData()
-    await storeCompanyNIT()
+    getUserData()
+    storeCompanyNIT()
     return response
 }
 
