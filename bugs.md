@@ -11,7 +11,7 @@
 * [X] elementos: IP y mac opcionales
 * [X] elementos: Mensajes de seleccion no deben mostrarse sino se ha seleccionado nada
 * [X] Certificados: Al buscar nueva persona, no se actualizan datos
-* [ ] General - Console.log en producción
+* [X] General - Console.log en producción
 * [ ] General - Mensaje de inicio de sesion debe mostrarse aunque no hayan datos de empresa
 * [ ] General - No se cierra la sesión al vencerse los tokens
 * [ ] General - Testear comportamiento con cuentas nuevas y perfiles diferentes a administrador
