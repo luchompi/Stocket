@@ -16,7 +16,17 @@
 * [X] General - No se cierra la sesión al vencerse los tokens
 * [X] General - Testear comportamiento con cuentas nuevas y perfiles diferentes a administrador
 
-OBS. Verificar si dockerfile puede cohexistir con procfile en railway.
+
+
+------- Correciones nuevas -----
+
+URL para pruebas en producción:
+
+https://stocket-production.up.railway.app/
+
+
+
+OBS. Verificar si dockerfile puede cohexistir con procfile en railway. [NO, debe eliminarse al deploy
 Configuracion Procfile
 web: gunicorn core.wsgi --log-file -
 
