@@ -40,13 +40,24 @@ const choosedBrand = ref([])
 const searchProvider = ref<string>('')
 const proveedor = ref({} as Suppliers | null)
 const proveedorResponse = ref([] as Suppliers[])
-
+const dataSelected = ref<boolean>(false)
 const findCategory = async () => {
   categoryResponse.value = (await getCategoriesByName(categoria.value)).data
 }
 
 const setCategory = (item: any) => {
   choosedCategory.value = item
+}
+
+const resetearSeleccion = () => {
+  choosedCategory.value = {} as Category
+  choosedBrand.value = []
+  referencia.value = null
+  dataSelected.value = false
+  ReferenceResponse.value = []
+  categoryResponse.value = []
+  marca.value = ''
+  categoria.value = ''
 }
 
 const findBrand = async () => {
@@ -61,6 +72,7 @@ const findBrand = async () => {
 const setReference = (item: any) => {
   choosedBrand.value = item
   referencia.value = item
+  dataSelected.value = true
 }
 
 const findProvider = async () => {
@@ -101,11 +113,10 @@ watchEffect(() => {
           <li class="list-group-item" v-for="element in categoryResponse" @click="setCategory(element)">{{
               element.name
             }}
+            <i class="bi bi-check-circle-fill" v-if="element == choosedCategory"> Seleccionado</i>
           </li>
         </ul>
-        <div class="alert alert-primary alert-dismissible fade show" role="alert" v-if="!!choosedCategory">
-          <strong>{{ choosedCategory.name }}</strong> selecionado.
-        </div>
+        <br>
       </div>
       <div class="col col-lg-6">
         <!----Marca de elemento-->
@@ -118,12 +129,18 @@ watchEffect(() => {
           <li class="list-group-item" v-for="element in ReferenceResponse" @click="setReference(element)">{{
               element.marca
             }}
+            <i class="bi bi-check-circle-fill" v-if="element == choosedBrand"> Seleccionado</i>
+
           </li>
         </ul>
+        <br>
       </div>
-      <div class="alert alert-warning alert-dismissible fade show" role="alert" v-if="referencia !== null">
-        <strong>{{ choosedCategory.name }} - {{ referencia.marca }}</strong> establecida con éxito.
+      <br>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert" v-if="dataSelected">
+        <strong>{{ choosedCategory.name }} - {{ referencia?.marca }}</strong> establecida con éxito.
+        <button type="button" class="btn btn-danger" @click="resetearSeleccion">Borrar</button>
       </div>
+      <br>
     </div>
     <!--modelo-->
     <div class="input-group mb-3">
@@ -163,9 +180,11 @@ watchEffect(() => {
             }} -{{
               element.razonSocial
             }}
+            <i class="bi bi-check-circle-fill" v-if="element == proveedor"> Seleccionado</i>
+
           </li>
         </ul>
-        <div class="alert alert-primary alert-dismissible fade show" role="alert" v-if="proveedor">
+        <div class="alert alert-primary alert-dismissible fade show" role="alert" v-if="proveedor?.razonSocial">
           <strong>{{ proveedor?.razonSocial }}</strong> selecionado.
         </div>
       </div>

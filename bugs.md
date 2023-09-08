@@ -9,11 +9,12 @@
 * [X] Categorías - Mostrar datos de la Categoria cuando se vaya a editar
 * [X] Marcas - Mostrar datos de la Marca cuando se vaya a editar
 * [X] elementos: IP y mac opcionales
-* [ ] elementos: Mensajes de seleccion no deben mostrarse sino se ha seleccionado nada
+* [X] elementos: Mensajes de seleccion no deben mostrarse sino se ha seleccionado nada
 * [ ] Certificados: Al buscar nueva persona, no se actualizan datos
 * [ ] General - Console.log en producción
 * [ ] General - Mensaje de inicio de sesion debe mostrarse aunque no hayan datos de empresa
 * [ ] General - No se cierra la sesión al vencerse los tokens
+* [ ] General - Testear comportamiento con cuentas nuevas y perfiles diferentes a administrador
 
 OBS. Verificar si dockerfile puede cohexistir con procfile en railway.
 Configuracion Procfile
