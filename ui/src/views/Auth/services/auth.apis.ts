@@ -38,12 +38,26 @@ export const refreshTokens = async () => {
         .then((Response) => {
             sesion.setTokens(Response.data)
         }).catch((error) => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error de Comunicación con el servidor',
-                text: 'Se ha detectado un error de comunicación con el servidor, se cerrará la sesión y se perderán todas las operaciones que no se hayan procesado'
-            })
-            sesion.clearSesion()
+            if (sesion.isShowed == false) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error de Comunicación con el servidor',
+                    text: 'Se ha detectado un error de comunicación con el servidor, se cerrará la sesión y se perderán todas las operaciones que no se hayan procesado',
+                    confirmButtonText: 'Aceptar',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    allowEnterKey: false,
+                    showCloseButton: false,
+                    showCancelButton: false,
+                    showDenyButton: false,
+                    showConfirmButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        sesion.clearSesion()
+                    }
+                })
+                sesion.isShowed = true
+            }
         })
 }
 
