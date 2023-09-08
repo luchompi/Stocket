@@ -8,7 +8,8 @@
 * [X] Referencias - Buscador de referencias
 * [X] Categorías - Mostrar datos de la Categoria cuando se vaya a editar
 * [X] Marcas - Mostrar datos de la Marca cuando se vaya a editar
-* [ ] elementos: IP y mac opcionales
+* [X] elementos: IP y mac opcionales
+* [ ] elementos: Mensajes de seleccion no deben mostrarse sino se ha seleccionado nada
 * [ ] Certificados: Al buscar nueva persona, no se actualizan datos
 * [ ] General - Console.log en producción
 * [ ] General - Mensaje de inicio de sesion debe mostrarse aunque no hayan datos de empresa
