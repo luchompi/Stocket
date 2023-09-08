@@ -7,6 +7,7 @@ import type {References} from '../../Referencias/services/services/referencias.i
 import {filterReferences} from '../../Referencias/services/services/referencias.services';
 import type {Suppliers} from '@/views/Personas/Proveedores/services/proveedor.interfaces';
 import {getProveedoresByNameOrNIT} from '@/views/Personas/Proveedores/services/proveedor.services';
+import type { Brands } from '../../Marcas/services/marca.interfaces';
 
 const props = defineProps<{
   element?: Element
@@ -36,7 +37,7 @@ const modelo = ref<string>('')
 const categoryResponse = ref([] as Category[])
 const choosedCategory = ref({} as Category)
 const ReferenceResponse = ref([] as References[])
-const choosedBrand = ref([])
+const choosedBrand = ref({} as Brands)
 const searchProvider = ref<string>('')
 const proveedor = ref({} as Suppliers | null)
 const proveedorResponse = ref([] as Suppliers[])
@@ -51,7 +52,7 @@ const setCategory = (item: any) => {
 
 const resetearSeleccion = () => {
   choosedCategory.value = {} as Category
-  choosedBrand.value = []
+  choosedBrand.value = {} as Brands
   referencia.value = null
   dataSelected.value = false
   ReferenceResponse.value = []
@@ -129,7 +130,7 @@ watchEffect(() => {
           <li class="list-group-item" v-for="element in ReferenceResponse" @click="setReference(element)">{{
               element.marca
             }}
-            <i class="bi bi-check-circle-fill" v-if="element == choosedBrand"> Seleccionado</i>
+            <i class="bi bi-check-circle-fill" v-if="choosedBrand.name = element.marca.marca_name"> Seleccionado</i>
 
           </li>
         </ul>
