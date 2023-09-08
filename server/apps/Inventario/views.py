@@ -162,7 +162,6 @@ class ElementoIndex(APIView):
 
     def post(self, request, format=None):
         serializer = ElementoSerializer(data=request.data)
-        print(request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(status=status.HTTP_201_CREATED)
