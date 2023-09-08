@@ -63,8 +63,12 @@ export const refreshTokens = async () => {
 
 export const storeCompanyNIT = async (): Promise<void> => {
     const sesion = sesionStore()
-    const response = await getCompany()
-    if (response.status == 200) {
-        sesion.setNIT(response.data[0].NIT)
-    }
+    await getCompany()
+    .then((Response) => {
+        sesion.setNIT(Response.data[0].NIT)
+    })
+    .catch((error) => {
+        sesion.setNIT('')
+    })
+    
 }

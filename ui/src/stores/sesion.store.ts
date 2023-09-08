@@ -33,27 +33,20 @@ export const sesionStore = defineStore('sesion', () => {
     }
 
     const clearSesion = () => {
-        if (isShowed.value) {
+        
             Swal.fire({
                 title: 'Sesión cerrada',
                 icon: 'success',
                 showConfirmButton: false,
                 timer: 1500
             })
-            PAT.value = null
-            RAT.value = null
-            UserData.value = null
-            timer.value = 0
-            NIT.value = null
-            isShowed.value = true
             location.reload()
-        }
+        
     }
 
     const incrementTimer = () => {
         if (isLogged.value) {
             timer.value++
-            console.log(timer.value)
         }
         timer.value > 15 ? refreshed.value = false : refreshed.value = true
     }

@@ -14,7 +14,7 @@
 * [X] General - Console.log en producción
 * [X] General - Mensaje de inicio de sesion debe mostrarse aunque no hayan datos de empresa
 * [X] General - No se cierra la sesión al vencerse los tokens
-* [ ] General - Testear comportamiento con cuentas nuevas y perfiles diferentes a administrador
+* [X] General - Testear comportamiento con cuentas nuevas y perfiles diferentes a administrador
 
 OBS. Verificar si dockerfile puede cohexistir con procfile en railway.
 Configuracion Procfile
