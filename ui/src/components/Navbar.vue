@@ -1,7 +1,7 @@
 <template>
   <nav class="py-2 bg-body-tertiary border-bottom">
     <div class="container d-flex flex-wrap">
-      <ul class="nav me-auto" v-if="sesion.UserData[0]?.groups?.includes('Administradores','Administrador','Encargado') || sesion.UserData[0]?.is_superuser">
+      <ul class="nav me-auto" v-if="sesion.UserData[0]?.groups?.includes('Administradores') ||sesion.UserData[0]?.groups?.includes('Administrador') || sesion.UserData[0]?.groups?.includes('Encargado') || sesion.UserData[0]?.is_superuser">
         <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2 active" aria-current="page">Home</a>
         </li>
         <li class="nav-item dropdown" v-if="sesion.isLogged">
@@ -163,7 +163,7 @@
         </svg>
         <span class="fs-4" v-if="sesion.isLogged">Stocket <i
             class="bi bi-archive-fill"></i> - {{
-            sesion.UserData[0]?.groups?.includes('Administradores','Administrador','Encargado') || sesion.UserData[0]?.is_superuser ? ( sesion.UserData[0]?.groups?.includes('Administradores','Administrador','Encargado') ?  sesion.UserData[0]?.groups[0] : sesion.UserData[0]?.is_superuser  ? 'SuperUsuario':'Invitado'):'Invitado' }}</span>
+            sesion.UserData[0]?.groups[0] || sesion.UserData[0]?.is_superuser ? (sesion.UserData[0]?.groups[0] ? sesion.UserData[0]?.groups[0] :(sesion.UserData[0].is_superuser ? 'SuperUsuario':'Invitado')):'Invitado'}}</span>
       </RouterLink>
       <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
         <input type="search" class="form-control" :value="props.dateTime" readonly>
