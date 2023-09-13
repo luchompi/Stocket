@@ -14,7 +14,7 @@ export const loginAndAdminRequired = () => {
     const sesion = sesionStore()
     const url = useRouter()
     watchEffect(() => {
-        sesion.isLogged ? (sesion.UserData[0]?.is_superuser || sesion.UserData[0]?.groups?.includes('Administradores') ? null : url.push({name: 'Forbidden'})) : url.push({name: 'login'})
+        sesion.isLogged ? (sesion.UserData[0]?.is_superuser || sesion.UserData[0]?.groups?.includes('Administradores') || sesion.UserData[0]?.groups?.includes('Administrador') ? null : url.push({name: 'Forbidden'})) : url.push({name: 'login'})
     })
 }
 
