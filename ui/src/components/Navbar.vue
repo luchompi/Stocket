@@ -34,7 +34,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item dropdown" v-if="sesion.isLogged">
+        <li class="nav-item dropdown" v-if="sesion.isLogged && sesion.NIT">
           <a class="nav-link dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown"
              aria-expanded="false">
             Personas <i class="bi bi-person"></i>
@@ -52,7 +52,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item dropdown" v-if="sesion.isLogged">
+        <li class="nav-item dropdown" v-if="sesion.isLogged && sesion.NIT">
           <a class="nav-link dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown"
              aria-expanded="false">
             Inventario <i class="bi bi-bookshelf"></i>
@@ -83,7 +83,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item dropdown" v-if="sesion.isLogged">
+        <li class="nav-item dropdown" v-if="sesion.isLogged && sesion.NIT">
           <a class="nav-link dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown"
              aria-expanded="false">
             Gestión <i class="bi bi-tools"></i>
@@ -104,7 +104,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item dropdown" v-if="sesion.isLogged">
+        <li class="nav-item dropdown" v-if="sesion.isLogged && sesion.NIT">
           <a class="nav-link dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown"
              aria-expanded="false">
             Certificados <i class="bi bi-file-earmark-post"></i>

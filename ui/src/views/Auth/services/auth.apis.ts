@@ -66,9 +66,8 @@ export const storeCompanyNIT = async (): Promise<void> => {
     await getCompany()
     .then((Response) => {
         sesion.setNIT(Response.data[0].NIT)
-    })
+    })   
     .catch((error) => {
         sesion.setNIT('')
     })
-    
 }
