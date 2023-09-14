@@ -33,7 +33,7 @@ onMounted(() => {
     </div>
   </div>
   <br>
-  <div class="row" v-if="sesionStore().isLogged &&(sesionStore().UserData[0]?.groups?.includes('Administradores','Administrador','Encargado') || sesionStore().UserData[0]?.is_superuser)">
+  <div class="row" v-if="sesionStore().isLogged &&(sesionStore().UserData[0]?.groups?.includes('Administradores') || sesionStore().UserData[0]?.groups?.includes('Administrador') || sesionStore().UserData[0]?.groups?.includes('Encargado') || sesionStore().UserData[0]?.is_superuser)">
     <div class="col">
       <bajaComponent/>
     </div>
