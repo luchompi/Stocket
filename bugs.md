@@ -21,7 +21,7 @@ Bugs corregidos completamente, conteo total - 24 correciones.
 
 * [X] Bug 25 - No se gestionan correctamente los roles desde el panel de administracion de django
 * [X] Bug 26 - No se envian correos electronicos para operacion con cuentas de usuario
-* [ ] Bug 27 - No se redirecciona registro de usuario ni reestablecimiento de contraseña
+* [X] Bug 27 - No se redirecciona registro de usuario ni reestablecimiento de contraseña
 * [X] Bug 28 - Corrección de elementos en interfaz Empresa (botones, animaciónes, etc)
 * [ ] Bug 29 - Corrección de elementos en interfaz Sedes (botones, animaciónes, etc)
 * [ ] Bug 30 - Corrección de elementos en interfaz Dependencias (botones, animaciónes, etc)
