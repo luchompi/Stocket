@@ -16,25 +16,26 @@
 * [X] General - No se cierra la sesión al vencerse los tokens
 * [X] General - Testear comportamiento con cuentas nuevas y perfiles diferentes a administrador
 
-Bugs corregidos completamente, conteo total - 26 correciones.
+Bugs corregidos completamente, conteo total - 24 correciones.
 ------- Correciones nuevas -----
 
-* [X] No se gestionan correctamente los roles desde el panel de administracion de django
-* [X] No se envian correos electronicos para operacion con cuentas de usuario
-* [X] Corrección de elementos en interfaz Empresa (botones, animaciónes, etc)
-* [ ] Corrección de elementos en interfaz Sedes (botones, animaciónes, etc)
-* [ ] Corrección de elementos en interfaz Dependencias (botones, animaciónes, etc)
-* [ ] Corrección de elementos en interfaz Gestion de sedes por dependencias (botones, animaciónes, etc)
-* [ ] Corrección de elementos en interfaz Inventario (botones, animaciónes, etc)
-* [ ] Corrección de elementos en interfaz Marcas (botones, animaciónes, etc)
-* [ ] Corrección de elementos en interfaz Categorias (botones, animaciónes, etc)
-* [ ] Corrección de elementos en interfaz Referencias (botones, animaciónes, etc)
-* [ ] Corrección de elementos en interfaz Elementos (botones, animaciónes, etc)
-* [ ] Corrección de elementos en interfaz Asignaciones (botones, animaciónes, etc)
-* [ ] Corrección de elementos en interfaz Traspazos (botones, animaciónes, etc)
-* [ ] Corrección de elementos en interfaz Mantenimientos (botones, animaciónes, etc)
-* [ ] Corrección de elementos en interfaz Bajas (botones, animaciónes, etc)
-* [ ] Corrección de elementos en interfaz Certificaciones (botones, animaciónes, etc)
+* [X] Bug 25 - No se gestionan correctamente los roles desde el panel de administracion de django
+* [X] Bug 26 - No se envian correos electronicos para operacion con cuentas de usuario
+* [ ] Bug 27 - No se redirecciona registro de usuario ni reestablecimiento de contraseña
+* [X] Bug 28 - Corrección de elementos en interfaz Empresa (botones, animaciónes, etc)
+* [ ] Bug 29 - Corrección de elementos en interfaz Sedes (botones, animaciónes, etc)
+* [ ] Bug 30 - Corrección de elementos en interfaz Dependencias (botones, animaciónes, etc)
+* [ ] Bug 31 - Corrección de elementos en interfaz Gestion de sedes por dependencias (botones, animaciónes, etc)
+* [ ] Bug 32 - Corrección de elementos en interfaz Inventario (botones, animaciónes, etc)
+* [ ] Bug 33 - Corrección de elementos en interfaz Marcas (botones, animaciónes, etc)
+* [ ] Bug 34 - Corrección de elementos en interfaz Categorias (botones, animaciónes, etc)
+* [ ] Bug 35 - Corrección de elementos en interfaz Referencias (botones, animaciónes, etc)
+* [ ] Bug 36 - Corrección de elementos en interfaz Elementos (botones, animaciónes, etc)
+* [ ] Bug 37 - Corrección de elementos en interfaz Asignaciones (botones, animaciónes, etc)
+* [ ] Bug 38 - Corrección de elementos en interfaz Traspazos (botones, animaciónes, etc)
+* [ ] Bug 39 - Corrección de elementos en interfaz Mantenimientos (botones, animaciónes, etc)
+* [ ] Bug 40 - Corrección de elementos en interfaz Bajas (botones, animaciónes, etc)
+* [ ] Bug 41 - Corrección de elementos en interfaz Certificaciones (botones, animaciónes, etc)
 
 URL para pruebas en producción:
 
