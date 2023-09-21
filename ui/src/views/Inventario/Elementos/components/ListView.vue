@@ -18,7 +18,7 @@ const declararBaja = (item:ElementPreview) => {
   Swal.fire({
     icon: 'question',
     title: '¿Está seguro?',
-    text: `¿Desea declarar a baja el elemento ${item.placa}?`,
+    text: `¿Desea declarar a baja el elemento de placa ${item.placa}?`,
     showCancelButton: true,
     confirmButtonText: 'Si, declarar a baja',
     cancelButtonText: 'No, cancelar',
