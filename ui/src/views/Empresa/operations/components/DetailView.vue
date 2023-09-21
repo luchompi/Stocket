@@ -2,7 +2,15 @@
   <div class="row justify-content-md-center">
     <div class="col col-lg-12">
       <div class="card">
-        <div class="card-body">
+        <div class="card-body" v-if="loading">
+          Espere ...
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body" v-else>
           <h5 class="card-title">Seleccione las dependencias para la sede {{ sedeData.name }}</h5>
           <div class="card-text">
             <div class="input-group mb-3">
