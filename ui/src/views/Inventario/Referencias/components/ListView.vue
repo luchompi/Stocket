@@ -5,7 +5,9 @@
       <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
       <input type="text" class="form-control" placeholder="Ingrese nombre de la categoría a buscar"
              aria-label="Username"
-             aria-describedby="basic-addon1">
+             aria-describedby="basic-addon1"
+             v-model="search"
+             >
     </div>
     <div v-if="loading">
       <div class="d-flex justify-content-center">
