@@ -98,8 +98,8 @@ watchEffect(() => {
             </p>
             <div class="btn-group" role="group" aria-label="Basic example">
               <RouterLink :to="{ name: 'dependencias-actualizar', params: { id: element.id } }" type="button"
-                class="btn btn-warning">Editar</RouterLink>
-              <button type="button" class="btn btn-danger" @click="eliminarDependencia(element.id)">Borrar</button>
+                class="btn btn-warning">Editar <i class="bi bi-pencil-square"></i></RouterLink>
+              <button type="button" class="btn btn-danger" @click="eliminarDependencia(element.id)">Borrar <i class="bi bi-trash"></i></button>
             </div>
           </div>
         </div>
