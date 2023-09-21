@@ -1,5 +1,11 @@
 <template>
-<div class="card-text">
+  <div class="card-text" v-if="loading">
+    Espere ...
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+<div class="card-text" v-else>
   <h5>Ingrese los datos a modificar</h5>
   <FormView :categoria="queryset" @onUpdateData="onUpdateData"/>
 </div>
@@ -15,10 +21,13 @@ import FormView from './FormView.vue'
 import Swal from 'sweetalert2';
 const queryset = ref({} as Category)
 const url = useRouter()
+const loading = ref<boolean>(false)
 onMounted(async()=>{
+  loading.value = true
   const id = url.currentRoute.value.params.id
   const data = await getCategoryById(id)
   queryset.value = data
+  loading.value = false
 })
 
 const proceed = async(data:Category) =>{

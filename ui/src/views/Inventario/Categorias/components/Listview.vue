@@ -25,7 +25,7 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Opciones</th>
               </tr>
               </thead>
               <tbody>
@@ -35,9 +35,9 @@
                 <td>
                   <div class="btn-group" role="group" aria-label="Basic example">
                     <RouterLink :to="{name:'categorias-editar',params:{id:element.id}}" type="button"
-                                class="btn btn-warning">Editar
+                                class="btn btn-warning">Editar <i class="bi bi-pencil-square"></i>
                     </RouterLink>
-                    <button type="button" class="btn btn-danger" @click="deleteCategoria(element.id)">Eliminar</button>
+                    <button type="button" class="btn btn-danger" @click="deleteCategoria(element.id)">Borrar <i class="bi bi-trash"></i></button>
                   </div>
                 </td>
               </tr>
