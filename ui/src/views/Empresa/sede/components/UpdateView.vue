@@ -8,7 +8,17 @@
     </div>
     <div class="card-body">
         <h6>Ingrese los datos solicitados</h6>
-        <div class="row">
+        <div class="row" v-if="loading">
+            <div class="col">
+                Espere ...
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" v-else>
             <div class="col">
                 <h6>Estos son los datos en almacenados en sistema</h6>
                 <div>
@@ -46,10 +56,13 @@ import Swal from 'sweetalert2';
 
 const url = useRouter()
 const data = ref<any>([])
+const loading = ref<boolean>(false)
 
 onMounted(async () => {
+    loading.value = true
     const response = await getSedeData(url.currentRoute.value.params.nit, url.currentRoute.value.params.id)
     data.value = response.data
+    loading.value = false
 })
 
 const onUpdate = async(data: any) => {
