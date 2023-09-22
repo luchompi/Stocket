@@ -9,6 +9,16 @@ export const obtenerMantenimientos = async () => {
     })
 }
 
+
+export const buscarMantenimiento = async(id:any) =>{
+    return await baseApi.get(`gestion/mantenimientos/search/${id}/`, {
+        headers: {
+            Authorization: `JWT ${sesionStore().PAT}`
+        }
+    })
+}
+
+
 export const crearMantenimiento = async (elemento: any, data: any) => {
     return await baseApi.post(`gestion/mantenimientos/create/${elemento}/`, data, {
         headers: {
