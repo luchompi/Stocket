@@ -23,19 +23,20 @@ Bugs corregidos completamente, conteo total - 24 correciones.
 * [X] Bug 26 - No se envian correos electronicos para operacion con cuentas de usuario
 * [X] Bug 27 - No se redirecciona registro de usuario ni reestablecimiento de contraseña
 * [X] Bug 28 - Corrección de elementos en interfaz Empresa (botones, animaciónes, etc)
-* [ ] Bug 29 - Corrección de elementos en interfaz Sedes (botones, animaciónes, etc)
-* [ ] Bug 30 - Corrección de elementos en interfaz Dependencias (botones, animaciónes, etc)
-* [ ] Bug 31 - Corrección de elementos en interfaz Gestion de sedes por dependencias (botones, animaciónes, etc)
-* [ ] Bug 32 - Corrección de elementos en interfaz Inventario (botones, animaciónes, etc)
-* [ ] Bug 33 - Corrección de elementos en interfaz Marcas (botones, animaciónes, etc)
-* [ ] Bug 34 - Corrección de elementos en interfaz Categorias (botones, animaciónes, etc)
-* [ ] Bug 35 - Corrección de elementos en interfaz Referencias (botones, animaciónes, etc)
-* [ ] Bug 36 - Corrección de elementos en interfaz Elementos (botones, animaciónes, etc)
-* [ ] Bug 37 - Corrección de elementos en interfaz Asignaciones (botones, animaciónes, etc)
-* [ ] Bug 38 - Corrección de elementos en interfaz Traspazos (botones, animaciónes, etc)
-* [ ] Bug 39 - Corrección de elementos en interfaz Mantenimientos (botones, animaciónes, etc)
-* [ ] Bug 40 - Corrección de elementos en interfaz Bajas (botones, animaciónes, etc)
-* [ ] Bug 41 - Corrección de elementos en interfaz Certificaciones (botones, animaciónes, etc)
+* [X] Bug 29 - Corrección de elementos en interfaz Sedes (botones, animaciónes, etc)
+* [X] Bug 30 - Corrección de elementos en interfaz Dependencias (botones, animaciónes, etc)
+* [X] Bug 31 - Corrección de elementos en interfaz Gestion de sedes por dependencias (botones, animaciónes, etc)
+* [X] Bug 32 - Corrección de elementos en interfaz Inventario (botones, animaciónes, etc)
+* [X] Bug 33 - Corrección de elementos en interfaz Marcas (botones, animaciónes, etc)
+* [X] Bug 34 - Corrección de elementos en interfaz Categorias (botones, animaciónes, etc)
+* [X] Bug 35 - Corrección de elementos en interfaz Referencias (botones, animaciónes, etc)
+* [X] Bug 36 - Corrección de elementos en interfaz Elementos (botones, animaciónes, etc)
+* [X] Bug 37 - Corrección de elementos en interfaz Asignaciones (botones, animaciónes, etc)
+* [X] Bug 38 - Corrección de elementos en interfaz Traspazos (botones, animaciónes, etc)
+* [X] Bug 39 - Corrección de elementos en interfaz Mantenimientos (botones, animaciónes, etc)
+* [X] Bug 40 - Corrección de elementos en interfaz Bajas (botones, animaciónes, etc)
+* [X] Bug 41 - Corrección de elementos en interfaz Certificaciones (botones, animaciónes, etc)
+* [X] Bug 42 - Corrección de elementos en interfaz Reportes (botones, animaciónes, etc)
 
 URL para pruebas en producción:
 
