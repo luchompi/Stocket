@@ -32,6 +32,8 @@ const reciever = ref<boolean>(false)
 const json = ref<any>({})
 const employee = ref({} as Employee)
 const url = useRouter()
+
+
 const selectEmployee = (data: any) => {
   employee.value = data.data
   reciever.value = data.status
