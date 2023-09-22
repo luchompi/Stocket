@@ -191,7 +191,7 @@ watchEffect(() => {
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Guardar</button>
+    <button type="submit" class="btn btn-primary">Guardar <i class="bi bi-save"></i></button>
   </form>
 </template>
 
