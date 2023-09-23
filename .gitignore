@@ -1,6 +1,7 @@
 /__pycache__/
 *.pyc
 *.pyo
+client
 
 # Logs
 logs
@@ -16,6 +17,7 @@ node_modules
 dist-ssr
 coverage
 *.local
+
 
 /cypress/videos/
 /cypress/screenshots/
