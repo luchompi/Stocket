@@ -4,9 +4,11 @@ import {obtenerBajas} from "@/views/Gestion/Bajas/services/bajas.services";
 import type {Baja} from "@/views/Gestion/Bajas/services/bajas.interfaces";
 
 const bajas = ref([] as Baja[])
-
+const loading = ref<boolean>(false)
 const getData = async () => {
+  loading.value = true
   bajas.value = (await obtenerBajas()).data
+  loading.value = false
 }
 
 onMounted(() => {
@@ -16,7 +18,13 @@ onMounted(() => {
 
 <template>
   <div class="card">
-    <div class="card-body">
+    <div class="card-body" v-if="loading">
+      Espere ...
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <div class="card-body" v-else>
       <h4 class="card-title">Bajas por procesar</h4>
       <div class="card-text" v-if="bajas.length > 0">
         <p>Hay {{ bajas.length }} baja(s) por procesar.</p>

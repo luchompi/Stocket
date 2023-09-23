@@ -1,8 +1,9 @@
 <template>
   <div class="card">
-    <div class="card-header">
+    <div class="card-body">
       <div class=" d-flex align-items-center">
-        <div class="text-center flex-grow-1 mb-0">Empresas - Stocket <i class="bi bi-archive-fill"></i></div>
+        <div class="h5 text-center flex-grow-1 mb-auto">Información de Empresa <i class="bi bi-info"></i>
+        </div>
         <div class="btn-group" role="group" aria-label="Basic example">
           <RouterLink :to="{ name: 'empresa-create' }" type="button" class="btn btn-primary" v-if="!queryset.length">
             Nuevo <i class="bi bi-plus-square"></i></RouterLink>
@@ -10,32 +11,28 @@
             <i class="bi bi-pencil-square"></i>
           </RouterLink>
           <RouterLink :to="{ name: 'sedes', params: { nit: queryset[0].NIT } }" type="button" class="btn btn-info"
-            v-if="queryset.length">Ver <i class="bi bi-search"></i>
+                      v-if="queryset.length">Ver sedes <i class="bi bi-search"></i>
           </RouterLink>
         </div>
       </div>
-    </div>
-    <div class="card-body">
       <h5 class="card-title">Datos de Empresa</h5>
-
       <div v-if="loading">
+        Espere, se están cargando los datos ...
         <div class="spinner-border text-primary" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
       </div>
       <div v-else>
-        <dataComponent :empresa="queryset" />
+        <dataComponent :empresa="queryset"/>
       </div>
-
     </div>
-
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { getCompany } from '../services/empresa.services';
+import {onMounted, ref} from 'vue'
+import {getCompany} from '../services/empresa.services';
 import dataComponent from './components/dataComponent.vue'
-import type { empresaInterface } from '../services/empresa.interfaces';
+import type {empresaInterface} from '../services/empresa.interfaces';
 
 
 const queryset = ref([] as empresaInterface[])

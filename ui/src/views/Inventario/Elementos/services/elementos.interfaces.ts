@@ -5,7 +5,7 @@ export interface Element {
     serial: string;
     estado: string;
     IP: string | null;
-    MAC: string;
+    MAC: string | null;
     proveedor: string | null;
     created_at: string;
     delete_on: string | null;

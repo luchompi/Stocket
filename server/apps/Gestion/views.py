@@ -3,7 +3,7 @@ from datetime import timedelta as td
 
 from apps.Inventario.models import Elemento
 from apps.Inventario.serializers import ElementoViewSerializer
-from core.permissions import isAdminOrSuperuser, isEncargado
+from core.permissions import admin_or_superuser_or_encargado_required
 from django.db import transaction
 from django.db.models import Q
 from rest_framework import status
@@ -21,7 +21,7 @@ from ..Personas.models import Funcionario
 
 
 class AsignacionIndex(APIView):
-    permission_classes = [isAdminOrSuperuser | isEncargado]
+    @admin_or_superuser_or_encargado_required
 
     def get(self, request):
         asignacion = Asignacion.objects.order_by('-timestamps')[:5]
@@ -47,7 +47,7 @@ class AsignacionIndex(APIView):
 
 
 class AsignacionDetail(APIView):
-    permission_classes = [isAdminOrSuperuser | isEncargado]
+    @admin_or_superuser_or_encargado_required
 
     def get(self, request, pk, format=None):
         asignacion = Asignacion.objects.get(pk=pk)
@@ -75,7 +75,7 @@ class AsignacionDetail(APIView):
 
 
 class AsignacionSearch(APIView):
-    permission_classes = [isAdminOrSuperuser | isEncargado]
+    @admin_or_superuser_or_encargado_required
 
     def get(self, request, pk):
         asignacion = Asignacion.objects.filter(
@@ -86,7 +86,7 @@ class AsignacionSearch(APIView):
 
 
 class DetallesAsignacionDetail(APIView):
-    permission_classes = [isAdminOrSuperuser | isEncargado]
+    @admin_or_superuser_or_encargado_required
 
     def get(self, request, pk, format=None):
         queryset = DetallesAsignacion.objects.filter(asignacion_id=pk)
@@ -95,7 +95,7 @@ class DetallesAsignacionDetail(APIView):
 
 
 class DetalleAsignacionSearch(APIView):
-    permission_classes = [isAdminOrSuperuser | isEncargado]
+    @admin_or_superuser_or_encargado_required
 
     def get(self, request, format=None):
         queryset = Elemento.objects.filter(estado='Por asignar')[:5]
@@ -110,6 +110,7 @@ class DetalleAsignacionSearch(APIView):
 
 
 class SearchElementByArgs(APIView):
+    @admin_or_superuser_or_encargado_required
     def post(self, request, format=None):
         query = Q(estado='Por asignar')
         if request.data['param'] == 'marca':
@@ -127,28 +128,25 @@ class SearchElementByArgs(APIView):
 
 ####CONTROLADORES DE MANTENIMIENTO
 class MantenimientoIndex(APIView):
-    permission_classes = [isAdminOrSuperuser | isEncargado]
-
+    @admin_or_superuser_or_encargado_required
     def get(self, request):
-        mantenimiento = Mantenimiento.objects.order_by('-timestamps')[:5]
+        mantenimiento = Mantenimiento.objects.filter(estado='En Progreso')[:10]
         serializer = MantenimientoSerializer(mantenimiento, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class MantenimientoCreate(APIView):
-    permission_classes = [isAdminOrSuperuser | isEncargado]
-
+    @admin_or_superuser_or_encargado_required
     def post(self, request, pk, format=None):
         queryset = Elemento.objects.get(placa=pk)
-        q = Mantenimiento(elemento=queryset, user=request.user.username, estado='En mantenimiento',
+        q = Mantenimiento(elemento=queryset, user=request.user.username, estado='En Progreso',
                           descripcion=request.data['details'])
         q.save()
         return Response(status=status.HTTP_201_CREATED)
 
 
 class MantenimientoDetails(APIView):
-    permission_classes = [isAdminOrSuperuser | isEncargado]
-
+    @admin_or_superuser_or_encargado_required
     def get(self, request, pk, format=None):
         queryset = Mantenimiento.objects.get(PID=pk)
         serializer = MantenimientoSerializer(queryset)
@@ -159,10 +157,7 @@ class MantenimientoDetails(APIView):
         elemento = Elemento.objects.get(placa=queryset.elemento.placa)
         if (request.data['estado'] == '1'):
             q = DetallesAsignacion.objects.filter(elemento__placa=queryset.elemento.placa)
-            if q:
-                elemento.estado = 'Asignado'
-            else:
-                elemento.estado = 'Por asignar'
+            elemento.estado = 'Asignado' if q else 'Por asignar'
         elif (request.data['estado'] == '2'):
             elemento.estado = 'Para cambio'
         elif (request.data['estado'] == '3'):
@@ -174,6 +169,12 @@ class MantenimientoDetails(APIView):
         elemento.save()
         return Response(status=status.HTTP_200_OK)
 
+class SearchMantenimiento(APIView):
+    @admin_or_superuser_or_encargado_required
+    def get(self,request,pk,format=None):
+        queryset = Mantenimiento.objects.filter(Q(PID__icontains=pk)|Q(elemento__placa__icontains=pk))
+        serializer = MantenimientoSerializer(queryset,many=True)
+        return Response(serializer.data,status=status.HTTP_200_OK)
 
 """
 Controladores para Bajas
@@ -181,8 +182,7 @@ Controladores para Bajas
 
 
 class BajaIndex(APIView):
-    permission_classes = [isAdminOrSuperuser | isEncargado]
-
+    @admin_or_superuser_or_encargado_required
     def get(self, request):
         baja = Baja.objects.order_by('-timestamps')[:5]
         serializer = BajaSerializer(baja, many=True)
@@ -190,8 +190,7 @@ class BajaIndex(APIView):
 
 
 class BajaCreate(APIView):
-    permission_classes = [isAdminOrSuperuser | isEncargado]
-
+    @admin_or_superuser_or_encargado_required
     def get(self, request, format=None):
         queryset = Elemento.objects.filter(
             Q(estado__contains='Para cambio') | Q(estado__contains='Dañado') | Q(estado__contains='Para baja'))
@@ -213,8 +212,7 @@ class BajaCreate(APIView):
 
 
 class BajaDetails(APIView):
-    permission_classes = [isAdminOrSuperuser | isEncargado]
-
+    @admin_or_superuser_or_encargado_required
     def get(self, request, pk, format=None):
         queryset = DetalleBaja.objects.filter(baja__PID=pk)
         serializer = DetalleBajaSerializer(queryset, many=True)
@@ -233,11 +231,9 @@ class BajaDetails(APIView):
 
 
 class certificaciones(APIView):
-    permission_classes = [isAdminOrSuperuser | isEncargado]
-
+    @admin_or_superuser_or_encargado_required
     def get(self, request, pk, format=None):
-        queryset = Asignacion.objects.filter(funcionario__iden=pk)
-        if queryset:
+        if queryset := Asignacion.objects.filter(funcionario__iden=pk):
             serializer = AsignacionSerializer(queryset, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
@@ -245,11 +241,11 @@ class certificaciones(APIView):
 
 
 class BorrarRegistros(APIView):
-    permission_classes = [isAdminOrSuperuser | isEncargado]
-
+    @admin_or_superuser_or_encargado_required
     def delete(self, request, format=None):
-        queryset = DetalleBaja.objects.filter(fechaBorrado__lte=dt.now().date())
-        if queryset:
+        if queryset := DetalleBaja.objects.filter(
+            fechaBorrado__lte=dt.now().date()
+        ):
             for item in queryset:
                 elemento = Elemento.objects.get(placa=item.elemento.placa)
                 elemento.delete()
@@ -257,16 +253,14 @@ class BorrarRegistros(APIView):
                 q = Baja.objects.get(PID=x.baja.PID)
                 q.delete()
             queryset.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        else:
-            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 # Esta clase comprueba los elementos cuyo mantenimiento sigue en progreso
 class ComprobarMantenimiento(APIView):
-    permission_classes = [isAdminOrSuperuser | isEncargado]
+    @admin_or_superuser_or_encargado_required
 
     def get(self, request, format=None):
-        queryset = Mantenimiento.objects.filter(estado='En mantenimiento')
+        queryset = Mantenimiento.objects.filter(estado='En Progreso')
         serializer = MantenimientoSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

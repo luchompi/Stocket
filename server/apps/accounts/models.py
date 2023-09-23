@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin,Group
 
 class UserAccountManager(BaseUserManager):
     def create_user(self,email,password=None,**extra_fields):
@@ -16,7 +16,6 @@ class UserAccountManager(BaseUserManager):
     def create_superuser(self,email,password,**extra_fields):
         extra_fields.setdefault('is_staff',True)
         extra_fields.setdefault('is_superuser',True)
-        extra_fields.setdefault('role','Administrador')
         
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True')
@@ -34,12 +33,11 @@ class UserAccount(AbstractBaseUser,PermissionsMixin):
     last_name = models.CharField(max_length=255, blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    role = models.CharField(max_length=255, null=True,blank=True)    
     phone = models.CharField(max_length=255, null=True,blank=True)
     address = models.CharField(max_length=255, null=True,blank=True)
     city = models.CharField(max_length=255, default='Riohacha')
     uid = models.CharField(max_length=255,unique=True,null=True,blank=True)
-    
+    groups = models.ManyToManyField(Group, blank=True, related_name="user_groups")
     objects = UserAccountManager()
     
     USERNAME_FIELD = 'username'

@@ -8,12 +8,15 @@ import Swal from 'sweetalert2';
 const data = ref<any>([])
 const url = useRouter()
 const sedeDep = ref<any>([])
+const loading = ref<boolean>(false)
 
 onMounted(async () => {
+  loading.value = true
   const response = await getSedeData(url.currentRoute.value.params.nit, url.currentRoute.value.params.id)
   data.value = response.data
   const sededep = await getDependenciasBySede(url.currentRoute.value.params.id)
   sedeDep.value = sededep.data
+  loading.value = false
 })
 
 const eliminarDependencia = async (sede_id:any,dependencia_id:any) =>{
@@ -29,7 +32,15 @@ const eliminarDependencia = async (sede_id:any,dependencia_id:any) =>{
 </script>
 
 <template>
-  <div class="card">
+  <div v-if="loading">
+    <div class="d-flex justify-content-center my-5">
+      Espere ...
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+  <div class="card" v-else>
     <div class="card-body">
       <div class=" card-title d-flex align-items-center">
         <h4 class="text-center flex-grow-1 mb-0">Detalles de la sede</h4>

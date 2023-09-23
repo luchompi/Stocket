@@ -4,10 +4,13 @@ import {borrarBaja} from "@/views/Gestion/Bajas/services/bajas.services";
 import {onMounted, watchEffect} from "vue";
 import bajaComponent from './components/bajaComponent.vue'
 import mantenimientoComponent from './components/mantenimientoComponent.vue'
+import {comprobarRolUsuario} from '@/hooks/permissions.hooks'
+
+const comprobarRol = comprobarRolUsuario()
 
 onMounted(() => {
   watchEffect(async () => {
-    if (sesionStore().isLogged) {
+    if (sesionStore().isLogged && comprobarRol) {
       await borrarBaja()
     }
   })
@@ -30,7 +33,7 @@ onMounted(() => {
     </div>
   </div>
   <br>
-  <div class="row" v-if="sesionStore().isLogged">
+  <div class="row" v-if="sesionStore().isLogged &&(sesionStore().UserData[0]?.groups?.includes('Administradores') || sesionStore().UserData[0]?.groups?.includes('Administrador') || sesionStore().UserData[0]?.groups?.includes('Encargado') || sesionStore().UserData[0]?.is_superuser)">
     <div class="col">
       <bajaComponent/>
     </div>

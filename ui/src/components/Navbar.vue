@@ -1,7 +1,7 @@
 <template>
   <nav class="py-2 bg-body-tertiary border-bottom">
     <div class="container d-flex flex-wrap">
-      <ul class="nav me-auto">
+      <ul class="nav me-auto" v-if="sesion.UserData[0]?.groups?.includes('Administradores') ||sesion.UserData[0]?.groups?.includes('Administrador') || sesion.UserData[0]?.groups?.includes('Encargado') || sesion.UserData[0]?.is_superuser">
         <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2 active" aria-current="page">Home</a>
         </li>
         <li class="nav-item dropdown" v-if="sesion.isLogged">
@@ -12,6 +12,11 @@
           <ul class="dropdown-menu">
             <li>
               <RouterLink :to="{ name: 'empresa' }" class="dropdown-item">Ver datos <i class="bi bi-search"></i>
+              </RouterLink>
+            </li>
+            <li v-if="!!sesion.NIT">
+              <RouterLink :to="{ name: 'sedes',params:{nit:sesion.NIT} }" class="dropdown-item">Sedes <i
+                  class="bi bi-building"></i>
               </RouterLink>
             </li>
             <li>
@@ -29,7 +34,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item dropdown" v-if="sesion.isLogged">
+        <li class="nav-item dropdown" v-if="sesion.isLogged && sesion.NIT">
           <a class="nav-link dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown"
              aria-expanded="false">
             Personas <i class="bi bi-person"></i>
@@ -47,7 +52,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item dropdown" v-if="sesion.isLogged">
+        <li class="nav-item dropdown" v-if="sesion.isLogged && sesion.NIT">
           <a class="nav-link dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown"
              aria-expanded="false">
             Inventario <i class="bi bi-bookshelf"></i>
@@ -78,7 +83,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item dropdown" v-if="sesion.isLogged">
+        <li class="nav-item dropdown" v-if="sesion.isLogged && sesion.NIT">
           <a class="nav-link dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown"
              aria-expanded="false">
             Gestión <i class="bi bi-tools"></i>
@@ -99,7 +104,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item dropdown" v-if="sesion.isLogged">
+        <li class="nav-item dropdown" v-if="sesion.isLogged && sesion.NIT">
           <a class="nav-link dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown"
              aria-expanded="false">
             Certificados <i class="bi bi-file-earmark-post"></i>
@@ -113,6 +118,7 @@
           </ul>
         </li>
       </ul>
+      <ul ul class="nav me-auto" v-else></ul>
       <ul class="nav" v-if="sesion.isLogged">
         <li class="nav-item">
           <div class="dropdown">
@@ -155,7 +161,9 @@
         <svg class="bi me-2" width="40" height="32">
           <use xlink:href="#bootstrap"/>
         </svg>
-        <span class="fs-4">Stocket <i class="bi bi-archive-fill"></i> </span>
+        <span class="fs-4" v-if="sesion.isLogged">Stocket <i
+            class="bi bi-archive-fill"></i> - {{
+            sesion.UserData[0]?.groups[0] || sesion.UserData[0]?.is_superuser ? (sesion.UserData[0]?.groups[0] ? sesion.UserData[0]?.groups[0] :(sesion.UserData[0].is_superuser ? 'SuperUsuario':'Invitado')):'Invitado'}}</span>
       </RouterLink>
       <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
         <input type="search" class="form-control" :value="props.dateTime" readonly>

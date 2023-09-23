@@ -15,10 +15,24 @@
           <div class="card-text" v-else>
             <div class="row">
               <div class="col">
-                <DataView :data="proveedor"/>
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ proveedor.NIT }} - {{ proveedor.razonSocial }}</h5>
+                    <div class="row">
+                      <div class="col">
+                        <p>Ciudad: {{ proveedor.city }}</p>
+                        <p>Dirección: {{ proveedor.address }}</p>
+                      </div>
+                      <div class="col">
+                        <p>Teléfono: {{ proveedor.phone }}</p>
+                        <p>Correo: {{ proveedor.email }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="col">
-                <FormView :data="proveedor" @onUpdateData="onUpdateData"/>
+                <FormView :data="proveedor" @onUpdateData="onUpdateData" />
               </div>
             </div>
           </div>
@@ -29,11 +43,11 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from 'vue'
-import {useRouter} from 'vue-router'
-import {getProveedoresById, updateProveedor} from "@/views/Personas/Proveedores/services/proveedor.services";
-import type {Suppliers} from "@/views/Personas/Proveedores/services/proveedor.interfaces";
-import {errorValidator} from "@/hooks/errors.hooks";
+import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { getProveedoresById, updateProveedor } from "@/views/Personas/Proveedores/services/proveedor.services";
+import type { Suppliers } from "@/views/Personas/Proveedores/services/proveedor.interfaces";
+import { errorValidator } from "@/hooks/errors.hooks";
 import Swal from "sweetalert2";
 import DataView from "./DataView.vue";
 import FormView from './FormView.vue'
@@ -49,49 +63,49 @@ onMounted(() => {
 const getData = async () => {
   loading.value = true
   await getProveedoresById(url.currentRoute.value.params.nit)
-      .then((Response) => {
-        proveedor.value = Response.data
+    .then((Response) => {
+      proveedor.value = Response.data
+    })
+    .catch((error) => {
+      const resiever = errorValidator(error.response.data)
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: resiever,
+        showConfirmButton: true
       })
-      .catch((error) => {
-        const resiever = errorValidator(error.response.data)
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: resiever,
-          showConfirmButton: true
-        })
-      })
-      .finally(() => {
-        loading.value = false
-      })
+    })
+    .finally(() => {
+      loading.value = false
+    })
 
 }
 
-const onUpdateData = async(data:Suppliers) =>{
+const onUpdateData = async (data: Suppliers) => {
   loading.value = true
-  await updateProveedor(url.currentRoute.value.params.nit,data)
-  .then((Response)=>{
-    Swal.fire({
-      icon:'success',
-      title:'Actualizado',
-      text:'Proveedor actualizado correctamente',
-      showConfirmButton:true,
-      timerProgressBar:true,
-      timer:5000
+  await updateProveedor(url.currentRoute.value.params.nit, data)
+    .then((Response) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Actualizado',
+        text: 'Proveedor actualizado correctamente',
+        showConfirmButton: true,
+        timerProgressBar: true,
+        timer: 5000
+      })
+      getData()
     })
-    getData()
-  })
-  .catch((error)=>{
-    const reciever = errorValidator(error.response.data)
-    Swal.fire({
-      icon:'error',
-      title:'Error',
-      text:reciever,
-      showConfirmButton:true
+    .catch((error) => {
+      const reciever = errorValidator(error.response.data)
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: reciever,
+        showConfirmButton: true
+      })
     })
-  })
-  .finally(()=>{
-    loading.value = false
-  })
+    .finally(() => {
+      loading.value = false
+    })
 }
 </script>

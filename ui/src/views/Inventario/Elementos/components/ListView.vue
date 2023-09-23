@@ -18,7 +18,7 @@ const declararBaja = (item:ElementPreview) => {
   Swal.fire({
     icon: 'question',
     title: '¿Está seguro?',
-    text: `¿Desea declarar a baja el elemento ${item.placa}?`,
+    text: `¿Desea declarar a baja el elemento de placa ${item.placa}?`,
     showCancelButton: true,
     confirmButtonText: 'Si, declarar a baja',
     cancelButtonText: 'No, cancelar',
@@ -85,9 +85,9 @@ watchEffect(() => {
         <td>{{ item.estado }}</td>
         <td>
           <div class="btn-group" role="group" aria-label="Basic example">
-            <RouterLink :to="{name:'elementos-details',params:{placa:item.placa}}" type="button" class="btn btn-primary">Ver</RouterLink>
-            <RouterLink :to="{name:'elementos-edit',params:{placa:item.placa}}" type="button" class="btn btn-warning">Editar</RouterLink>
-            <button @click="declararBaja(item)" type="button" class="btn btn-danger">A baja</button>
+            <RouterLink :to="{name:'elementos-details',params:{placa:item.placa}}" type="button" class="btn btn-primary">Ver <i class="bi bi-search"></i></RouterLink>
+            <RouterLink :to="{name:'elementos-edit',params:{placa:item.placa}}" type="button" class="btn btn-warning">Edita <i class="bi bi-pencil-square"></i></RouterLink>
+            <button @click="declararBaja(item)" type="button" class="btn btn-danger">A baja <i class="bi bi-download"></i></button>
           </div>
         </td>
       </tr>

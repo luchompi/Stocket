@@ -4,9 +4,11 @@ import type {Maintenance} from "@/views/Gestion/Mantenimientos/services/mantenim
 import {obtenerElementosEnMantenimiento} from "@/views/Gestion/Mantenimientos/services/mantenimiento.services";
 
 const mantenimientos = ref([] as Maintenance[]);
-
+const loading = ref<boolean>(false);
 const getData = async () => {
+  loading.value = true
   mantenimientos.value = (await obtenerElementosEnMantenimiento()).data
+  loading.value = false
 }
 
 onMounted(() => {
@@ -17,7 +19,13 @@ onMounted(() => {
 
 <template>
   <div class="card">
-    <div class="card-body">
+    <div class="card-body" v-if="loading">
+      Espere ...
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <div class="card-body" v-else>
       <h4 class="card-title">Reporte de mantenimienos</h4>
       <div class="card-text" v-if="mantenimientos.length > 0">
         <p>Existen {{ mantenimientos.length }} elementos en mantenimiento</p>

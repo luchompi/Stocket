@@ -9,17 +9,21 @@ const asignacion = ref({} as Asignation)
 const funcionario = ref([] as any)
 const details = ref([] as AsignationDetail[])
 const url = useRouter()
+const loading = ref<boolean>(false)
 
 const getElements = async () => {
   const response = await getElementsinAsignment(url.currentRoute.value.params.id)
   details.value = response.data
+  loading.value = false
 }
 
 const getData = async () => {
+  loading.value = true
   const response = await getAsignacion(url.currentRoute.value.params.id)
   asignacion.value = response.data
   funcionario.value = response.data.funcionario
   getElements()
+
 }
 
 onMounted(() => {
@@ -28,7 +32,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="card-body">
+  <div class="card-body" v-if="loading">
+    Espere ...
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body" v-else>
     <div class=" d-flex align-items-center">
       <div class="text-center flex-grow-1 ">
         <h2>Detalles de asignacion con PID {{ asignacion.id }}</h2>
