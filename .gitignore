@@ -1,7 +1,7 @@
 /__pycache__/
 *.pyc
 *.pyo
-client
+
 
 # Logs
 logs
@@ -31,3 +31,4 @@ coverage
 *.njsproj
 *.sln
 *.sw?
+.vercel
