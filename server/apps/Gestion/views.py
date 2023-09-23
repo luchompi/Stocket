@@ -132,7 +132,6 @@ class MantenimientoIndex(APIView):
     def get(self, request):
         mantenimiento = Mantenimiento.objects.filter(estado='En Progreso')[:10]
         serializer = MantenimientoSerializer(mantenimiento, many=True)
-        print(mantenimiento)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
