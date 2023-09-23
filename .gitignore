@@ -2,6 +2,7 @@
 *.pyc
 *.pyo
 ui
+
 # Logs
 logs
 *.log
