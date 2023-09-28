@@ -14,9 +14,9 @@ onMounted(async () => {
   loading.value = true
   const response = await getSedeData(url.currentRoute.value.params.nit, url.currentRoute.value.params.id)
   data.value = response.data
+  loading.value = false
   const sededep = await getDependenciasBySede(url.currentRoute.value.params.id)
   sedeDep.value = sededep.data
-  loading.value = false
 })
 
 const eliminarDependencia = async (sede_id:any,dependencia_id:any) =>{
@@ -70,7 +70,7 @@ const eliminarDependencia = async (sede_id:any,dependencia_id:any) =>{
           Descripción: {{ data.description ? data.description : 'No existen datos' }}
         </div>
     </div>
-    <div class="row">
+    <div class="row" v-if="sedeDep.length">
       <div class="col">
         <br>
         <h6>Dependencias anexadas</h6>
