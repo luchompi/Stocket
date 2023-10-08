@@ -75,11 +75,11 @@ Ver. 0.6.0.0 - beta
     1. [X] Reportes de errores generales
     2. [ ] Reporte de correcciones y características adicionales
     3. [X] Pruebas en entorno de producción
-2. [ ] Revisión de documentación
-3. [ ] Creación de diagramas de colaboración, despliegue y nodos
-4. [ ] Escritura de FAQ y manuales
+2. [X] Revisión de documentación
+3. [X] Creación de diagramas de colaboración, despliegue y nodos
+4. [X] Escritura de FAQ y manuales
 5. [ ] Propuesta de selección de tecnologías para despliegue
-6. [ ] Configuraciones para despliegue en producción adicionales
+6. [X] Configuraciones para despliegue en producción adicionales
 
 Ver. 1.0.0.0 -stable
 
