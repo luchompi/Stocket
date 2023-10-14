@@ -73,7 +73,7 @@ Ver. 0.6.0.0 - beta
 
 1. [X] Cambio a Fase Beta
     1. [X] Reportes de errores generales
-    2. [ ] Reporte de correcciones y características adicionales
+    2. [X] Reporte de correcciones y características adicionales
     3. [X] Pruebas en entorno de producción
 2. [X] Revisión de documentación
 3. [X] Creación de diagramas de colaboración, despliegue y nodos
