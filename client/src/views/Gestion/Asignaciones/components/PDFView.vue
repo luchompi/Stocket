@@ -35,7 +35,7 @@ const generarPDF = () => {
 
 onMounted(() => {
     getData()
-    setTimeout(generarPDF, 500)
+    setTimeout(generarPDF, 1500)
 })
 document.title = 'Reporte de asignación - Stocket'
 </script>
