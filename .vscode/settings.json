@@ -8,5 +8,7 @@
         "Ver. 0.5.0.0",
         "Ver. 0.6.0.0 - beta",
         "Ver. 1.0.1.0"
-    ]
+    ],
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true
 }

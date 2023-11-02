@@ -1,8 +1,20 @@
-# React + Vite
+# Cliente para Stocket - React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este es el codigo react se ejecuta en el servidor para poder realizar las vistas en el proyecto
 
-Currently, two official plugins are available:
+Gestor de paquetes seleccionado: yarn
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Paquetes: 
+
+* react
+* react-router-dom
+* zustand
+* sweetalert2
+* axios
+* bootstrap
+* bootstrap-icons
+
+Paquetes a estudiar:
+
+* react-magic-motion ([Introduction 👉 react-magic-motion](https://www.react-magic-motion.com/))
+* lordicon free icons ([14,200+ Animated Icons - Lordicon](https://lordicon.com/))
