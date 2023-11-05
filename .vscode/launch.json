@@ -1,0 +1,35 @@
+{
+  // Use IntelliSense para saber los atributos posibles.
+  // Mantenga el puntero para ver las descripciones de los existentes atributos.
+  // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "🚀 launch django",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/server/manage.py",
+      "args": ["runserver"],
+      "django": true,
+      "justMyCode": true
+    },
+    {
+      "name": "🏗️ make:migrations",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/server/manage.py",
+      "args": ["makemigrations"],
+      "django": true,
+      "justMyCode": true
+    },
+    {
+      "name": "💾 make:migrate",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/server/manage.py",
+      "args": ["migrate"],
+      "django": true,
+      "justMyCode": true
+    }
+  ]
+}
