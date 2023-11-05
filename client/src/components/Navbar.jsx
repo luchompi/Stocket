@@ -110,7 +110,7 @@ const Navbar = (dateTime) => {
               <>
                 <div className="btn-group">
                   <button type="button" className="btn btn-primary">
-                    Sesión iniciada como {userData.username}
+                    Sesión iniciada como {userData?.username}
                   </button>
                   <button
                     type="button"
