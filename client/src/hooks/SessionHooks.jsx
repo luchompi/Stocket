@@ -13,3 +13,15 @@ export const RedirectIfIsAuth = () => {
   }, [isAuth, navigate]);
   return <div />;
 };
+
+export const RedirectIfNotAuth = () => {
+  const { isAuth } = useSesionStore.getState();
+  const navigate = useNavigate();
+  useEffect(() => {
+    const interval = setInterval(() => {
+      isAuth ? null : navigate("/login");
+    }, 100);
+    return () => clearInterval(interval);
+  }, [isAuth, navigate]);
+  return <div />;
+};

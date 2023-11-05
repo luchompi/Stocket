@@ -116,18 +116,14 @@ const Navbar = (dateTime) => {
                     type="button"
                     className="btn btn-default dropdown-toggle dropdown-icon"
                     data-toggle="dropdown"
-                  >
-                    <span className="sr-only">Toggle Dropdown</span>
-                  </button>
+                  ></button>
                   <div className="dropdown-menu" role="menu">
+                    <Link to={`/profile`} className="dropdown-item" href="#">
+                      Ver datos de usuario{" "}
+                      <i className="ri-account-pin-box-line"></i>
+                    </Link>
                     <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Something else here
+                      Cambiar Contraseña <i className="ri-key-line"></i>
                     </a>
                     <div className="dropdown-divider"></div>
                     <a className="dropdown-item" onClick={salir}>
