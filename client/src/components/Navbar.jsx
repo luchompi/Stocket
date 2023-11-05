@@ -6,6 +6,7 @@ const Navbar = (dateTime) => {
   const { isAuth } = useSesionStore.getState();
   const navigate = useNavigate();
   const cerrarSesion = useSesionStore((state) => state.logout);
+  const userData = useSesionStore((state) => state.userData);
   const salir = () => {
     successMessage("Sesión cerrada", "Se ha cerrado la sesión con éxito");
     cerrarSesion();
@@ -16,7 +17,7 @@ const Navbar = (dateTime) => {
       <nav className="navbar navbar-expand navbar-light navbar-white">
         <div className="container">
           <lord-icon
-            src="https://cdn.lordicon.com/rmjnvgsm.json"
+            src="https://cdn.lordicon.com/hnppcsvw.json"
             trigger="hover"
             colors="primary:#4030e8,secondary:#66a1ee"
             style={{ width: "50px", height: "50px" }}
@@ -107,11 +108,32 @@ const Navbar = (dateTime) => {
           <ul className="navbar-nav ml-auto">
             {isAuth ? (
               <>
-                <div className="nav-item">
-                  Sesión iniciada{" "}
-                  <button className="btn btn-danger" onClick={salir}>
-                    Salir
+                <div className="btn-group">
+                  <button type="button" className="btn btn-primary">
+                    Sesión iniciada como {userData.username}
                   </button>
+                  <button
+                    type="button"
+                    className="btn btn-default dropdown-toggle dropdown-icon"
+                    data-toggle="dropdown"
+                  >
+                    <span className="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <div className="dropdown-menu" role="menu">
+                    <a className="dropdown-item" href="#">
+                      Action
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Another action
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Something else here
+                    </a>
+                    <div className="dropdown-divider"></div>
+                    <a className="dropdown-item" onClick={salir}>
+                      Salir
+                    </a>
+                  </div>
                 </div>
               </>
             ) : (
