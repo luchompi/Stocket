@@ -1,99 +1,138 @@
-import PropTypes from 'prop-types'
-import {Link} from 'react-router-dom'
-import sesionStore from "../store/sesion.store.js";
-import {successMessage} from "./messages.js";
+import { Link, useNavigate } from "react-router-dom";
+import useSesionStore from "../store/sesion.store";
+import { successMessage } from "./messages";
 
-const Navbar = (props) => {
-    const {isAuth} = sesionStore.getState();
-    const doLogout = sesionStore((state) => state.logout)
-    const logout = () => {
-        doLogout()
-        successMessage('¡Hecho!', 'Sesión cerrada con éxito')
-        setInterval(() => {
-            location.reload
-        }, 3000)
-    }
+const Navbar = (dateTime) => {
+  const { isAuth } = useSesionStore.getState();
+  const navigate = useNavigate();
+  const cerrarSesion = useSesionStore((state) => state.logout);
+  const salir = () => {
+    successMessage("Sesión cerrada", "Se ha cerrado la sesión con éxito");
+    cerrarSesion();
+    navigate("/");
+  };
+  return (
+    <>
+      <nav className="navbar navbar-expand navbar-light navbar-white">
+        <div className="container">
+          <lord-icon
+            src="https://cdn.lordicon.com/rmjnvgsm.json"
+            trigger="hover"
+            colors="primary:#4030e8,secondary:#66a1ee"
+            style={{ width: "50px", height: "50px" }}
+          ></lord-icon>
+          <div className="navbar-brand">
+            <Link to={"/"} className="brand-text link-dark">
+              Stocket
+            </Link>
+          </div>
 
+          <ul className="navbar-nav">
+            {isAuth ? (
+              <>
+                <li className="nav-item"></li>
+                <li className="nav-item d-none d-sm-inline-block">
+                  <a href="index3.html" className="nav-link">
+                    Home
+                  </a>
+                </li>
+                <li className="nav-item d-none d-sm-inline-block">
+                  <a href="#" className="nav-link">
+                    Contact
+                  </a>
+                </li>
+                <li className="nav-item dropdown">
+                  <a
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdown4"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Help
+                  </a>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdown4"
+                  >
+                    <a className="dropdown-item" href="#">
+                      FAQ
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Support
+                    </a>
+                    <div className="dropdown-divider"></div>
+                    <a className="dropdown-item" href="#">
+                      Contact
+                    </a>
+                  </div>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item"></li>
+                <li className="nav-item"></li>
+                <li className="nav-item"></li>
+              </>
+            )}
+          </ul>
 
-    return (
-        <div>
-            <header>
-                <div className="px-3 py-2 text-bg-dark border-bottom">
-                    <div className="container">
-                        <div
-                            className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                            <Link to={`/`}
-                                  className="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-                                <h4>Stocket - <i className="bi bi-boxes"></i></h4>
-                            </Link>
-
-                            <ul className="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-                                <li>
-                                    <a href="#" className="nav-link text-secondary">
-                                        Home
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="nav-link text-white">
-                                        Dashboard
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="nav-link text-white">
-                                        Orders
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="nav-link text-white">
-                                        Products
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="nav-link text-white">
-                                        Customers
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+          <form
+            className="form-inline ml-3"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div className="input-group input-group-sm">
+              <input
+                className="form-control form-control-navbar"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                value={dateTime.dateTime}
+                readOnly
+              />
+              <div className="input-group-append">
+                <div className="btn btn-navbar">
+                  <i className="ri-time-line"></i>
                 </div>
-                <div className="px-3 py-2 border-bottom mb-3">
-                    <div className="container d-flex flex-wrap justify-content-center">
-                        <div className="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
-                            Fecha y hora: {props.dateTime}
-                        </div>
+              </div>
+            </div>
+          </form>
 
-                        <div className="text-end">
-                            {isAuth ?
-                                (<>
-                                    <div className="dropdown">
-                                        <button className="btn btn-secondary dropdown-toggle" type="button"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                            Usuario : myUser - Rol: MiRol
-                                        </button>
-                                        <ul className="dropdown-menu">
-                                            <li><a className="dropdown-item" href="#">Action</a></li>
-                                            <li><a className="dropdown-item" href="#">Another action</a></li>
-                                            <li><a className="dropdown-item" onClick={logout}>Cerrar sesión <i
-                                                className="bi bi-power"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </>)
-                                : (<>
-                                    <Link to={`/auth/login`} type="button"
-                                          className="btn btn-light text-dark me-2">Login</Link>
-                                    <button type="button" className="btn btn-primary">Sign-up</button>
-                                </>)}
-                        </div>
-                    </div>
+          <ul className="navbar-nav ml-auto">
+            {isAuth ? (
+              <>
+                <div className="nav-item">
+                  Sesión iniciada{" "}
+                  <button className="btn btn-danger" onClick={salir}>
+                    Salir
+                  </button>
                 </div>
-            </header>
+              </>
+            ) : (
+              <div className="btn-group nav-item">
+                <Link
+                  to={"/register"}
+                  type="button"
+                  className="btn btn-primary"
+                >
+                  Registrarse <i className="ri-user-add-line"></i>
+                </Link>
+                <Link to={"/login"} type="button" className="btn btn-secondary">
+                  Entrar <i className="ri-login-box-line"></i>
+                </Link>
+              </div>
+            )}
+          </ul>
         </div>
-    )
-}
+      </nav>
+    </>
+  );
+};
 
-Navbar.propTypes = {
-    dateTime: PropTypes.string
-}
-
-export default Navbar
+export default Navbar;

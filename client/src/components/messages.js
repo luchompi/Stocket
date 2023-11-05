@@ -1,14 +1,15 @@
 import Swal from 'sweetalert2'
 
-
 export const successMessage = (title, message) => {
     return Swal.fire({
+        icon: 'success',
         title: title,
         text: message,
-        icon: 'success',
+        showConfirmButton: false,
+        timer: 3500,
         allowOutsideClick: false,
         allowEscapeKey: false,
-        timer: 3500,
+        allowEnterKey: false,
         timerProgressBar: true
     })
 }

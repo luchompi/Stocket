@@ -1,20 +1,8 @@
-# Cliente para Stocket - React
+# React + Vite
 
-Este es el codigo react se ejecuta en el servidor para poder realizar las vistas en el proyecto
+Este documento tiene como finalidad definir los paquetes y cambios realizados en el cliente web
 
-Gestor de paquetes seleccionado: yarn
-
-Paquetes: 
-
-* react
-* react-router-dom
-* zustand
-* sweetalert2
-* axios
-* bootstrap
-* bootstrap-icons
-
-Paquetes a estudiar:
-
-* react-magic-motion ([Introduction 👉 react-magic-motion](https://www.react-magic-motion.com/))
-* lordicon free icons ([14,200+ Animated Icons - Lordicon](https://lordicon.com/))
+1. Se ha implementado react
+2. Se han instalado los paquetes react, react-router-dom, axios sweetalert2, admin-lte, lordicon, lottie-web
+3. Se ha implementado lordicon (https://lordicon.com/)
+4. Se ha implementado remix icons ([Remix Icon - Open source icon library](https://remixicon.com/))
