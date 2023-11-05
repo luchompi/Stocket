@@ -6,6 +6,7 @@ import useSesionStore from "../../../store/sesion.store";
 import { useNavigate, Link } from "react-router-dom";
 import { RedirectIfIsAuth } from "../../../hooks/SessionHooks";
 import { IconHelperWithColors } from "../../../helpers/IconHelper";
+import { obtenerDatosUsuario } from "../../Principal/services/principal.apis";
 
 const Login = () => {
   document.title = "Stocket - Iniciar Sesión";
@@ -29,6 +30,7 @@ const Login = () => {
       .then((Response) => {
         successMessage("Bienvenido", "Sesión iniciada con éxito");
         setTokens(Response.data);
+        obtenerDatosUsuario();
         navigate("/home");
       })
       .catch((error) => {

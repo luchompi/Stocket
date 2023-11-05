@@ -12,6 +12,11 @@ const useSesionStore = create((set) => ({
             isAuth: true,
         });
     },
+    setUserData: (data) => {
+        set({
+            userData: data,
+        });
+    },
     logout: () => {
         set({
             PAT: null,
