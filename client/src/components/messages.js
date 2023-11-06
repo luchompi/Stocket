@@ -36,3 +36,17 @@ export const errorMessage = (data) => {
         timerProgressBar: true
     })
 }
+
+export const warningMessage = (title, message) => {
+    return Swal.fire({
+        icon: 'warning',
+        title: title,
+        text: message,
+        showConfirmButton: false,
+        timer: 3500,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        allowEnterKey: false,
+        timerProgressBar: true
+    })
+}
