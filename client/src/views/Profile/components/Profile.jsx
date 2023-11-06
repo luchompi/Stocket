@@ -10,9 +10,15 @@ const Profile = () => {
       <div className="card-header">
         <h3 className="card-title">Perfil de usuario</h3>
         <div className="card-tools">
-          <Link to={`/profile/nuevo/`} className="btn btn-success">
-            Agregar
-          </Link>
+          {userData?.uid ? (
+            <Link to={`/profile/nuevo/`} className="btn btn-warning">
+              Editar <i className="ri-edit-line"></i>
+            </Link>
+          ) : (
+            <Link to={`/profile/nuevo/`} className="btn btn-success">
+              Agregar <i className="ri-add-line"></i>
+            </Link>
+          )}
         </div>
       </div>
 

@@ -1,13 +1,16 @@
 import React from "react";
 import EventEmitter from "../../../helpers/EventEmitter";
+import useSesionStore from "../../../store/sesion.store";
+import { Link } from "react-router-dom";
 const FormProfile = () => {
+  const { userData } = useSesionStore.getState();
   const [data, setData] = React.useState({
-    first_name: "",
-    last_name: "",
-    address: "",
-    phone: "",
-    city: "",
-    uid: "",
+    first_name: userData?.first_name || "",
+    last_name: userData?.last_name || "",
+    address: userData?.address || "",
+    phone: userData?.phone || "",
+    city: userData?.city || "",
+    uid: userData?.uid || "",
   });
 
   const handleChange = (e) => {
@@ -23,18 +26,22 @@ const FormProfile = () => {
       <form className="form-horizontal" onSubmit={handleSubmit}>
         <div className="form-group">
           {/*Identificación */}
-          <label htmlFor="UID">
-            Identificación <i className="ri-hashtag"></i>
-          </label>
-          <input
-            type="text"
-            className="form-control form-control-border border-width-2"
-            id="UID"
-            placeholder="Especifique su identificación. Ej: 1234567890"
-            name="uid"
-            onChange={handleChange}
-            required
-          />
+          {userData?.uid ? null : (
+            <>
+              <label htmlFor="UID">
+                Identificación <i className="ri-hashtag"></i>
+              </label>
+              <input
+                type="text"
+                className="form-control form-control-border border-width-2"
+                id="UID"
+                placeholder="Especifique su identificación. Ej: 1234567890"
+                name="uid"
+                onChange={handleChange}
+                required
+              />
+            </>
+          )}
         </div>
         <div className="form-group">
           {/*Nombres */}
@@ -48,7 +55,7 @@ const FormProfile = () => {
             placeholder="Ingrese su nombre. Ej: pepe"
             name="first_name"
             onChange={handleChange}
-            required
+            required={!userData?.first_name}
           />
         </div>
         <div className="form-group">
@@ -63,7 +70,7 @@ const FormProfile = () => {
             placeholder="Ingrese sus apellidos. Ej: perez"
             name="last_name"
             onChange={handleChange}
-            required
+            required={!userData?.last_name}
           />
         </div>
         <div className="form-group">
@@ -78,7 +85,7 @@ const FormProfile = () => {
             placeholder="Ciudad de residencia. Ej: Bogotá DC"
             name="city"
             onChange={handleChange}
-            required
+            required={!userData?.city}
           />
         </div>
         <div className="form-group">
@@ -93,7 +100,7 @@ const FormProfile = () => {
             placeholder="Defina dirección de residencia. Ej. Calle 123 # 123-123"
             name="address"
             onChange={handleChange}
-            required
+            required={!userData?.address}
           />
         </div>
         <div className="form-group">
@@ -108,12 +115,17 @@ const FormProfile = () => {
             placeholder="Defina su teléfono de contacto. Ej: 6057270000 ó 3177777777"
             name="phone"
             onChange={handleChange}
-            required
+            required={!userData?.phone}
           />
         </div>
-        <button type="submit" className="btn btn-success">
-          Enviar
-        </button>
+        <div className="btn-group">
+          <button type="submit" className="btn btn-success">
+            Enviar
+          </button>
+          <Link to={`/profile`} type="button" className="btn btn-secondary">
+            Atrás
+          </Link>
+        </div>
       </form>
     </div>
   );
