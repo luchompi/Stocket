@@ -22,7 +22,7 @@ const FormProfile = () => {
     <div>
       <form className="form-horizontal" onSubmit={handleSubmit}>
         <div className="form-group">
-          {/*Ciudad */}
+          {/*Identificación */}
           <label htmlFor="UID">
             Identificación <i className="ri-hashtag"></i>
           </label>
