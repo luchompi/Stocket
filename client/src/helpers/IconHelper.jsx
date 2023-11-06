@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 export const IconHelperWithColors = (url, colors) => {
   const [animate, setAnimate] = useState(null);
