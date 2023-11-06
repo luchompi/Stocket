@@ -17,6 +17,7 @@ const Login = () => {
   });
   const [loading, setLoading] = useState(false);
   const setTokens = useSesionStore((state) => state.setTokens);
+  const setUserData = useSesionStore((state) => state.setUserData);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -30,7 +31,9 @@ const Login = () => {
       .then((Response) => {
         successMessage("Bienvenido", "Sesión iniciada con éxito");
         setTokens(Response.data);
-        obtenerDatosUsuario();
+        obtenerDatosUsuario().then((response) => {
+          setUserData(response.data);
+        });
         navigate("/home");
       })
       .catch((error) => {
