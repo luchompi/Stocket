@@ -33,7 +33,7 @@ const App = () => {
           <>
             <div className="alert alert-info alert-dismissible">
               <strong>
-                <i className="icon fas fa-exclamation-triangle"></i> Atención!
+                <i className="ri-information-line"></i> Atención!
               </strong>
               Su perfil se encuentra incompleto. Por favor, diligencie los datos
               requeridos.
@@ -47,7 +47,7 @@ const App = () => {
           <>
             <div className="alert alert-warning alert-dismissible">
               <strong>
-                <i className="icon fas fa-exclamation-triangle"></i> Atención!
+                <i className="ri-error-warning-line"></i> ¡Atención! {""}
               </strong>
               Su perfil tiene permisos de administrador, tenga cuidado con los
               cambios que haga, ya que no se pueden deshacer.
