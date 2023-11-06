@@ -122,9 +122,13 @@ const Navbar = (dateTime) => {
                       Ver datos de usuario{" "}
                       <i className="ri-account-pin-box-line"></i>
                     </Link>
-                    <a className="dropdown-item" href="#">
+                    <Link
+                      to={`/forgot-password`}
+                      className="dropdown-item"
+                      href="#"
+                    >
                       Cambiar Contraseña <i className="ri-key-line"></i>
-                    </a>
+                    </Link>
                     <div className="dropdown-divider"></div>
                     <a className="dropdown-item" onClick={salir}>
                       Salir

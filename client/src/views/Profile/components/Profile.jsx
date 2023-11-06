@@ -23,18 +23,18 @@ const Profile = () => {
           />
           <div className="col">
             <h2>Hola, {userData?.username}</h2>
-            <h4>Identificación: {userData?.uid ? userData?.uid : "N/A"}</h4>
-            <h5>Rol: {userData?.groups[0] ? userData?.groups[0] : "N/A"}</h5>
+            <h4>Identificación: {userData?.uid || "N/A"}</h4>
+            <h5>Rol: {userData?.groups[0] || "Invitado"}</h5>
             <p>
               Nombres:{" "}
               {userData?.first_name && userData?.last_name
                 ? userData?.first_name + " " + userData?.last_name
                 : "N/A"}
             </p>
-            <p>Ciudad: {userData?.city ? userData?.city : "N/A"}</p>
-            <p>Dirección: {userData?.address ? userData?.address : "N/A"}</p>
-            <p>Teléfono: {userData?.phone ? userData?.phone : "N/A"}</p>
-            <p>Correo: {userData?.email ? userData?.email : "N/A"}</p>
+            <p>Ciudad: {userData?.city || "N/A"}</p>
+            <p>Dirección: {userData?.address || "N/A"}</p>
+            <p>Teléfono: {userData?.phone || "N/A"}</p>
+            <p>Correo: {userData?.email || "N/A"}</p>
           </div>
         </div>
       </div>

@@ -6,14 +6,17 @@ import { actualizarPerfilUsuario } from "../services/profile.apis";
 import { successMessage } from "../../../components/messages";
 import { IconHelperWitoutColors } from "../../../helpers/IconHelper";
 import { useNavigate } from "react-router-dom";
+import useSesionStore from "../../../store/sesion.store";
 const CreateProfile = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const setUserData = useSesionStore((state) => state.setUserData);
 
   const saveData = async (data) => {
     setLoading(true);
     await actualizarPerfilUsuario(data)
       .then((Response) => {
+        setUserData(Response.data);
         successMessage("¡Hecho!", "Perfil actualizado correctamente");
         navigate("/profile/");
       })
