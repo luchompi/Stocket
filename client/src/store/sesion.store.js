@@ -5,12 +5,19 @@ const useSesionStore = create((set) => ({
     RAT: null,
     isAuth: false,
     userData: null,
+    counter: 0,
     setTokens: (data) => {
         set({
             PAT: data.access,
             RAT: data.refresh,
             isAuth: true,
         });
+    },
+    incrementTimer: () => {
+        set(state => ({ counter: state.counter + 1 }))
+    },
+    resetTimer: () => {
+        set({ counter: 0 })
     },
     setUserData: (data) => {
         set({
@@ -23,6 +30,7 @@ const useSesionStore = create((set) => ({
             RAT: null,
             isAuth: false,
             userData: null,
+            counter: 0
         })
     }
 }))
