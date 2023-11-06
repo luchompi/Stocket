@@ -7,10 +7,10 @@ const SesionWatcher = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       isAuth ? incrementTimer() : null;
-      counter > 60 ? logout() : null;
+      counter > 1799999 ? logout() : null;
     }, 1000);
     return () => clearInterval(interval);
-  }, [incrementTimer, isAuth, counter,logout]);
+  }, [incrementTimer, isAuth, counter, logout]);
 
   return <></>;
 };

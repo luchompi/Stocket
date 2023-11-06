@@ -13,6 +13,11 @@ const useSesionStore = create((set) => ({
             isAuth: true,
         });
     },
+    setAccessToken: (data) => {
+        set({
+            PAT: data.access,
+        });
+    },
     incrementTimer: () => {
         set(state => ({ counter: state.counter + 1 }))
     },
