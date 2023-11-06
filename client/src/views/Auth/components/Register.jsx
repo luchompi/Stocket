@@ -4,8 +4,11 @@ import { guardarUsuario } from "../services/auth.apis";
 import { errorMessage, successMessage } from "../../../components/messages";
 import { useNavigate } from "react-router-dom";
 import { IconHelperWithColors } from "../../../helpers/IconHelper";
+import { RedirectIfIsAuth } from "../../../hooks/SessionHooks";
+
 const Register = () => {
   document.title = "Stocket - Registrar usuario";
+  RedirectIfIsAuth();
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(false);
   const [data, setData] = useState({

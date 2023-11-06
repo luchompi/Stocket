@@ -3,8 +3,11 @@ import { useState } from "react";
 import { successMessage, errorMessage } from "../../../components/messages.js";
 import { activarCuenta } from "../services/auth.apis.js";
 import Loading from "../../../components/Loading";
+import { RedirectIfIsAuth } from "../../../hooks/SessionHooks.jsx";
+
 const Activate = () => {
   document.title = "Stocket - Activar cuenta";
+  RedirectIfIsAuth();
   const { uid, token } = useParams();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
