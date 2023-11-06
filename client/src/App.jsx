@@ -6,7 +6,7 @@ import useSesionStore from "./store/sesion.store.js";
 import { solicitarTokenAcceso } from "./views/Auth/services/auth.apis.js";
 const App = () => {
   const [dateTime, setDateTime] = useState("");
-  const { counter } = useSesionStore.getState();
+  const { counter, userData, isAuth } = useSesionStore.getState();
   const { resetTimer, setAccessToken } = useSesionStore((state) => state);
 
   useEffect(() => {
@@ -28,6 +28,33 @@ const App = () => {
     <div onMouseMove={checkSesionStatus}>
       <Navbar dateTime={dateTime} />
       <hr />
+      {isAuth ? (
+        userData?.uid ? null : (
+          <>
+            <div className="alert alert-info alert-dismissible">
+              <strong>
+                <i className="icon fas fa-exclamation-triangle"></i> Atención!
+              </strong>
+              Su perfil se encuentra incompleto. Por favor, diligencie los datos
+              requeridos.
+            </div>
+          </>
+        )
+      ) : null}
+      {isAuth ? (
+        userData?.groups.includes("Administrador", "administradores") ||
+        userData?.is_superuser ? null : (
+          <>
+            <div className="alert alert-warning alert-dismissible">
+              <strong>
+                <i className="icon fas fa-exclamation-triangle"></i> Atención!
+              </strong>
+              Su perfil tiene permisos de administrador, tenga cuidado con los
+              cambios que haga, ya que no se pueden deshacer.
+            </div>
+          </>
+        )
+      ) : null}
       <div className="row justify-content-md-center">
         <Outlet />
       </div>
