@@ -32,11 +32,38 @@ const Navbar = (dateTime) => {
             {isAuth ? (
               <>
                 <li className="nav-item"></li>
-                <li className="nav-item d-none d-sm-inline-block">
-                  <a href="index3.html" className="nav-link">
-                    Home
+                <li className="nav-item dropdown">
+                  <a
+                    className="nav-link dropdown-toggle"
+                    id="navbarEmpresa"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Empresa <i className="ri-building-2-line"></i>
                   </a>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="navbarEmpresa"
+                  >
+                    <Link
+                      to={`/empresa/details`}
+                      className="dropdown-item"
+                      href="#"
+                    >
+                      Ver datos <i className="ri-search-eye-line"></i>
+                    </Link>
+                    <a className="dropdown-item" href="#">
+                      Support
+                    </a>
+                    <div className="dropdown-divider"></div>
+                    <a className="dropdown-item" href="#">
+                      Contact
+                    </a>
+                  </div>
                 </li>
+
                 <li className="nav-item d-none d-sm-inline-block">
                   <a href="#" className="nav-link">
                     Contact

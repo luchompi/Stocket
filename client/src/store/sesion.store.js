@@ -5,6 +5,7 @@ const useSesionStore = create((set) => ({
     RAT: null,
     isAuth: false,
     userData: null,
+    empresaData: null,
     counter: 0,
     setTokens: (data) => {
         set({
@@ -16,6 +17,11 @@ const useSesionStore = create((set) => ({
     setAccessToken: (data) => {
         set({
             PAT: data.access,
+        });
+    },
+    setEmpresaData: (data) => {
+        set({
+            empresaData: data,
         });
     },
     incrementTimer: () => {
@@ -35,7 +41,8 @@ const useSesionStore = create((set) => ({
             RAT: null,
             isAuth: false,
             userData: null,
-            counter: 0
+            counter: 0,
+            empresaData: null,
         })
     }
 }))

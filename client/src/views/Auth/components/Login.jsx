@@ -7,6 +7,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { RedirectIfIsAuth } from "../../../hooks/SessionHooks";
 import { IconHelperWithColors } from "../../../helpers/IconHelper";
 import { obtenerDatosUsuario } from "../../Principal/services/principal.apis";
+import { obtenerDatosEmpresa } from "../../Empresa/services/empresa.apis";
 
 const Login = () => {
   document.title = "Stocket - Iniciar Sesión";
@@ -16,8 +17,10 @@ const Login = () => {
     password: "",
   });
   const [loading, setLoading] = useState(false);
-  const setTokens = useSesionStore((state) => state.setTokens);
-  const setUserData = useSesionStore((state) => state.setUserData);
+  const { setTokens, setUserData, setEmpresaData } = useSesionStore(
+    (state) => state
+  );
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -33,6 +36,9 @@ const Login = () => {
         setTokens(Response.data);
         obtenerDatosUsuario().then((response) => {
           setUserData(response.data);
+        });
+        obtenerDatosEmpresa().then((res) => {
+          setEmpresaData(res.data);
         });
         navigate("/home");
       })
@@ -65,8 +71,8 @@ const Login = () => {
               <div className="col">
                 <form className="form-horizontal" onSubmit={handleSubmit}>
                   <div className="card-body">
+                    {/*Usuario */}
                     <div className="form-group">
-                      {/*Usuario */}
                       <label htmlFor="Username">
                         Usuario <i className="ri-account-box-line"></i>
                       </label>
