@@ -1,15 +1,10 @@
 import useSesionStore from "../../../store/sesion.store";
 import { IconHelperWitoutColors } from "../../../helpers/IconHelper";
 import { Link } from "react-router-dom";
-import {useEffect, useState} from "react";
 
 const Home = () => {
   const { empresaData } = useSesionStore.getState();
-    const [data, setData] = useState({});
-    useEffect(() => {
-        setData(empresaData)
-    }, [empresaData]);
-    console.log(data)
+
   return (
     <div>
       <div className="card-header">
