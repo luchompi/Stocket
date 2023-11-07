@@ -1,35 +1,36 @@
 import { useState } from "react";
 import useSesionStore from "../../../store/sesion.store";
 import EventEmitter from "../../../helpers/EventEmitter";
-import { RedirectIfNotAuth } from "../../../hooks/SessionHooks";
+import {useNavigate} from "react-router-dom";
 
-const EmpresaForm = () => {
-  RedirectIfNotAuth();
-  const { empresaData, isAuth } = useSesionStore.getState();
-  const [data, setData] = useState({
-    NIT: empresaData?.NIT || "",
-    name: empresaData?.name || "",
-    address: empresaData?.address || "",
-    phone: empresaData?.phone || "",
-    email: empresaData?.email || "",
-    web: empresaData?.web || "",
-    description: empresaData?.description || "",
+const EmpresaForm = (data) => {
+  const isAuth = useSesionStore((state) => state.isAuth);
+  const reciever = data.data[0];
+  const [empresa, setEmpresa] = useState({
+    NIT: reciever.NIT || "",
+    name: reciever.name || "",
+    address: reciever.address || "",
+    phone: reciever.phone || "",
+    email: reciever.email || "",
+    web: reciever.web || "",
+    description: reciever.description || "",
   });
 
   const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+    setEmpresa({ ...empresa, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    empresaData?.NIT ? EventEmitter.emit("onUpdateEmpresa", data) : null;
+    reciever.NIT ? EventEmitter.emit("onUpdateEmpresa", empresa) : null;
   };
+
   return (
     <>
       {isAuth ? (
         <>
           <form onSubmit={handleSubmit} className="form-horizontal">
-            {empresaData?.NIT ? null : (
+            {reciever.NIT ? null : (
               <>
                 {/*NIT */}
                 <div className="form-group">
@@ -43,7 +44,7 @@ const EmpresaForm = () => {
                     placeholder="Ingrese su usuario. Ej: 440001256"
                     name="NIT"
                     onChange={handleChange}
-                    required={!empresaData?.NIT}
+                    required={!reciever.NIT}
                   />
                 </div>
               </>
@@ -60,7 +61,7 @@ const EmpresaForm = () => {
                 placeholder="Ingrese nombre de la empresa. Ej: Empresa S.A."
                 name="name"
                 onChange={handleChange}
-                required={!empresaData?.name}
+                required={!reciever.name}
               />
             </div>
             {/*Dirección */}
@@ -75,7 +76,7 @@ const EmpresaForm = () => {
                 placeholder="Dirección de la empresa. Ej: Calle 123 # 45-67"
                 name="address"
                 onChange={handleChange}
-                required={!empresaData?.address}
+                required={!reciever.address}
               />
             </div>
             {/*Teléfono */}
@@ -90,7 +91,7 @@ const EmpresaForm = () => {
                 placeholder="Teléfono de contacto. Ej: 3001234567"
                 name="phone"
                 onChange={handleChange}
-                required={!empresaData?.phone}
+                required={!reciever.phone}
               />
             </div>
             {/*Correo electrónico */}
@@ -105,7 +106,7 @@ const EmpresaForm = () => {
                 placeholder="Ingrese su usuario. Ej: pepe.perez"
                 name="email"
                 onChange={handleChange}
-                required={!empresaData?.email}
+                required={!reciever.email}
               />
             </div>
             {/*Página web */}
