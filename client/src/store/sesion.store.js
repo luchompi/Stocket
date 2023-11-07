@@ -16,13 +16,13 @@ const useSesionStore = create((set) => ({
     },
     setAccessToken: (data) => {
         set({
-            PAT: data.access,
+            PAT: data,
         });
     },
     setEmpresaData: (data) => {
-        set({
+        set(()=>({
             empresaData: data,
-        });
+        }))
     },
     incrementTimer: () => {
         set(state => ({ counter: state.counter + 1 }))

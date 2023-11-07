@@ -7,8 +7,8 @@ import { solicitarTokenAcceso } from "./views/Auth/services/auth.apis.js";
 const App = () => {
   const [dateTime, setDateTime] = useState("");
   const { counter, userData, isAuth } = useSesionStore.getState();
-  const { resetTimer, setAccessToken } = useSesionStore((state) => state);
-
+  const setToken = useSesionStore((state) => state.setAccessToken);
+  const resetTimer = useSesionStore((state) => state.resetTimer);
   useEffect(() => {
     const interval = setInterval(() => {
       setDateTime(new Date().toLocaleString());
@@ -19,7 +19,7 @@ const App = () => {
     if (counter > 1700000 && counter < 1799999) {
       await solicitarTokenAcceso().then((Response) => {
         resetTimer();
-        setAccessToken(Response.data.access);
+        setToken(Response.data.access);
       });
     }
   };
