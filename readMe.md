@@ -19,3 +19,8 @@ las rutinas para su funcionamiento.
 credenciales predeterminadas: usuario: root password: root123
 
 Se inicia el refactor del producto, para optimizar codigo y reducir redundancia.
+
+
+---
+Se suspende refactor en vista de que no se cumplen ciertos criterios para la optimizacion completa del producto.
+---
