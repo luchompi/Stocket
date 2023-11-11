@@ -49,7 +49,7 @@ const Update = () => {
       </div>
       <div className="card-body">
         <h4>Ingrese los datos a actualizar</h4>
-        <EmpresaForm data={empresaData} />
+        <EmpresaForm />
       </div>
     </>
   );

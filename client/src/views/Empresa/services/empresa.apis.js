@@ -11,9 +11,17 @@ export const obtenerDatosEmpresa = () => {
 }
 
 export const actualizarDatosEmpresa = (NIT, data) => {
-    const {PAT}  = useSesionStore.getState()
-    console.log(NIT)
+    const { PAT } = useSesionStore.getState()
     return baseApi.put(`empresa/${NIT}/`, data, {
+        headers: {
+            Authorization: `JWT ${PAT}`
+        }
+    })
+}
+
+export const guardarDatosEmpresa = (data) => {
+    const { PAT } = useSesionStore.getState()
+    return baseApi.post('empresa/', data, {
         headers: {
             Authorization: `JWT ${PAT}`
         }

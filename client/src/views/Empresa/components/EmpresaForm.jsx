@@ -1,11 +1,10 @@
 import { useState } from "react";
 import useSesionStore from "../../../store/sesion.store";
 import EventEmitter from "../../../helpers/EventEmitter";
-import {useNavigate} from "react-router-dom";
 
-const EmpresaForm = (data) => {
+const EmpresaForm = () => {
   const isAuth = useSesionStore((state) => state.isAuth);
-  const reciever = data.data[0];
+  const reciever = useSesionStore.getState().empresaData[0] || {};
   const [empresa, setEmpresa] = useState({
     NIT: reciever.NIT || "",
     name: reciever.name || "",
@@ -22,7 +21,7 @@ const EmpresaForm = (data) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    reciever.NIT ? EventEmitter.emit("onUpdateEmpresa", empresa) : null;
+    reciever.NIT ? EventEmitter.emit("onUpdateEmpresa", empresa) : EventEmitter.emit("onCreateEmpresa", empresa);
   };
 
   return (

@@ -15,7 +15,9 @@ const Home = () => {
               Editar <i className="ri-edit-line"></i>
             </Link>
           ) : (
-            <button className="btn btn-success">Añadir </button>
+            <Link to={`/empresa/create`} className="btn btn-success">
+              Añadir{" "}
+            </Link>
           )}
         </div>
       </div>

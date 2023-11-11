@@ -1,3 +1,4 @@
+import Create from '../components/Create.jsx'
 import Home from '../components/Home.jsx'
 import Update from '../components/Update.jsx'
 import EmpresaLayout from '../EmpresaLayout.jsx'
@@ -12,6 +13,10 @@ const empresaRoutes = [{
         {
             path: '/empresa/update',
             Component: Update
+        },
+        {
+            path: '/empresa/create',
+            Component: Create
         }
     ]
 
