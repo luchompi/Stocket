@@ -1,44 +1,40 @@
-# React + Vite
+# client
 
-Este documento tiene como finalidad definir los paquetes y cambios realizados en el cliente web
+This template should help get you started developing with Vue 3 in Vite.
 
-1. Se ha implementado react
-2. Se han instalado los paquetes react, react-router-dom, axios sweetalert2, admin-lte, lordicon, lottie-web
-3. Se ha implementado lordicon (https://lordicon.com/)
-4. Se ha implementado remix icons ([Remix Icon - Open source icon library](https://remixicon.com/))
-5. se ha implementado libreria fbemitter (https://www.youtube.com/watch?v=E1QbP1MWpMc&t=930s)
-6. Se ha implementado react-quill para crear plantillas para escritura de texto en pantalla ([react-quill - npm (npmjs.com)](https://www.npmjs.com/package/react-quill))
+## Recommended IDE Setup
 
-¿como se usa fbemitter?
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-para usarlo,
+## Type Support for `.vue` Imports in TS
 
-1. Se debe crear la instancia del emitter para solo invocarla una vez (helpers/EventEmitter.js)
-2. Creamos el componente hijo, importamos el event emitter y definimos el nombre del metodo que padre debe reconocer para recibir los datos y tambien los datos a enviar (views/profile/components/FormProfile.jsx , el disparador debe contener esto EventEmitter.emit("onSave", data);)
-3. El componente padre, debe usar un useEffect para observar los eventos y debe tener esta logica
+TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
 
-useEffect(() => {
+If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
 
-//onSave es el nombre del emitter definido en la vista, data los valores que viajan de hijo a padre
+1. Disable the built-in TypeScript Extension
+    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
+    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
+2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
 
-const onSave = (data) => {
+## Customize configuration
 
-//Logica aquí
+See [Vite Configuration Reference](https://vitejs.dev/config/).
 
-console.log(data);
+## Project Setup
 
-    };
+```sh
+npm install
+```
 
-//Observador del listener, le permite al componente saber que está esperando, y que debe hacer apenas se dispare el evento, en este caso, espera "onSave" y se dirije a la funcion onSave dentro del hook
+### Compile and Hot-Reload for Development
 
-const listener = EventEmitter.addListener("onSave", onSave);
+```sh
+npm run dev
+```
 
-return () => {
+### Type-Check, Compile and Minify for Production
 
-//Destructor del evento, así se borra todo al destruir el componente
-
-listener.remove();
-
-    };
-
-  }, []);
+```sh
+npm run build
+```
