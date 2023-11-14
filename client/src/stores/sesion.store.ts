@@ -1,10 +1,11 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import type { Login, Register } from '@/views/Auth/services/auth.interfaces'
-import { login, registro } from '@/views/Auth/services/auth.apis'
+import type { Activate, Login, Register } from '@/views/Auth/services/auth.interfaces'
+import { login, registro, activarCuenta } from '@/views/Auth/services/auth.apis'
 import { errorMessage, successMessage } from '@/components/messages'
-
+import { useRouter } from 'vue-router'
 const useSesionStore = defineStore('counter', () => {
+    const url = useRouter()
     const timer = ref(0)
     const PAT = ref<string | null>(null)
     const RAT = ref<string | null>(null)
@@ -33,6 +34,7 @@ const useSesionStore = defineStore('counter', () => {
         await registro(data)
             .then((Response) => {
                 successMessage('Usuario registrado', 'Usuario registrado correctamente. Verifique su correo electrónico para activar su cuenta')
+                url.push({ name: 'Login' })
             })
             .catch((error) => {
                 errorMessage(error.response.data)
@@ -42,8 +44,20 @@ const useSesionStore = defineStore('counter', () => {
             })
     }
 
-    const activarCuenta = () =>{
-        
+    const activarPerfil = async (data: Activate) => {
+        loadingStatus.value = true
+        await activarCuenta(data)
+            .then((Response) => {
+                successMessage('¡Cuenta activada!', 'Puede iniciar sesión')
+                url.push({ name: 'Login' })
+            })
+            .catch((error) => {
+                errorMessage(error.response.data)
+            })
+            .finally(() => {
+                loadingStatus.value = false
+            })
+
     }
 
     const cerrarSesion = () => {
@@ -60,7 +74,8 @@ const useSesionStore = defineStore('counter', () => {
         loadingStatus,
         iniciarSesion,
         cerrarSesion,
-        registrarUsuario
+        registrarUsuario,
+        activarPerfil
     }
 })
 

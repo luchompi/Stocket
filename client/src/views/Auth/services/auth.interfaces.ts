@@ -9,3 +9,8 @@ export interface Register {
     re_password: string;
     username: string;
 }
+
+export interface Activate {
+    uid: any;
+    token: any;
+}
