@@ -14,3 +14,7 @@ export interface Activate {
     uid: any;
     token: any;
 }
+
+export interface Email {
+    email: string;
+}

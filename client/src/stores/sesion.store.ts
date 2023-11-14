@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import type { Activate, Login, Register } from '@/views/Auth/services/auth.interfaces'
-import { login, registro, activarCuenta } from '@/views/Auth/services/auth.apis'
+import { login, registro, activarCuenta, cambiarContraseña, guardarNuevaContrasena } from '@/views/Auth/services/auth.apis'
 import { errorMessage, successMessage } from '@/components/messages'
 import { useRouter } from 'vue-router'
 const useSesionStore = defineStore('counter', () => {
@@ -60,6 +60,37 @@ const useSesionStore = defineStore('counter', () => {
 
     }
 
+    const recuperarContrasena = async (data: any) => {
+        loadingStatus.value = true
+        await cambiarContraseña(data)
+            .then((Response) => {
+                successMessage('¡Correo enviado!', 'Verifique su correo electrónico para cambiar su contraseña')
+                url.push({ name: 'Login' })
+            })
+            .catch((error) => {
+                errorMessage(error.response.data)
+            })
+            .finally(() => {
+                loadingStatus.value = false
+            })
+
+    }
+
+    const cambiarContrasena = async (data: any) => {
+        loadingStatus.value = true
+        await guardarNuevaContrasena(data)
+            .then((Response) => {
+                successMessage('¡Contraseña cambiada!', 'Puede iniciar sesión')
+                url.push({ name: 'Login' })
+            })
+            .catch((error) => {
+                errorMessage(error.response.data)
+            })
+            .finally(() => {
+                loadingStatus.value = false
+            })
+    }
+
     const cerrarSesion = () => {
         timer.value = 0
         PAT.value = null
@@ -75,7 +106,9 @@ const useSesionStore = defineStore('counter', () => {
         iniciarSesion,
         cerrarSesion,
         registrarUsuario,
-        activarPerfil
+        activarPerfil,
+        recuperarContrasena,
+        cambiarContrasena
     }
 })
 

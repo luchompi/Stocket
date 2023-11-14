@@ -12,3 +12,11 @@ export const registro = (data: Register) => {
 export const activarCuenta = (data: Activate) => {
     return baseApi.post('users/activation/', data)
 }
+
+export const cambiarContraseña = (data: any) => {
+    return baseApi.post('users/reset_password/', data)
+}
+
+export const guardarNuevaContrasena = (data: any) => {
+    return baseApi.post('users/reset_password_confirm/', data)
+}
