@@ -1,9 +1,13 @@
 <template>
-    Espere ...
-    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
-        <span class="visually-hidden">Loading...</span>
-    </div>
-    <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
-        <span class="visually-hidden">Loading...</span>
+    <div class="row">
+        <Animations :animation-data="COMMS" :style="{ width: '100px', height: '100px' }" />
+        <div class="col">
+            <h5>Espere ...</h5>
+            <p>Estamos procesando su petición, por favor espere...</p>
+        </div>
     </div>
 </template>
+<script setup lang="ts">
+import Animations from './Animations.vue';
+import COMMS from '../assets/Icons/COMMS.json';
+</script>
