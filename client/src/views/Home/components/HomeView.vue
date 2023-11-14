@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import Animations from '@/components/Animations.vue';
 import Icon from '@/assets/Icons/Icon.json'
+document.title = 'Home - Stocket'
+
 </script>
 
 <template>

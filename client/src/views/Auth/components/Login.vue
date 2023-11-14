@@ -44,7 +44,7 @@ const handleSubmit = (e: any) => {
             <span class="input-group-text"><i class="bi bi-person-badge"></i></span>
             <div class="form-floating">
               <input type="text" name="username" @input="handleChange" class="form-control" id="Username"
-                placeholder="Username">
+                placeholder="Usuario">
               <label for="Username">Usuario</label>
             </div>
           </div>
@@ -52,14 +52,15 @@ const handleSubmit = (e: any) => {
             <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
             <div class="form-floating">
               <input type="password" name="password" @input="handleChange" class="form-control" id="Password"
-                placeholder="Username">
+                placeholder="Contraseña">
               <label for="Password">Contraseña</label>
             </div>
           </div>
           <div class="btn-group">
             <button type="submit" class="btn btn-success">Entrar <i class="bi bi-arrow-right"></i></button>
-            <button type="button" class="btn btn-secondary">¿Olvidó su contraseña?<i class="bi bi-question"></i>
-            </button>
+            <RouterLink :to="{ name: 'ResetPassword' }" type="button" class="btn btn-secondary">¿Olvidó su contraseña?<i
+                class="bi bi-question"></i>
+            </RouterLink>
           </div>
         </form>
       </div>
