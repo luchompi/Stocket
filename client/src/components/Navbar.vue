@@ -1,6 +1,6 @@
 <template>
     <nav class="py-2 bg-body-tertiary border-bottom">
-        <div class="container d-flex flex-wrap">
+        <div class="container d-flex flex-wrap nav-item">
             <ul class="nav me-auto">
                 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2 active"
                         aria-current="page">Home</a></li>
@@ -9,7 +9,21 @@
                 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">FAQs</a></li>
                 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">About</a></li>
             </ul>
-            <ul class="nav">
+            <ul class="nav" v-if="sesion.isAuth">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        sesión iniciada como {{ sesion.userData.username }}
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" @click="sesion.cerrarSesion">Salir <i class="bi bi-power"></i></a></li>
+                    </ul>
+                </div>
+
+            </ul>
+            <ul class="nav" v-else>
                 <li class="nav-item">
                     <RouterLink :to="{ name: 'Login' }" class="nav-link link-body-emphasis px-2">Login</RouterLink>
                 </li>
@@ -27,7 +41,13 @@
                     justifyContent: 'center',
                     alignItems: 'center'
                 }">
-                    <h3>Stocket</h3>
+                    <div v-if="sesion.isAuth">
+                        <h3>Stocket - {{ sesion.userData.groups.length ?
+                            sesion.userData.groups[0] : 'Invitado' }}</h3>
+                    </div>
+                    <div v-else>
+                        <h3>Stocket</h3>
+                    </div>
                 </div>
             </a>
             <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
@@ -41,6 +61,8 @@
 </template>
 
 <script setup lang="ts">
+import useSesionStore from '@/stores/sesion.store';
+const sesion = useSesionStore()
 const props = defineProps<{
     dateTime: string
 }>()
