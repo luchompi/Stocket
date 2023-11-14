@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import type { Activate, Login, Register } from '@/views/Auth/services/auth.interfaces'
-import { login, registro, activarCuenta, cambiarContraseña, guardarNuevaContrasena } from '@/views/Auth/services/auth.apis'
+import type { Activate, Login, Register, User } from '@/views/Auth/services/auth.interfaces'
+import { login, registro, activarCuenta, cambiarContraseña, obtenerDatosUsuario, guardarNuevaContrasena } from '@/views/Auth/services/auth.apis'
 import { errorMessage, successMessage } from '@/components/messages'
 import { useRouter } from 'vue-router'
 const useSesionStore = defineStore('counter', () => {
@@ -12,6 +12,17 @@ const useSesionStore = defineStore('counter', () => {
     const isAuth = computed(() => PAT.value !== null && RAT.value !== null
         && PAT.value.length > 200 && RAT.value.length > 200 && PAT.value !== RAT.value)
     const loadingStatus = ref(false)
+    const userData = ref({} as User)
+
+    const obtenerUsuario = async () => {
+        await obtenerDatosUsuario()
+            .then((Response) => {
+                userData.value = Response.data
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
 
     const iniciarSesion = async (data: Login) => {
         loadingStatus.value = true
@@ -20,6 +31,9 @@ const useSesionStore = defineStore('counter', () => {
                 PAT.value = Response.data.access
                 RAT.value = Response.data.refresh
                 successMessage('Bienvenido', 'Sesión iniciada correctamente')
+            })
+            .then(() => {
+                obtenerUsuario()
             })
             .catch((error) => {
                 errorMessage(error.response.data)
@@ -95,6 +109,8 @@ const useSesionStore = defineStore('counter', () => {
         timer.value = 0
         PAT.value = null
         RAT.value = null
+        userData.value = {} as User
+        successMessage('¡Hasta pronto!', 'Sesión cerrada correctamente')
     }
 
     return {
@@ -103,6 +119,7 @@ const useSesionStore = defineStore('counter', () => {
         RAT,
         isAuth,
         loadingStatus,
+        userData,
         iniciarSesion,
         cerrarSesion,
         registrarUsuario,
