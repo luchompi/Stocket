@@ -4,9 +4,9 @@ import EditDocument from '@/assets/Icons/EditDocument.json'
 import { ref, watchEffect } from 'vue'
 import type { Register } from '../services/auth.interfaces';
 import useSesionStore from '@/stores/sesion.store';
-
+import { RedirectIfAuth } from '@/middleware/auth.middleware'
 document.title = 'Registro de usuarios - Stocket'
-
+RedirectIfAuth()
 const loading = ref(false)
 const sesion = useSesionStore()
 const data = ref({} as Register)

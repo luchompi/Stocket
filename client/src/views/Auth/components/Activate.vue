@@ -3,7 +3,8 @@ import Animations from '@/components/Animations.vue';
 import { useRouter } from 'vue-router';
 import COMMS from '@/assets/Icons/COMMS.json';
 import useSesionStore from '@/stores/sesion.store'
-import { onMounted } from 'vue';
+import { RedirectIfAuth } from '@/middleware/auth.middleware'
+RedirectIfAuth()
 const sesion = useSesionStore();
 const url = useRouter()
 

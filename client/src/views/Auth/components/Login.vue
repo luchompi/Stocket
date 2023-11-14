@@ -4,10 +4,10 @@ import Fingerprint from '@/assets/Icons/Fingerprint.json'
 import useSesionStore from '@/stores/sesion.store';
 import { ref } from 'vue'
 import type { Login } from '../services/auth.interfaces';
-
+import { RedirectIfAuth } from '@/middleware/auth.middleware'
 document.title = 'Iniciar sesión - Stocket'
 
-
+RedirectIfAuth()
 const sesion = useSesionStore()
 
 const data = ref({} as Login)
