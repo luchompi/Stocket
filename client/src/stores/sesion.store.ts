@@ -37,6 +37,7 @@ const useSesionStore = defineStore('sesion', () => {
 
     const incrementTimer = () => {
         timer.value++
+        timer.value == 1800 ? cerrarSesion():null
     }
     const obtenerUsuario = async () => {
         await obtenerDatosUsuario()
