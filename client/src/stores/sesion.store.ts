@@ -1,11 +1,19 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import type { Activate, Login, Register, User } from '@/views/Auth/services/auth.interfaces'
-import { login, registro, activarCuenta, cambiarContraseña, obtenerDatosUsuario, guardarNuevaContrasena } from '@/views/Auth/services/auth.apis'
+import {
+    login,
+    registro,
+    activarCuenta,
+    cambiarContraseña,
+    obtenerDatosUsuario,
+    guardarNuevaContrasena,
+    actualizarPAT
+} from '@/views/Auth/services/auth.apis'
 import { errorMessage, successMessage } from '@/components/messages'
 import { useRouter } from 'vue-router'
 import { actualizarDatosUsuario } from '@/views/Profile/services/profile.apis'
-const useSesionStore = defineStore('counter', () => {
+const useSesionStore = defineStore('sesion', () => {
     const url = useRouter()
     const timer = ref(0)
     const PAT = ref<string | null>(null)
@@ -15,6 +23,21 @@ const useSesionStore = defineStore('counter', () => {
     const loadingStatus = ref(false)
     const userData = ref({} as User)
 
+    const refrescarSesion = async() =>{
+        await actualizarPAT()
+            .then((Response)=>{
+                PAT.value = Response.data.access
+                timer.value = 0
+            })
+            .catch((error)=>{
+                errorMessage(error.response.data)
+                cerrarSesion()
+            })
+    }
+
+    const incrementTimer = () => {
+        timer.value++
+    }
     const obtenerUsuario = async () => {
         await obtenerDatosUsuario()
             .then((Response) => {
@@ -148,7 +171,9 @@ const useSesionStore = defineStore('counter', () => {
         recuperarContrasena,
         cambiarContrasena,
         setLoadingStatus,
-        actualizarUsuario
+        actualizarUsuario,
+        refrescarSesion,
+        incrementTimer
     }
 })
 

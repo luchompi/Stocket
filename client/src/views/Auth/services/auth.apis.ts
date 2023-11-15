@@ -31,3 +31,8 @@ export const obtenerDatosUsuario = () => {
         }
     )
 }
+
+export const actualizarPAT = () =>{
+    const store = useSesionStore()
+    return baseApi.post('jwt/refresh', {refresh: `${store.RAT}`})
+}
