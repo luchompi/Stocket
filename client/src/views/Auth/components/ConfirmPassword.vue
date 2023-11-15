@@ -29,6 +29,11 @@
                             <label for="Password2">Repita su contraseña</label>
                         </div>
                     </div>
+                    <div v-if="data.new_password !== data.re_new_password">
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>¡Error! </strong> Las contraseñas no coinciden
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-success">Guardar <i class="bi bi-save"></i></button>
                 </form>
             </div>

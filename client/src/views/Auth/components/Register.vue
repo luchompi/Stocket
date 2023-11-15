@@ -66,6 +66,11 @@ const handleSubmit = async (e: any) => {
                             <label for="RePassword">Repita contraseña</label>
                         </div>
                     </div>
+                    <div v-if="data.password !== data.re_password">
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>¡Error! </strong> Las contraseñas no coinciden
+                        </div>
+                    </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="bi bi-envelope-at"></i></span>
                         <div class="form-floating">

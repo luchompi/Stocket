@@ -12,10 +12,8 @@
 </template>
 <script setup lang="ts">
 import Loading from '@/components/Loading.vue';
-import { RedirectIfAuth } from '@/middleware/auth.middleware'
 import useSesionStore from '@/stores/sesion.store';
 
 const sesion = useSesionStore()
 
-RedirectIfAuth()
 </script>
