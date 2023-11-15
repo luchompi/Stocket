@@ -9,7 +9,6 @@ let anim = ref()
 
 onMounted(() => {
     setTimeout(() => {
-        console.log(anim.value.goToAndPlay(150, true))
         anim.value
     }, 5000)
 })

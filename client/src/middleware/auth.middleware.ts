@@ -18,11 +18,11 @@ export const RedirectIfAuth: RedirectIfAuth = () => {
     })
 }
 
-export const RedirectIfNotAuth: RedirectIfAuth = () => {
+export const RedirectIfNotAuth: RedirectIfNotAuth = () => {
     const url = useRouter()
     const useSesion = useSesionStore()
     watchEffect(() => {
-        useSesion.isAuth ? null : url.push({ name: 'login' })
+        useSesion.isAuth ? null : url.push({ name: 'Login' })
     })
 }
 
