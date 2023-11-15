@@ -16,8 +16,11 @@
                         sesión iniciada como {{ sesion.userData.username }}
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Perfil de usuario <i class="bi bi-person-badge"></i></a></li>
+                        <li>
+                            <RouterLink :to="{ name: 'ResetPassword' }" class="dropdown-item">Cambiar contraseña <i
+                                    class="bi bi-key"></i></RouterLink>
+                        </li>
                         <li><a class="dropdown-item" @click="sesion.cerrarSesion">Salir <i class="bi bi-power"></i></a></li>
                     </ul>
                 </div>
