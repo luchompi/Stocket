@@ -4,6 +4,7 @@ import type { Activate, Login, Register, User } from '@/views/Auth/services/auth
 import { login, registro, activarCuenta, cambiarContraseña, obtenerDatosUsuario, guardarNuevaContrasena } from '@/views/Auth/services/auth.apis'
 import { errorMessage, successMessage } from '@/components/messages'
 import { useRouter } from 'vue-router'
+import { actualizarDatosUsuario } from '@/views/Profile/services/profile.apis'
 const useSesionStore = defineStore('counter', () => {
     const url = useRouter()
     const timer = ref(0)
@@ -105,6 +106,26 @@ const useSesionStore = defineStore('counter', () => {
             })
     }
 
+    const setLoadingStatus = () => {
+        loadingStatus.value = !loadingStatus.value
+    }
+
+    const actualizarUsuario = async (data: any) => {
+        loadingStatus.value = true
+        await actualizarDatosUsuario(data)
+            .then((Response) => {
+                successMessage('¡Hecho!', 'Datos actualizados correctamente')
+                obtenerUsuario()
+                url.push({ name: 'Profile' })
+            })
+            .catch((error) => {
+                errorMessage(error.response.data)
+            })
+            .finally(() => {
+                loadingStatus.value = false
+            })
+    }
+
     const cerrarSesion = () => {
         timer.value = 0
         PAT.value = null
@@ -125,7 +146,9 @@ const useSesionStore = defineStore('counter', () => {
         registrarUsuario,
         activarPerfil,
         recuperarContrasena,
-        cambiarContrasena
+        cambiarContrasena,
+        setLoadingStatus,
+        actualizarUsuario
     }
 })
 
