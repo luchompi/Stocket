@@ -3,6 +3,7 @@ import Animations from '@/components/Animations.vue';
 import useSesionStore from '@/stores/sesion.store';
 import Avatar from '@/assets/Icons/Avatar.json'
 const sesion = useSesionStore();
+document.title  = 'Perfil de usuario - Stocket';
 </script>
 
 <template>
@@ -36,5 +37,3 @@ const sesion = useSesionStore();
         </div>
     </div>
 </template>
-
-<style scoped></style>

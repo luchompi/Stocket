@@ -11,7 +11,6 @@ const store = useSesionStore()
 setInterval(() => {
   dateTime.value = new Date().toLocaleString()
   store.isAuth ? store.incrementTimer() : null
-  console.log(store.timer)
 }, 1000)
 
 </script>

@@ -87,4 +87,6 @@ const handleSubmit = (e: any) => {
     e.preventDefault()
     sesion.actualizarUsuario(data.value)
 }
+
+document.title ='Actualizar perfil - Stocket'
 </script>
