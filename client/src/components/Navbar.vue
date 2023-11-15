@@ -41,21 +41,20 @@
     </nav>
     <header class="py-3 mb-4 border-bottom">
         <div class="container d-flex flex-wrap justify-content-center">
-            <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none">
+            <RouterLink :to="{name:'home'}" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none">
                 <div :style="{
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center'
                 }">
                     <div v-if="sesion.isAuth">
-                        <h3>Stocket - {{ sesion.userData.groups.length ?
-                            sesion.userData.groups[0] : 'Invitado' }}</h3>
+                        <h3>Stocket - {{sesion.userData.groups?.includes('Administrador' || 'Encargado')  ? sesion.userData.groups[0] : (sesion.userData.is_superuser ? 'SuperUsuario' : 'Invitado') }}</h3>
                     </div>
                     <div v-else>
                         <h3>Stocket</h3>
                     </div>
                 </div>
-            </a>
+            </RouterLink>
             <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="input1"><i class="bi bi-watch"></i></span>
