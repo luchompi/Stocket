@@ -13,8 +13,11 @@ import {
 import { errorMessage, successMessage } from '@/components/messages'
 import { useRouter } from 'vue-router'
 import { actualizarDatosUsuario } from '@/views/Profile/services/profile.apis'
+import useEmpresaStore from './empresa.store'
+import type { Company } from '@/views/Empresa/services/empresa.interfaces'
 const useSesionStore = defineStore('sesion', () => {
     const url = useRouter()
+    const empresa = useEmpresaStore()
     const timer = ref(0)
     const PAT = ref<string | null>(null)
     const RAT = ref<string | null>(null)
@@ -23,13 +26,13 @@ const useSesionStore = defineStore('sesion', () => {
     const loadingStatus = ref(false)
     const userData = ref({} as User)
 
-    const refrescarSesion = async() =>{
+    const refrescarSesion = async () => {
         await actualizarPAT()
-            .then((Response)=>{
+            .then((Response) => {
                 PAT.value = Response.data.access
                 timer.value = 0
             })
-            .catch((error)=>{
+            .catch((error) => {
                 errorMessage(error.response.data)
                 cerrarSesion()
             })
@@ -37,7 +40,7 @@ const useSesionStore = defineStore('sesion', () => {
 
     const incrementTimer = () => {
         timer.value++
-        timer.value == 1800 ? cerrarSesion():null
+        timer.value == 1800 ? cerrarSesion() : null
     }
     const obtenerUsuario = async () => {
         await obtenerDatosUsuario()
@@ -59,6 +62,7 @@ const useSesionStore = defineStore('sesion', () => {
             })
             .then(() => {
                 obtenerUsuario()
+                empresa.obtenerDatos()
             })
             .catch((error) => {
                 errorMessage(error.response.data)
@@ -130,8 +134,8 @@ const useSesionStore = defineStore('sesion', () => {
             })
     }
 
-    const setLoadingStatus = () => {
-        loadingStatus.value = !loadingStatus.value
+    const setLoadingStatus = (status: boolean) => {
+        loadingStatus.value = status
     }
 
     const actualizarUsuario = async (data: any) => {
@@ -155,6 +159,7 @@ const useSesionStore = defineStore('sesion', () => {
         PAT.value = null
         RAT.value = null
         userData.value = {} as User
+        empresa.eliminarStore()
         successMessage('¡Hasta pronto!', 'Sesión cerrada correctamente')
     }
 
