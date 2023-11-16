@@ -21,8 +21,9 @@ class Sede(models.Model):
     phone = models.CharField(max_length=20)
     email = models.EmailField(max_length=254)
     description = models.TextField(null=True, blank=True)
-    web = models.CharField(max_length=50, null=True, blank=True)
-    empresa = models.ForeignKey(Empresa, to_field='NIT', on_delete=models.CASCADE)
+    web = models.SlugField(null=True, blank=True)
+    empresa = models.ForeignKey(
+        Empresa, to_field='NIT', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

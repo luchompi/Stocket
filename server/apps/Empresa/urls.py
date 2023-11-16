@@ -7,9 +7,12 @@ urlpatterns = [
     # URLS para Empresa
     path('', v.EmpresaController.as_view()),
     # URLS para sedes
-    path('<int:NIT>/sedes/', v.SedeIndex.as_view()),
-    path('<int:NIT>/sedes/<int:pk>/', v.SedeDetails.as_view()),
-    path('<int:NIT>/sedes/<str:search>/', v.SedeSearch.as_view()),
+    path('sedes/', v.SedeController.as_view()),
+    path('sedes/<int:pk>/', v.SedeController.as_view()),
+    path('sedes/search/<str:search>/', v.SedeController.as_view()),
+    # path('<int:NIT>/sedes/', v.SedeIndex.as_view()),
+    # path('sedes/<int:pk>/', v.SedeDetails.as_view()),
+    # path('<int:NIT>/sedes/<str:search>/', v.SedeSearch.as_view()),
     # URLS para dependencias
     path('dependencias/', v.DependenciaIndex.as_view()),
     path('dependencias/<int:pk>/', v.DependenciaDetails.as_view()),

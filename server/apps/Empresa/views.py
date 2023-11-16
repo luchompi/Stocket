@@ -1,4 +1,4 @@
-from core.permissions import admin_or_superuser_required
+from core.permissions import admin_or_superuser_or_encargado_required, admin_or_superuser_required
 from django.db import transaction
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, get_list_or_404
@@ -6,8 +6,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Dependencia, Empresa, SedeDependencia
-from .serializers import DependenciaSerializer, EmpresaSerializer, SedeDependenciaSerializer
+from .models import Dependencia, Empresa, SedeDependencia, Sede
+from .serializers import SedeSerializer, EmpresaSerializer, SedeDependenciaSerializer
 
 
 # Empresa Controller
@@ -48,66 +48,56 @@ class EmpresaController(APIView):
         empresa.delete() if empresa else None
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+class SedeController(APIView):
+    def get_sedes(self):
+        queryset = Empresa.objects.first()
+        return Sede.objects.filter(empresa=queryset)
 
-"""
-# Sede Controllers
-class SedeIndex(APIView):
-    @admin_or_superuser_required
-    def get(self, request, NIT, format=None):
-        sedes = get_list_or_404(Sede, empresa__NIT=NIT)
-        serializer = SedeSerializer(sedes, many=True)
-        return Response(serializer.data)
+    def filter_sedes(self, sedes):
+        print(sedes)
+        return Sede.objects.filter(name__icontains=sedes)
 
-    @admin_or_superuser_required
-    def post(self, request, NIT, format=None):
-        myData = request.data.copy()
-        if q := Sede.objects.filter(name=myData['name'], empresa__NIT=NIT):
-            return Response({"error": "Ya existe una sede con ese nombre."}, status=status.HTTP_400_BAD_REQUEST)
-        empresa = Empresa.objects.get(NIT=NIT)
-        myData['empresa'] = empresa.NIT
-        serializer = SedeSerializer(data=myData)
+    def get_sede(self, pk):
+        return Sede.objects.get(id=pk)
+
+    @admin_or_superuser_or_encargado_required
+    def get(self, request, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        search = self.kwargs.get('search')
+
+        if pk:
+            sede = self.get_sede(pk)
+            serializer = SedeSerializer(sede)
+        elif search:
+            sedes = self.filter_sedes(search)
+            serializer = SedeSerializer(sedes, many=True)
+        else:
+            sedes = self.get_sedes()
+            serializer = SedeSerializer(sedes, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @admin_or_superuser_or_encargado_required
+    def post(self, request, *args, **kwargs):
+        serializer = SedeSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-class SedeDetails(APIView):
-    @admin_or_superuser_required
-    def get(self, request, NIT, pk, format=None):
-        sede = get_object_or_404(Sede, id=pk, empresa=NIT)
-        serializer = SedeSerializer(sede)
-        return Response(serializer.data)
-
-    @admin_or_superuser_required
-    def put(self, request, pk, NIT, format=None):
-        sede = get_object_or_404(Sede, id=pk, empresa__NIT=NIT)
+    @admin_or_superuser_or_encargado_required
+    def patch(self, request, *args, **kwargs):
+        sede = self.get_sede(self.kwargs.get('pk'))
         serializer = SedeSerializer(sede, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response(status=status.HTTP_200_OK)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @admin_or_superuser_required
-    def delete(self, request, pk, NIT, format=None):
-        try:
-            sede = get_object_or_404(Sede, id=pk, empresa__NIT=NIT)
-            sede.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        except (sede.DoesNotExist):
-            return Response(status=status.HTTP_404_NOT_FOUND)
-
-
-class SedeSearch(APIView):
-    @admin_or_superuser_required
-    def get(self, request, NIT, search, format=None):
-        sedes = Sede.objects.filter(Q(name__icontains=search) | Q(
-            id__icontains=search), empresa__NIT=NIT, )
-        serializer = SedeSerializer(sedes, many=True)
-        return Response(serializer.data)
-
-"""
-
+    def delete(self, request, *args, **kwargs):
+        sede = self.get_sede(self.kwargs.get('pk'))
+        sede.delete() if sede else None
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 # Dependencia controllers
 
