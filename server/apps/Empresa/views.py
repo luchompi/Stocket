@@ -10,18 +10,17 @@ from .models import Dependencia, Empresa, Sede, SedeDependencia
 from .serializers import DependenciaSerializer, EmpresaSerializer, SedeDependenciaSerializer, SedeSerializer
 
 
-# Empresa Controllers
+# Empresa Controller
+class EmpresaController(APIView):
+    def get_empresa(self):
+        return Empresa.objects.first()
 
+    def get(self, request, *args, **kwargs):
+        empresa = self.get_empresa()
+        serializer = EmpresaSerializer(empresa)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
-class EmpresaIndex(APIView):
-    @admin_or_superuser_required
-    def get(self, request, format=None):
-        empresas = Empresa.objects.all()
-        serializer = EmpresaSerializer(empresas, many=True)
-        return Response(serializer.data)
-
-    @admin_or_superuser_required
-    def post(self, request, format=None):
+    def post(self, request, *args, **kwargs):
         serializer = EmpresaSerializer(data=request.data)
         if Empresa.objects.count() == 1:
             return Response({"detail": "Ya existe un registro en la tabla Empresa. No puedes crear más registros."},
@@ -31,17 +30,19 @@ class EmpresaIndex(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-class EmpresaDetails(APIView):
-    @admin_or_superuser_required
-    def put(self, request, pk, format=None):
-        empresa = get_object_or_404(Empresa, NIT=pk)
+    def patch(self, request, *args, **kwargs):
+        empresa = self.get_empresa()
         serializer = EmpresaSerializer(
             empresa, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, *args, **kwargs):
+        empresa = self.get_empresa()
+        empresa.delete() if empresa else None
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 # Sede Controllers
