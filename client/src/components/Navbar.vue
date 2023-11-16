@@ -1,15 +1,31 @@
 <template>
     <nav class="py-2 bg-body-tertiary border-bottom">
-        <div class="container d-flex flex-wrap nav-item">
+        <div class="container d-flex flex-wrap nav-item" v-if="sesion.isAuth">
             <ul class="nav me-auto">
                 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2 active"
                         aria-current="page">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Features</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link link-dark dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                        aria-expanded="false">Empresa</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <RouterLink :to="{ name: 'Empresa' }" class="dropdown-item">Datos de la empresa <i
+                                    class="bi bi-building"></i></RouterLink>
+                        </li>
+                        <li><a class="dropdown-item" href="#">Sedes <i class="bi bi-building"></i></a></li>
+                        <li><a class="dropdown-item" href="#">Dependencias <i class="bi bi-diagram-3-fill"></i> </a></li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li><a class="dropdown-item" href="#">Incluir sedes en dependencias <i
+                                    class="bi bi-node-plus"></i></a></li>
+                    </ul>
+                </li>
                 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Pricing</a></li>
                 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">FAQs</a></li>
                 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">About</a></li>
             </ul>
-            <ul class="nav" v-if="sesion.isAuth">
+            <ul class="nav">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -29,7 +45,10 @@
                 </div>
 
             </ul>
-            <ul class="nav" v-else>
+        </div>
+        <div class="container d-flex flex-wrap nav-item" v-else>
+            <ul class="nav me-auto"></ul>
+            <ul class="nav">
                 <li class="nav-item">
                     <RouterLink :to="{ name: 'Login' }" class="nav-link link-body-emphasis px-2">Login</RouterLink>
                 </li>
@@ -41,14 +60,16 @@
     </nav>
     <header class="py-3 mb-4 border-bottom">
         <div class="container d-flex flex-wrap justify-content-center">
-            <RouterLink :to="{name:'home'}" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none">
+            <RouterLink :to="{ name: 'home' }"
+                class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none">
                 <div :style="{
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center'
                 }">
                     <div v-if="sesion.isAuth">
-                        <h3>Stocket - {{sesion.userData.groups?.includes('Administrador' || 'Encargado')  ? sesion.userData.groups[0] : (sesion.userData.is_superuser ? 'SuperUsuario' : 'Invitado') }}</h3>
+                        <h3>Stocket - {{ sesion.userData.groups?.includes('Administrador' || 'Encargado') ?
+                            sesion.userData.groups[0] : (sesion.userData.is_superuser ? 'SuperUsuario' : 'Invitado') }}</h3>
                     </div>
                     <div v-else>
                         <h3>Stocket</h3>
