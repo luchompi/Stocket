@@ -15,6 +15,7 @@ import { useRouter } from 'vue-router'
 import { actualizarDatosUsuario } from '@/views/Profile/services/profile.apis'
 import useEmpresaStore from './empresa.store'
 import type { Company } from '@/views/Empresa/services/empresa.interfaces'
+import { toastError, toastSuccess } from '@/components/toast'
 const useSesionStore = defineStore('sesion', () => {
     const url = useRouter()
     const empresa = useEmpresaStore()
@@ -31,9 +32,11 @@ const useSesionStore = defineStore('sesion', () => {
             .then((Response) => {
                 PAT.value = Response.data.access
                 timer.value = 0
+                toastSuccess()
             })
             .catch((error) => {
                 errorMessage(error.response.data)
+                toastError()
                 cerrarSesion()
             })
     }
