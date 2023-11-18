@@ -1,5 +1,10 @@
 {
   "files": [],
+  "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "types": ["vue3-toastify/global"]
+  },
   "references": [
     {
       "path": "./tsconfig.node.json"
