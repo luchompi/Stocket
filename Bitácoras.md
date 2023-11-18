@@ -10,6 +10,6 @@
 1. [X] Bitacora 8 (hasta 3 de octubre)
 1. [X] Bitacora 9 (hasta 18 de octubre)
 1. [X] Bitacora 10 (hasta 2 de noviembre)
-1. [ ] Bitacora 11 (hasta 17 de noviembre)
+1. [X] Bitacora 11 (hasta 17 de noviembre)
 1. [ ] Bitacora final (hasta 5 de diciembre)
 1. [ ] Formulario final (hasta 5 de diciembre)
