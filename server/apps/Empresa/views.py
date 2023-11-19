@@ -48,14 +48,14 @@ class EmpresaController(APIView):
         empresa.delete() if empresa else None
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 class SedeController(APIView):
     def get_sedes(self):
         queryset = Empresa.objects.first()
-        return Sede.objects.filter(empresa=queryset)
+        return Sede.objects.filter(empresa=queryset).order_by('-created_at')
 
     def filter_sedes(self, sedes):
-        print(sedes)
-        return Sede.objects.filter(name__icontains=sedes)
+        return Sede.objects.filter(name__icontains=sedes).order_by('-created_at')
 
     def get_sede(self, pk):
         return Sede.objects.get(id=pk)
