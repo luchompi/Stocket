@@ -1,21 +1,24 @@
-import {ref} from 'vue'
-import {defineStore} from 'pinia'
-import {useRouter} from 'vue-router'
-import type {Company} from '@/views/Empresa/services/empresa.interfaces'
+import { ref } from 'vue'
+import { defineStore } from 'pinia'
+import { useRouter } from 'vue-router'
+import type { Company } from '@/views/Empresa/services/empresa.interfaces'
 import useSesionStore from './sesion.store'
-import {actualizarDatosEmpresa, guardarDatosEmpresa, obtenerDatosEmpresa} from '@/views/Empresa/services/empresa.apis'
-import {errorMessage, successMessage} from "@/components/messages";
+import { actualizarDatosEmpresa, guardarDatosEmpresa, obtenerDatosEmpresa } from '@/views/Empresa/services/empresa.apis'
+import { errorMessage, successMessage } from "@/components/messages";
+import useSedeStore from './sedes.store'
 
 const useEmpresaStore = defineStore('empresa', () => {
     const url = useRouter()
     const empresaData = ref({} as Company)
     const store = useSesionStore()
+    const sedeStore = useSedeStore()
 
     const obtenerDatos = async () => {
         store.setLoadingStatus(true)
         await obtenerDatosEmpresa()
             .then((Response) => {
                 empresaData.value = Response.data as Company
+                sedeStore.cargarSedes()
             })
             .finally(() => {
                 store.setLoadingStatus(false)
@@ -28,7 +31,7 @@ const useEmpresaStore = defineStore('empresa', () => {
             .then((Response) => {
                 empresaData.value = Response.data as Company
                 successMessage('¡Hecho!', 'Datos guardados correctamente')
-                url.push({name: 'Empresa'})
+                url.push({ name: 'Empresa' })
             })
             .catch((error) => {
                 errorMessage(error.response.data)
@@ -44,7 +47,7 @@ const useEmpresaStore = defineStore('empresa', () => {
             .then((Response) => {
                 empresaData.value = Response.data as Company
                 successMessage('¡Hecho!', 'Datos guardados correctamente')
-                url.push({name: 'Empresa'})
+                url.push({ name: 'Empresa' })
             })
             .catch((error) => {
                 errorMessage(error.response.data)
