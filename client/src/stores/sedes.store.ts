@@ -49,7 +49,7 @@ const useSedeStore = defineStore('sedes', () => {
     const eliminarSede = async (id: any) => {
         await warningMessage('¡Atención!', '¿Está seguro que desea eliminar esta sede?')
             .then((result) => {
-                if (result == true) {
+                if (result) {
                     loading.setLoadingStatus(true)
                     borrarSede(id)
                         .then((Response) => {

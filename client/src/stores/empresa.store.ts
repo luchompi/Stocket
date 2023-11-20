@@ -6,12 +6,14 @@ import useSesionStore from './sesion.store'
 import { actualizarDatosEmpresa, guardarDatosEmpresa, obtenerDatosEmpresa } from '@/views/Empresa/services/empresa.apis'
 import { errorMessage, successMessage } from "@/components/messages";
 import useSedeStore from './sedes.store'
+import useDependenciaStore from './dependencias.store'
 
 const useEmpresaStore = defineStore('empresa', () => {
     const url = useRouter()
     const empresaData = ref({} as Company)
     const store = useSesionStore()
     const sedeStore = useSedeStore()
+    const dependenciaStore = useDependenciaStore()
 
     const obtenerDatos = async () => {
         store.setLoadingStatus(true)
@@ -19,6 +21,8 @@ const useEmpresaStore = defineStore('empresa', () => {
             .then((Response) => {
                 empresaData.value = Response.data as Company
                 sedeStore.cargarSedes()
+                dependenciaStore.cargarDependencias()
+
             })
             .finally(() => {
                 store.setLoadingStatus(false)
