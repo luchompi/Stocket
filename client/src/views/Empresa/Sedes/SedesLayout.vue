@@ -1,6 +1,6 @@
 <template>
     <div class="card-header">
-        <h6>Detalles de empresa {{ store.empresaData.name }}</h6>
+        <h6>Detalles de la empresa {{ store.empresaData.name }}</h6>
     </div>
     <div class="card-body">
         <div class="card">

@@ -26,11 +26,8 @@ const useSedeStore = defineStore('sedes', () => {
         const data = { ...sede, empresa: empresa.empresaData.NIT }
         await guardarSede(data)
             .then((Response) => {
-                backupSedes.value.unshift(data)
-                if (backupSedes.value.length > 5) {
-                    backupSedes.value.pop()
-                }
                 successMessage('¡Hecho!', 'Sede creada correctamente')
+                cargarSedes()
                 url.push({ name: 'SedeList' })
             })
             .catch((error) => {
@@ -105,6 +102,13 @@ const useSedeStore = defineStore('sedes', () => {
             })
     }
 
+    const destruirStore = () => {
+        sedes.value = []
+        sede.value = {} as Sede
+        backupSedes.value = []
+
+    }
+
     return {
         sedes,
         sede,
@@ -112,7 +116,8 @@ const useSedeStore = defineStore('sedes', () => {
         crearSede,
         buscarSede,
         eliminarSede,
-        modificarSede
+        modificarSede,
+        destruirStore
     }
 
 })

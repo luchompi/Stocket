@@ -9,17 +9,17 @@ const sedeRoutes = [
         component: SedesLayout,
         children: [
             {
-                path: '/',
+                path: '/empresa/sedes/',
                 component: ListVue,
                 name: 'SedeList'
             },
             {
-                path: 'create',
+                path: '/empresa/sedes/create',
                 component: CreateVue,
                 name: 'SedeCreate'
             },
             {
-                path: 'update/:id',
+                path: '/empresa/sedes/update/:id',
                 component: UpdateVue,
                 name: 'SedeUpdate'
             }
