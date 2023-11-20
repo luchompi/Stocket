@@ -3,6 +3,7 @@ import Home from "../main/Home.vue";
 import Create from '../main/Create.vue'
 import Update from '../main/Update.vue'
 import sedeRoutes from "../Sedes/services/sedes.routes";
+import dependenicasRoutes from "@/views/Empresa/Dependencias/services/dependenicas.routes";
 const empresaRoutes = [
     {
         path: '/empresa',
@@ -23,7 +24,8 @@ const empresaRoutes = [
                 name: 'ActualizarEmpresa',
                 component: Update
             },
-            ...sedeRoutes
+            ...sedeRoutes,
+            ...dependenicasRoutes,
         ]
     }
 ]

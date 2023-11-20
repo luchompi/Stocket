@@ -16,7 +16,10 @@
                             <RouterLink :to="{ name: 'SedeList' }" class="dropdown-item">Sedes <i
                                     class="bi bi-building"></i></RouterLink>
                         </li>
-                        <li><a class="dropdown-item" href="#">Dependencias <i class="bi bi-diagram-3-fill"></i> </a></li>
+                        <li>
+                            <RouterLink :to="{ name: 'DepartamentosList' }" class="dropdown-item">Dependencias <i
+                                    class="bi bi-diagram-3-fill"></i> </RouterLink>
+                        </li>
                         <li>
                             <hr class="dropdown-divider" />
                         </li>

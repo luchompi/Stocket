@@ -17,9 +17,9 @@
             <input type="text" v-model="search" class="form-control" placeholder="Ingrese nombre de sede a buscar"
                 aria-label="Username" aria-describedby="basic-addon1">
         </div>
-        <Animations :animation-data="store.sedes.length ? Home : Warning" :style="{ width: '200px', height: '200px' }" />
+        <Animations :animation-data="len >0 ? Home : Warning" :style="{ width: '200px', height: '200px' }" />
 
-        <div class="col" v-if="store.sedes.length">
+        <div class="col" v-if="len">
             <h6 class="text-muted">Se le mostrarán los ultimos 5 registros creados</h6>
             <div class="list-group">
                 <div v-for="sede in store.sedes.slice(0, 5)" class="list-group-item list-group-item-action">
@@ -40,12 +40,14 @@ import Home from '@/assets/Icons/Home.json'
 import useSedeStore from '@/stores/sedes.store';
 import DataCard from './DataCard.vue';
 import { ref, watchEffect } from 'vue';
+const len = ref<number>(0)
 const store = useSedeStore();
 
 const search = ref<string>('')
 
 watchEffect(() => {
     store.buscarSede(search.value)
+  len.value = store.sedes.length
 })
 
 </script>
