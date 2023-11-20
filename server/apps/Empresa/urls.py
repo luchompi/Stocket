@@ -9,14 +9,11 @@ urlpatterns = [
     # URLS para sedes
     path('sedes/', v.SedeController.as_view()),
     path('sedes/<int:pk>/', v.SedeController.as_view()),
-    path('sedes/search/<str:search>/', v.SedeController.as_view()),
-    # path('<int:NIT>/sedes/', v.SedeIndex.as_view()),
-    # path('sedes/<int:pk>/', v.SedeDetails.as_view()),
-    # path('<int:NIT>/sedes/<str:search>/', v.SedeSearch.as_view()),
+
     # URLS para dependencias
-    path('dependencias/', v.DependenciaIndex.as_view()),
-    path('dependencias/<int:pk>/', v.DependenciaDetails.as_view()),
-    path('dependencias/search/<str:search>/', v.SearchDependencia.as_view()),
+    path('dependencias/', v.DependenciaController.as_view()),
+    path('dependencias/<int:pk>/', v.DependenciaController.as_view()),
+
     # URLS para sedes por dependencias
     path('sedes/<int:pk>/dependencias/', v.SedeByDependencia.as_view()),
     path('sedes/<int:sede_id>/dependencias/<int:dep_id>/',

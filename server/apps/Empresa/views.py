@@ -5,10 +5,8 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
 from .models import Dependencia, Empresa, SedeDependencia, Sede
-from .serializers import SedeSerializer, EmpresaSerializer, SedeDependenciaSerializer
-
+from .serializers import DependenciaSerializer, SedeSerializer, EmpresaSerializer, SedeDependenciaSerializer
 
 # Empresa Controller
 class EmpresaController(APIView):
@@ -48,14 +46,12 @@ class EmpresaController(APIView):
         empresa.delete() if empresa else None
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
+# Sede controller
 class SedeController(APIView):
     def get_sedes(self):
         queryset = Empresa.objects.first()
         return Sede.objects.filter(empresa=queryset).order_by('-created_at')
 
-    def filter_sedes(self, sedes):
-        return Sede.objects.filter(name__icontains=sedes).order_by('-created_at')
 
     def get_sede(self, pk):
         return Sede.objects.get(id=pk)
@@ -64,13 +60,13 @@ class SedeController(APIView):
     def get(self, request, *args, **kwargs):
         pk = self.kwargs.get('pk')
         search = self.kwargs.get('search')
-
+        sedes = (
+            [self.get_sede(pk)] if pk else
+            self.get_sedes()
+        )
         if pk:
             sede = self.get_sede(pk)
             serializer = SedeSerializer(sede)
-        elif search:
-            sedes = self.filter_sedes(search)
-            serializer = SedeSerializer(sedes, many=True)
         else:
             sedes = self.get_sedes()
             serializer = SedeSerializer(sedes, many=True)
@@ -99,60 +95,50 @@ class SedeController(APIView):
         sede.delete() if sede else None
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-# Dependencia controllers
 
-
-class DependenciaIndex(APIView):
+class DependenciaController(APIView):
     @admin_or_superuser_required
-    def get(self, request, format=None):
-        sedes = Dependencia.objects.order_by('-id')[:5]
-        serializer = DependenciaSerializer(sedes, many=True)
-        return Response(serializer.data)
+    def get(self, request, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+
+        dependencias = (
+            [self.get_dependencia(pk)] if pk else
+            self.get_dependencias()
+        )
+
+        serializer = DependenciaSerializer(dependencias, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     @admin_or_superuser_required
-    def post(self, request, format=None):
+    def post(self, request, *args, **kwargs):
         serializer = DependenciaSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class DependenciaDetails(APIView):
-    @admin_or_superuser_required
-    def get(self, request, pk, format=None):
-        dependencia = get_object_or_404(Dependencia, id=pk)
-        serializer = DependenciaSerializer(dependencia)
-        return Response(serializer.data)
+        return self._handle_serializer_response(serializer, status.HTTP_201_CREATED, status.HTTP_400_BAD_REQUEST)
 
     @admin_or_superuser_required
-    def put(self, request, pk, format=None):
-        dependencia = get_object_or_404(Dependencia, id=pk)
+    def patch(self, request, *args, **kwargs):
+        dependencia = self.get_dependencia(self.kwargs.get('pk'))
         serializer = DependenciaSerializer(
             dependencia, data=request.data, partial=True)
+        return self._handle_serializer_response(serializer, status.HTTP_200_OK, status.HTTP_400_BAD_REQUEST)
+
+    @admin_or_superuser_required
+    def delete(self, request, *args, **kwargs):
+        dependencia = self.get_dependencia(self.kwargs.get('pk'))
+        dependencia.delete() if dependencia else None
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def _handle_serializer_response(self, serializer, success_status, error_status):
         if serializer.is_valid():
             serializer.save()
-            return Response(status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.data, status=success_status)
+        print(serializer.errors)
+        return Response(serializer.errors, status=error_status)
 
-    @admin_or_superuser_required
-    def delete(self, request, pk, format=None):
-        try:
-            dependencia = get_object_or_404(Dependencia, id=pk)
-            dependencia.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        except (dependencia.DoesNotExist):
-            return Response(status=status.HTTP_404_NOT_FOUND)
+    def get_dependencias(self):
+        return Dependencia.objects.all().order_by('-created_at')
 
-
-class SearchDependencia(APIView):
-    @admin_or_superuser_required
-    def get(self, request, search, format=None):
-        dependencias = Dependencia.objects.filter(
-            Q(name__icontains=search) | Q(id__icontains=search))
-        serializer = DependenciaSerializer(dependencias, many=True)
-        return Response(serializer.data)
-
+    def get_dependencia(self, pk):
+        return Dependencia.objects.get(id=pk)
 
 # Sedes por dependencias
 
