@@ -1,14 +1,15 @@
 from core.permissions import admin_or_superuser_or_encargado_required, admin_or_superuser_required
-from django.db import transaction
-from django.db.models import Q
-from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
 from .models import Dependencia, Empresa, SedeDependencia, Sede
-from .serializers import DependenciaSerializer, SedeSerializer, EmpresaSerializer, SedeDependenciaSerializer
+from .serializers import DependenciaSerializer, SedeSerializer, EmpresaSerializer
+
 
 # Empresa Controller
+
+
 class EmpresaController(APIView):
     def get_empresa(self):
         return Empresa.objects.first()
@@ -46,12 +47,14 @@ class EmpresaController(APIView):
         empresa.delete() if empresa else None
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 # Sede controller
+
+
 class SedeController(APIView):
     def get_sedes(self):
         queryset = Empresa.objects.first()
         return Sede.objects.filter(empresa=queryset).order_by('-created_at')
-
 
     def get_sede(self, pk):
         return Sede.objects.get(id=pk)
@@ -100,12 +103,10 @@ class DependenciaController(APIView):
     @admin_or_superuser_required
     def get(self, request, *args, **kwargs):
         pk = self.kwargs.get('pk')
-
         dependencias = (
             [self.get_dependencia(pk)] if pk else
             self.get_dependencias()
         )
-
         serializer = DependenciaSerializer(dependencias, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -140,9 +141,9 @@ class DependenciaController(APIView):
     def get_dependencia(self, pk):
         return Dependencia.objects.get(id=pk)
 
+
 # Sedes por dependencias
-
-
+"""
 class SedeByDependencia(APIView):
     @admin_or_superuser_required
     def get(self, request, pk, format=None):
@@ -193,3 +194,28 @@ class obtenerDependenciasParaSede(APIView):
             dependencias = Dependencia.objects.all()
         serializer = DependenciaSerializer(dependencias, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+"""
+
+
+# Sedes por dependencias controller
+
+
+class SedeDependenciaController(APIView):
+    def obtener_dependencias_por_sede(self, pk):
+        return SedeDependencia.objects.filter(sede__id=pk).values_list('dependencia__name', flat=True)
+
+    def obtener_todos(self):
+        return SedeDependencia.objects.all()
+
+    # @admin_or_superuser_or_encargado_required
+    def get(self, request, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        data = (
+            [self.obtener_dependencias_por_sede(pk)] if pk else
+            self.obtener_todos()
+        )
+        queryset = list(data)
+        return Response(queryset, status=status.HTTP_200_OK if queryset else status.HTTP_404_NOT_FOUND)
+
+        # serializer = SedeDependenciaSerializer(data, many=True)
+        # return Response(serializer.data, status=status.HTTP_200_OK)

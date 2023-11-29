@@ -75,6 +75,6 @@ const handleInput = (e: any) => {
 
 const handleSubmit = (e: any) => {
     e.preventDefault()
-    store.sedes.find((item) => item.name === data.value.name) ? store.modificarSede(data.value, sedeId) : store.crearSede(data.value)
+    sedeId ? store.modificarSede(data.value, sedeId) : store.crearSede(data.value)
 }
 </script>

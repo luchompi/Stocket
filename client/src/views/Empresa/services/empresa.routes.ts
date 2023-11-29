@@ -4,6 +4,8 @@ import Create from '../main/Create.vue'
 import Update from '../main/Update.vue'
 import sedeRoutes from "../Sedes/services/sedes.routes";
 import dependenicasRoutes from "@/views/Empresa/Dependencias/services/dependenicas.routes";
+import SedeDepRoutes from "@/views/Empresa/SedeDependencia/services/sedeDep.routes";
+
 const empresaRoutes = [
     {
         path: '/empresa',
@@ -26,6 +28,7 @@ const empresaRoutes = [
             },
             ...sedeRoutes,
             ...dependenicasRoutes,
+            ...SedeDepRoutes,
         ]
     }
 ]
