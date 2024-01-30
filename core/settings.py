@@ -25,13 +25,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #3rdParyApps
+    # 3rdParyApps
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
     'djoser',
     'whitenoise',
-    #DevApps
+    # DevApps
     'apps.accounts',
     'apps.Empresa',
     'apps.Personas',
@@ -56,7 +56,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR,'dist'],
+        'DIRS': [BASE_DIR, 'dist'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,18 +77,18 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-       
-        ####Env config
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER':os.getenv('DB_USER'),
-        'PASSWORD':os.getenv('DB_PASSWORD'),
-        'HOST':os.getenv('DB_HOST'),
-        'PORT':os.getenv('DB_PORT')
-        
-        ####Local config
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': BASE_DIR / 'db.sqlite3',
+
+        # Env config
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': os.getenv('DB_NAME'),
+        # 'USER':os.getenv('DB_USER'),
+        # 'PASSWORD':os.getenv('DB_PASSWORD'),
+        # 'HOST':os.getenv('DB_HOST'),
+        # 'PORT':os.getenv('DB_PORT')
+
+        # Local config
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -177,33 +177,33 @@ CORS_ALLOWED_HEADERS = [
 CORS_PREFLIGHT_MAX_AGE = 86400
 CORS_ORIGIN_ALLOW_ALL = True
 
-#DJOSER config
+# DJOSER config
 DJOSER = {
-    'LOGIN_FIELD':'username',
-    'USER_CREATE_PASSWORD_RETYPE':True,
-    'USERNAME_CHANGED_EMAIL_CONFIRMATION':True,
-    'PASSWORD_CHANGED_EMAIL_CONFIRMATION':True,
-    'SEND_CONFIRMATION_EMAIL':True,
-    'SET_USERNAME_RETYPE':True,
-    'SET_PASSWORD_RETYPE':True,
-    'PASSWORD_RESET_CONFIRM_URL':'password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL':'email/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL':'activate/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL':True,
-    'RESEND_ACTIVATION_EMAIL':True,
-    'SERIALIZERS':{
-        'user_create':'apps.accounts.serializers.UserCreateSerializer',
-        'user':'apps.accounts.serializers.UserCreateSerializer',
-        'current_user':'apps.accounts.serializers.UserSerializer',
-        'user_update':'djoser.serializers.UserSerializer',
-        'user_delete':'djoser.serializers.UserDeleteSerializer'
-    }    
+    'LOGIN_FIELD': 'username',
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
+    'SEND_CONFIRMATION_EMAIL': True,
+    'SET_USERNAME_RETYPE': True,
+    'SET_PASSWORD_RETYPE': True,
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': 'email/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': True,
+    'RESEND_ACTIVATION_EMAIL': True,
+    'SERIALIZERS': {
+        'user_create': 'apps.accounts.serializers.UserCreateSerializer',
+        'user': 'apps.accounts.serializers.UserCreateSerializer',
+        'current_user': 'apps.accounts.serializers.UserSerializer',
+        'user_update': 'djoser.serializers.UserSerializer',
+        'user_delete': 'djoser.serializers.UserDeleteSerializer'
+    }
 }
 
-#### AuthUserConfig
+# AuthUserConfig
 AUTH_USER_MODEL = 'accounts.UserAccount'
 
-### Email config
+# Email config
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.getenv('EMAIL_HOST')
 EMAIL_PORT = os.getenv('EMAIL_PORT')
